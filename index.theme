@@ -1,11 +1,11 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=Jarvis-Windows11-Shell
-Comment=Stark Industries J.A.R.V.I.S. Windows 11 Desktop Shell Suite
+Name=macOS-Cupertino
+Comment=macOS Sonoma & Sequoia Luxury Desktop Shell Suite with Catppuccin Macchiato Accents
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=Jarvis-Windows11-Shell
-MetacityTheme=Jarvis-Windows11-Shell
-IconTheme=Jarvis-White
-CinnamonTheme=Jarvis-Windows11-Shell
+GtkTheme=macOS-Cupertino
+MetacityTheme=macOS-Cupertino
+IconTheme=macOS-Cupertino
+CinnamonTheme=macOS-Cupertino

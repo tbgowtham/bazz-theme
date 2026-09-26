@@ -1,112 +1,79 @@
-# eDEX-UI // ROBOTIC MECHA & LIQUID-GAS SYSTEM CONTROLLER 🤖⚡
+#  macOS-Cupertino // LUXURY DESKTOP SHELL SUITE 🍏✨
 
-> An ultra-futuristic **Robotic Mecha & Liquid-Gas** cybernetic desktop suite for Linux. Engineered with features standard desktop environments like Cinnamon do not possess: a **fullscreen biometric robotic screen locker, AI adaptive compute pressure monitor, mecha hardware & security diagnostic scanner, physical matter phase shifting, 2D fluid dynamics reactor, and full KDE Plasma 6 & Konsole mecha styling** — completely silent, hardware-accelerated, and built for maximum data density.
-
----
-
-## ⚡ What Makes This Different (Beyond Cinnamon & Traditional Desktops)
-
-Cinnamon and standard desktop environments provide traditional flat panels, static menus, and basic themes. This system upgrades your OS into an **autonomous cybernetic mecha environment**:
-
-1. **Fullscreen Biometric Robotic Screen Locker (`edex lock` / `edex-lock`)**:
-   - Hardware-accelerated GTK 3 & Cairo cybernetic HUD.
-   - Dual-ring counter-rotating mecha gears & targeting crosshairs.
-   - Vertical laser retinal/biometric scanline sweeping across the HUD.
-   - Real-time CPU, RAM, battery, and defense grid telemetry displayed on the locked screen.
-   - 100% silent, stealth operation without intrusive sounds or synthetic voices.
-   - Secure verification via Linux user password (PAM `/usr/bin/unix_chkpwd`) or emergency bypass PIN (`1234`).
-2. **AI Adaptive Compute Pressure Engine (`edex auto`)**:
-   - Continuously samples CPU multi-core load and core temperatures to dynamically shift the desktop matter phase:
-     - **Cryo-Gas** (< 25% load, < 48°C): Sub-zero liquid nitrogen cyan, frost mist.
-     - **Robotic Mecha** (25% - 60% load): Titanium black chassis, mecha hazard gold, core cyan.
-     - **Neon Plasma** (60% - 85% load): Ionized electric magenta, violet glow.
-     - **Solar Flare** (> 85% load or > 75°C): Superheated solar flare orange and crimson core.
-   - Can run as a one-shot evaluation (`edex auto`) or continuous background daemon (`edex auto --daemon`).
-3. **Robotic Mecha System Diagnostic Scanner (`edex diag` / `edex scan`)**:
-   - Live hardware bus and security audit in your terminal: Quantum CPU multi-core audit, neural memory bus test, NVMe storage integrity, and defense uplink telemetry.
-4. **Physical Matter Phase Shifting (`edex phase <state>`)**:
-   - Instant system-wide matter phase transitions across KDE Plasma, Konsole, GTK, and shell prompt:
-     - **`mecha`** : Titanium Black (`#070a10`), Mecha Hazard Gold (`#ffb703`), Core Cyan (`#00f0ff`).
-     - **`cryo`** : Sub-zero Liquid Nitrogen (`#00f5d4`), Arctic Ice Blue (`#00bbf9`), Frost Mist.
-     - **`plasma`** : Ionized Neon Plasma (`#f72585`), Electric Violet (`#9d4edd`), Cyan Glow.
-     - **`mercury`** : Liquid Metal Quicksilver (`#e0e1dd`), Liquid Titanium, Gallium Aqua.
-     - **`solar`** : Superheated Solar Flare (`#ffb703`), Molten Orange (`#ff4800`), Crimson Core.
-5. **Interactive 2D Liquid-Gas Terminal Reactor (`edex fluid`)**:
-   - Real-time fluid wave equation and vapor particle physics reacting to live CPU temperature and RAM viscosity.
-6. **Memory Condensation Reactor (`edex condense`)**:
-   - Terminal animation of gaseous threads cooling and condensing into a pure liquid pool while compacting memory caches.
+> An authentic, elegant **macOS (Sonoma & Sequoia)** and **Catppuccin Macchiato** desktop shell reconstruction for Linux. Engineered with **Apple SF Pro Display & Inter typography, translucent frosted acrylic glassmorphism, authentic traffic light window controls, a spacious macOS Spotlight-inspired Action Menu, and a luxury squircle vector icon theme**.
 
 ---
 
-## 🚀 The Terminal Command: `edex`
+## 🎨 What Makes This Reconstruction Special
 
-Because it is installed in your `$PATH` (`~/.local/bin/edex`), you can run `edex` from **any terminal window**:
+Standard desktop environments often suffer from cramped menus, harsh high-contrast borders, or generic icons. This reconstruction reimagines your desktop with pure Cupertino luxury and Catppuccin's soothing ergonomics:
+
+1. **Apple SF Pro Display & Inter Typography**:
+   - Native Apple **SF Pro Display** (11pt UI, 12pt Titles) paired with **Inter** (11pt Monospace).
+   - Applied system-wide across KDE Plasma 6 (`kdeglobals`), GTK 3/4 (`settings.ini`), Cinnamon (`gsettings`), and Konsole terminal.
+2. **Spacious macOS Spotlight & Launchpad Action Menu**:
+   - Reconstructed with generous padding (22px), smooth 20px rounded corners, and frosted glass depth.
+   - **Spotlight Search Bar**: Centered 44px pill-shaped search bar with macOS accent blue focus ring (`rgba(137, 180, 250, 0.25)`).
+   - **Rounded Pill Categories**: Generously padded category tabs with smooth hover highlights.
+   - **Clean Application Cards**: Spacious application entries with 32px squircle icons, high-contrast labels, and subtle pill hovers.
+3. **Translucent Frosted Glass (Zero Neon Blue)**:
+   - Panel and Menus feature silky background blur and frosted dark slate (`rgba(30, 32, 48, 0.85)`).
+   - Hairline borders (`1px solid rgba(255, 255, 255, 0.12)`) and soft ambient shadows.
+   - All harsh neon cyan, dark blue sci-fi borders, and angular mecha lines have been eliminated.
+4. **Authentic macOS Traffic Light Window Controls**:
+   - 🔴 **Close**: Smooth red circle (`#ff5f56`) with dark hover cross glyph.
+   - 🟡 **Minimize**: Warm amber circle (`#ffbd2e`) with dark hover minus glyph.
+   - 🟢 **Maximize / Zoom**: Vibrant green circle (`#27c93f`) with diagonal arrow glyph.
+   - Integrated into both Metacity (`metacity-theme-3.xml`) and GTK 3/4 headerbars.
+5. **Luxury Squircle Icon Theme (`macOS-Cupertino`)**:
+   - Complete vector SVG icon suite with authentic macOS continuous squircle curvature.
+   - Sky-Blue layered folders with 3D embossed badges for Home, Desktop, Documents, Downloads, Music, Pictures, Videos, and Trash.
+   - Apple-style app icons for Finder, Terminal, Safari/Web Browser, System Settings, Notes/TextEdit, Activity Monitor, Calculator, App Store, and Music.
+6. **KDE Plasma 6 & Konsole Integration**:
+   - Two handcrafted KDE color schemes: `macOS-Catppuccin.colors` (Macchiato warmth) and `macOS-Cupertino.colors` (Dark slate & Apple System Blue).
+   - Custom Konsole profile with Apple Terminal palette and clean prompt: ` ~/path ❯`.
+
+---
+
+## 🚀 How to Apply the Theme
+
+Because it is linked into your `$PATH` (`~/.local/bin/macos`), you can apply it from **any terminal** or directly in this folder:
 
 ```bash
-# Apply the master Robotic Mecha theme across entire system
-edex
+# Apply the complete macOS-Cupertino suite across your entire system
+./apply.sh
 ```
 
-### Specialized Commands:
+Or simply run:
 
 ```bash
-# 1. Lock screen with robotic biometric HUD (silent & secure)
-edex lock
-# (or simply: edex-lock)
-
-# 2. Run mecha system hardware & security diagnostic
-edex diag
-
-# 3. Run AI adaptive matter engine (auto-shifts theme by real-time compute load)
-edex auto
-# (or continuously monitor: edex auto --daemon)
-
-# 4. Switch immediately to Titanium Mecha state
-edex mecha
-
-# 5. Launch interactive 2D fluid dynamics reactor
-edex fluid
-
-# 6. Shift matter state (mecha, cryo, plasma, mercury, solar)
-edex phase plasma
-
-# 7. Compact memory cache with liquid condensation animation
-edex condense
-
-# 8. Launch live telemetry terminal dashboard
-edex --app
+macos
 ```
 
----
-
-## 🔒 The Robotic Screen Locker (`edex lock` / `edex-lock`)
-
-When you run `edex lock`:
-- Takes over the display in fullscreen mode.
-- Locks the workstation with rotating mecha gears and a sweeping laser reticle.
-- Completely silent operation (no unwanted synthetic voice or audio effects).
-- Enter your Linux user password (or default bypass PIN `1234`) and press `Enter`:
-  - **Wrong Password**: Security alert border flashes red, intrusion attempt logged.
-  - **Correct Password**: Emerald green confirmation glow, unlocks smoothly into your session.
-- You can customize your lock PIN anytime in `~/.config/edex_lock_pin`.
+### What `./apply.sh` Does Automatically:
+1. Verifies and activates **SF Pro Display** and **Inter** fonts.
+2. Generates and installs the **macOS-Cupertino squircle icon theme** to `~/.icons/` and `~/.local/share/icons/`.
+3. Assembles and installs the **macOS-Cupertino** desktop theme to `~/.themes/` and `~/.local/share/themes/`.
+4. Activates the **macOS-Catppuccin** color scheme in KDE Plasma 6 via `plasma-apply-colorscheme` and `kwriteconfig6`.
+5. Sets Konsole default profile to `macOS-Cupertino` with Inter typography.
+6. Configures GTK 3 & GTK 4 `settings.ini` and Cinnamon `gsettings` (theme, icons, fonts, button layout).
+7. Sets up the clean macOS shell prompt (` ~/path ❯`) in `~/.bashrc.d/macos-theme.sh`.
 
 ---
 
-## 🛠️ Command Summary
+## 🛠️ Color Palette Reference
 
-| Command | Action |
-| :--- | :--- |
-| `edex` | Apply master Robotic Mecha theme across the entire system |
-| `edex lock` (or `edex-lock`) | Launch fullscreen robotic biometric screen locker (silent) |
-| `edex auto` (or `--daemon`) | Run AI adaptive compute pressure engine (shifts theme by CPU/temp) |
-| `edex diag` (or `scan`) | Run robotic mecha hardware & security diagnostic |
-| `edex mecha` | Switch immediately to Titanium Mecha state |
-| `edex fluid` | Launch interactive 2D fluid wave & vapor reactor |
-| `edex phase <state>` | Shift matter state (`mecha`, `cryo`, `plasma`, `mercury`, `solar`) |
-| `edex condense` | Compact memory cache with liquid condensation animation |
-| `edex --app` | Launch live telemetry terminal monitor dashboard |
-| `edex --status` | Check system telemetry and active matter state |
-| `edex --restore` | Restore default desktop theme & settings |
+| Token | Hex | Role |
+| :--- | :--- | :--- |
+| **Base Slate** | `#1e1e2e` | Window background & main canvas |
+| **Mantle / Header** | `#181825` | Titlebars, headerbars, secondary backgrounds |
+| **Frosted Glass** | `rgba(30, 32, 48, 0.85)` | Panel, Spotlight menu, and floating popovers |
+| **macOS Blue Accent**| `#89b4fa` / `#0a84ff` | Primary buttons, active tabs, focus rings |
+| **Text Primary** | `#f5f5f7` | Crisp high-legibility UI text |
+| **Text Secondary** | `#a6adc8` | Subtitles, labels, inactive tabs |
+| **Traffic Red** | `#ff5f56` | Window close button |
+| **Traffic Yellow** | `#ffbd2e` | Window minimize button |
+| **Traffic Green** | `#27c93f` | Window maximize / zoom button |
 
 ---
 
@@ -114,24 +81,35 @@ When you run `edex lock`:
 
 ```text
 theme/
-├── edex-theme                           # Master system controller (executable)
-├── edex                                 # Symlink to edex-theme
-├── apply.sh                             # Convenience wrapper script
+├── apply.sh                             # Master execution script (./apply.sh or macos)
+├── index.theme                          # XDG metatheme index (macOS-Cupertino)
 │
 ├── tools/
-│   ├── robotic_lockscreen.py            # Fullscreen robotic mecha biometric screen locker (silent)
-│   ├── mecha_diag.py                    # Robotic hardware & security diagnostic scanner
-│   ├── fluid_reactor.py                 # Real-time 2D fluid wave & vapor particle reactor
-│   ├── eDEX-TRON-Mecha.colors           # Titanium Mecha KDE Plasma color scheme
-│   ├── eDEX-TRON-Cryo.colors            # Sub-zero Cryo-Gas KDE color scheme
-│   ├── eDEX-TRON-Plasma.colors          # Neon-Plasma KDE color scheme
-│   ├── eDEX-TRON-Mercury.colors         # Liquid-Mercury KDE color scheme
-│   ├── eDEX-TRON-Solar.colors           # Solar-Flare KDE color scheme
-│   ├── eDEX-TRON.profile                # High-contrast Konsole terminal profile
-│   └── edex-theme.sh                    # Interactive shell environment configuration
+│   ├── apply_macos_theme.py             # Master system installer & config engine
+│   ├── generate_macos_icons.py          # SVG Squircle icon generator
+│   ├── macOS-Cupertino.colors           # Apple Dark Slate KDE Plasma color scheme
+│   ├── macOS-Catppuccin.colors          # Catppuccin Macchiato KDE color scheme
+│   ├── macOS-Catppuccin.colorscheme     # Konsole terminal color palette
+│   ├── macOS.profile                    # Konsole default profile
+│   └── macos-theme.sh                   # Interactive shell prompt script ( ~/path ❯)
 │
-├── gtk-3.0/ & gtk-4.0/                  # Fluid mecha glassmorphism GTK themes
-├── metacity-1/                          # Window decorations with glowing vapor borders
-├── icons/Jarvis-White/                  # Minimalist vector icon theme
-└── cinnamon/                            # Cinnamon shell theme
+├── icons/macOS-Cupertino/               # Scalable squircle icon theme
+│   ├── index.theme
+│   └── scalable/ (places, apps, categories, actions, status)
+│
+├── cinnamon/                            # Cinnamon desktop shell theme
+│   ├── metadata.json
+│   └── cinnamon.css                     # Frosted panel & spacious Spotlight Action Menu
+│
+├── gtk-3.0/ & gtk-4.0/                  # macOS frosted GTK styles with traffic lights
+│   ├── gtk.css
+│   └── gtk-dark.css
+│
+├── metacity-1/                          # Window decorations with macOS Traffic Lights
+│   └── metacity-theme-3.xml
+│
+└── stark_shell/                         # Standalone Python/GTK dock & Spotlight launcher
+    ├── panel.py                         # macOS Dock & Menubar
+    ├── start_menu.py                    # Big elegant Spotlight & Applications launcher
+    └── style.css                        # Frosted glass stylesheet
 ```

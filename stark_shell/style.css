@@ -1,153 +1,157 @@
 /* ===================================================================
- * STARK SHELL // WINDOWS 11 FROSTED GLASS GTK CSS
+ * macOS-Cupertino // LUXURY SHELL GTK CSS
+ * Design: macOS Sonoma / Sequoia Frosted Glass + Catppuccin Macchiato
+ * Typography: Apple SF Pro Display / Inter
  * =================================================================== */
 
-@define-color cyan_accent #00E5FF;
-@define-color blue_accent #0088FF;
-@define-color crimson_accent #FF2A5F;
-@define-color green_accent #00FF88;
-@define-color glass_bg rgba(8, 14, 24, 0.92);
-@define-color card_bg rgba(14, 24, 40, 0.85);
+@define-color mac_blue #89b4fa;
+@define-color mac_red #ed8796;
+@define-color mac_green #a6e3a1;
+@define-color mac_yellow #f9e2af;
+@define-color glass_bg rgba(30, 32, 48, 0.88);
+@define-color card_bg rgba(36, 39, 58, 0.85);
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #F0F6FC;
+  font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f5f5f7;
 }
 
-/* Master Taskbar Panel (Wayland & X11) */
+/* Master Taskbar Panel / Menubar (Wayland & X11) */
 .stark-panel {
   background-color: @glass_bg;
-  border-top: 1px solid rgba(0, 229, 255, 0.4);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.7);
-  padding: 0 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  padding: 0 14px;
 }
 
-/* Taskbar Centered App Buttons */
+/* Taskbar Centered App Buttons (macOS Dock Style) */
 .stark-btn {
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 6px;
-  padding: 4px 8px;
+  border-radius: 8px;
+  padding: 4px 10px;
   transition: all 150ms ease;
-  min-height: 36px;
+  min-height: 38px;
 }
 
 .stark-btn:hover {
-  background-color: rgba(0, 229, 255, 0.16);
-  border-color: rgba(0, 229, 255, 0.4);
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .stark-btn:active {
-  background-color: rgba(0, 229, 255, 0.28);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Arc Start Button */
+/* Apple Menu / Start Button */
 .stark-start-btn {
-  background-color: rgba(0, 229, 255, 0.12);
-  border: 1px solid rgba(0, 229, 255, 0.35);
-  border-radius: 8px;
-  padding: 4px 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 4px 12px;
 }
 
 .stark-start-btn:hover {
-  background-color: rgba(0, 229, 255, 0.3);
-  box-shadow: 0 0 15px @cyan_accent;
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* System Tray Badges */
 .tray-badge {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  border-radius: 6px;
-  padding: 4px 8px;
-  margin: 4px 2px;
-  font-family: monospace;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px 10px;
+  margin: 4px 3px;
+  font-family: "SF Pro Text", "Inter", sans-serif;
   font-size: 11px;
-  font-weight: 700;
-  color: @cyan_accent;
+  font-weight: 600;
+  color: #cdd6f4;
 }
 
 .tray-badge:hover {
-  background-color: rgba(0, 229, 255, 0.15);
-  border-color: @cyan_accent;
+  background-color: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
 }
 
 .clock-btn {
-  padding: 2px 8px;
-  border-radius: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 500;
 }
 
 .clock-btn:hover {
-  background-color: rgba(0, 229, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Floating Frosted Start Menu Window */
+/* Floating Big Elegant macOS Spotlight / Launchpad Menu */
 .stark-start-menu {
-  background-color: rgba(10, 18, 30, 0.96);
-  border: 1px solid rgba(0, 229, 255, 0.45);
-  border-radius: 18px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 229, 255, 0.25);
-  padding: 20px;
+  background-color: rgba(30, 32, 48, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.18);
+  padding: 22px;
 }
 
 .start-search-entry {
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(0, 229, 255, 0.35);
-  border-radius: 10px;
-  padding: 8px 14px;
-  color: #FFFFFF;
-  font-size: 13px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 22px;
+  padding: 10px 18px;
+  color: #ffffff;
+  font-size: 14px;
 }
 
 .start-search-entry:focus {
-  border-color: @cyan_accent;
-  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+  border-color: @mac_blue;
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(137, 180, 250, 0.25);
 }
 
 .start-app-item {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 8px;
-  padding: 8px 12px;
-  transition: all 120ms ease;
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: all 140ms ease;
 }
 
 .start-app-item:hover {
-  background-color: rgba(0, 229, 255, 0.18);
-  border-color: rgba(0, 229, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .start-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 12px;
+  padding-top: 14px;
 }
 
-/* Quick Settings Window */
+/* Quick Settings Window (macOS Control Center Style) */
 .stark-quick-settings {
-  background-color: rgba(10, 18, 30, 0.96);
-  border: 1px solid rgba(0, 229, 255, 0.45);
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
-  padding: 16px;
+  background-color: rgba(30, 32, 48, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  padding: 18px;
 }
 
 .quick-tile {
   background-color: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 12px;
-  min-width: 90px;
-  min-height: 60px;
+  min-width: 95px;
+  min-height: 65px;
+  transition: all 150ms ease;
 }
 
 .quick-tile:hover {
-  background-color: rgba(0, 229, 255, 0.16);
-  border-color: @cyan_accent;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .quick-tile.active {
-  background-color: rgba(0, 229, 255, 0.28);
-  border-color: @cyan_accent;
-  box-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+  background-color: @mac_blue;
+  color: #181926;
+  border-color: @mac_blue;
 }

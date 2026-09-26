@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# eDEX-UI // ROBOTIC MECHA & LIQUID-GAS SYSTEM CONTROLLER
+# macOS-Cupertino // LUXURY DESKTOP SHELL CONTROLLER
 # ==============================================================================
-# Applies the full Robotic Mecha & Liquid-Gas futuristic theme:
-# - Fullscreen Biometric Robotic Screen Locker (`./apply.sh lock`)
-# - AI Adaptive Matter Engine (`./apply.sh auto`)
-# - KDE Plasma 6 Mecha Robotic Color Scheme (`eDEX-TRON-Mecha`)
-# - Mecha Hardware & Security Diagnostic Scanner (`./apply.sh diag`)
-# - 2D Liquid-Gas Fluid Dynamics Reactor (`./apply.sh fluid`)
-# - Matter Phase Shifting (Mecha, Cryo, Plasma, Mercury, Solar)
-# - Konsole Terminal Profile & Colorscheme
-# - Active Terminal OSC Palette Shift (Core Cyan / Titanium Black)
-# - Interactive Shell Prompt ([⚙ MECHA-ROBOTIC ⚙])
-# - Fluid Mecha GTK 3/4 & Metacity Themes
+# Reconstructs the Linux desktop into an elegant macOS (Sonoma/Sequoia)
+# & Catppuccin Macchiato environment:
+# - Apple SF Pro Display & Inter Typography
+# - Translucent Frosted Glass (Zero neon blue, zero dark blue HUD)
+# - Big Elegant Action Menu (macOS Spotlight & Launchpad style)
+# - macOS Traffic Light Window Controls (🔴 Close, 🟡 Minimize, 🟢 Maximize)
+# - FreeDesktop Squircle Icon Theme
+# - KDE Plasma 6, Cinnamon, GTK 3/4, & Konsole Theme Integration
 # ==============================================================================
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-EDEX_BIN="${SCRIPT_DIR}/edex-theme"
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
+MACOS_INSTALLER="${SCRIPT_DIR}/tools/apply_macos_theme.py"
 
-# Forward execution to the master edex-theme CLI engine
-exec "${EDEX_BIN}" "$@"
+# Forward execution to the macOS luxury theme installer
+exec python3 "${MACOS_INSTALLER}" "$@"

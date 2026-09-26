@@ -13,8 +13,8 @@ from .app_scanner import get_installed_apps
 class StartMenu(Gtk.Window):
     def __init__(self, on_close_callback=None):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
-        self.set_title("Stark Start Menu")
-        self.set_default_size(560, 500)
+        self.set_title("macOS Spotlight")
+        self.set_default_size(620, 560)
         self.set_decorated(False)
         self.set_skip_taskbar_hint(True)
         self.set_skip_pager_hint(True)
@@ -32,23 +32,23 @@ class StartMenu(Gtk.Window):
         self.connect("key-press-event", self.on_key_press)
 
     def build_ui(self):
-        main_vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=14)
-        main_vbox.set_margin_top(16)
-        main_vbox.set_margin_bottom(16)
-        main_vbox.set_margin_start(16)
-        main_vbox.set_margin_end(16)
+        main_vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=16)
+        main_vbox.set_margin_top(20)
+        main_vbox.set_margin_bottom(20)
+        main_vbox.set_margin_start(20)
+        main_vbox.set_margin_end(20)
         self.add(main_vbox)
 
-        # Header / Brand
-        header_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        # Header / Brand (macOS Spotlight Style)
+        header_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
         brand_lbl = Gtk.Label()
-        brand_lbl.set_markup("<span weight='bold' foreground='#00E5FF' font='11'>STARK INDUSTRIES // MARK LXXXV OS</span>")
+        brand_lbl.set_markup("<span weight='bold' foreground='#cdd6f4' font='13'> macOS Spotlight &amp; Applications</span>")
         header_hbox.pack_start(brand_lbl, False, False, 0)
         main_vbox.pack_start(header_hbox, False, False, 0)
 
-        # Search Entry
+        # Search Entry (Large macOS Spotlight Pill)
         self.search_entry = Gtk.Entry()
-        self.search_entry.set_placeholder_text("Type to search applications or commands...")
+        self.search_entry.set_placeholder_text("Spotlight Search or Run Command...")
         self.search_entry.get_style_context().add_class("start-search-entry")
         self.search_entry.connect("changed", self.on_search_changed)
         self.search_entry.connect("activate", self.on_search_activate)
@@ -57,7 +57,7 @@ class StartMenu(Gtk.Window):
         # Applications Scroll Window
         scroll = Gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.set_min_content_height(320)
+        scroll.set_min_content_height(360)
 
         self.apps_listbox = Gtk.ListBox()
         self.apps_listbox.set_selection_mode(Gtk.SelectionMode.NONE)
@@ -67,11 +67,11 @@ class StartMenu(Gtk.Window):
         self.populate_apps()
 
         # Footer User Profile & Power Controls
-        footer_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        footer_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=14)
         footer_box.get_style_context().add_class("start-footer")
 
         user_lbl = Gtk.Label()
-        user_lbl.set_markup("<span weight='bold'>Tony Stark</span> <span foreground='#00E5FF' font='9'>[MR_Gray]</span>")
+        user_lbl.set_markup("<span weight='bold' font='11'>MR_Gray</span> <span foreground='#89b4fa' font='10'>[macOS Sonoma]</span>")
         footer_box.pack_start(user_lbl, False, False, 0)
 
         # Power actions

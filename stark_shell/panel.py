@@ -23,12 +23,11 @@ except Exception:
 from gi.repository import Gtk, Gdk, GLib
 from .start_menu import StartMenu
 from .quick_settings import QuickSettings
-from .jarvis_voice import JarvisVoiceDialog
 
 class StarkPanel(Gtk.Window):
     def __init__(self):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
-        self.set_title("Stark Shell Taskbar")
+        self.set_title("macOS Dock & Menubar")
         self.set_default_size(1366, 48)
         self.set_decorated(False)
         self.set_skip_taskbar_hint(True)
@@ -44,14 +43,13 @@ class StarkPanel(Gtk.Window):
             GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.LEFT, True)
             GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.RIGHT, True)
             GtkLayerShell.set_exclusive_zone(self, 48)
-            GtkLayerShell.set_namespace(self, "stark-shell-panel")
+            GtkLayerShell.set_namespace(self, "macos-shell-panel")
         else:
             self.set_type_hint(Gdk.WindowTypeHint.DOCK)
 
         # Flyout Windows
         self.start_menu = StartMenu()
         self.quick_settings = QuickSettings()
-        self.jarvis_voice = JarvisVoiceDialog()
 
         self.build_ui()
         self.start_timers()
@@ -63,7 +61,7 @@ class StarkPanel(Gtk.Window):
         self.add(master_box)
 
         # -------------------------------------------------------------
-        # 1. Left Section: Stark Status & Weather
+        # 1. Left Section: macOS Apple Menu & Status
         # -------------------------------------------------------------
         left_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         left_box.set_size_request(220, 48)
@@ -71,9 +69,9 @@ class StarkPanel(Gtk.Window):
         hud_btn = Gtk.Button()
         hud_btn.get_style_context().add_class("stark-btn")
         hud_lbl = Gtk.Label()
-        hud_lbl.set_markup("<span font='9' foreground='#00E5FF'><b>STARK OS</b></span> <span font='9' foreground='#94A3B8'>22°C // Flight: Opt</span>")
+        hud_lbl.set_markup("<span font='11' weight='bold' foreground='#cdd6f4'></span> <span font='10' weight='medium' foreground='#f5f5f7'>Finder</span>")
         hud_btn.add(hud_lbl)
-        hud_btn.connect("clicked", lambda b: self.jarvis_voice.present())
+        hud_btn.connect("clicked", lambda b: self.start_menu.present())
         left_box.pack_start(hud_btn, False, False, 6)
 
         master_box.pack_start(left_box, False, False, 0)
@@ -120,12 +118,12 @@ class StarkPanel(Gtk.Window):
             btn.connect("clicked", lambda b, c=cmd: subprocess.Popen(c, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL))
             center_dock.pack_start(btn, False, False, 0)
 
-        # Jarvis Quick AI Button
-        jarvis_btn = Gtk.Button(label="🦾")
-        jarvis_btn.get_style_context().add_class("stark-btn")
-        jarvis_btn.set_tooltip_text("J.A.R.V.I.S. Voice Assistant")
-        jarvis_btn.connect("clicked", lambda b: self.jarvis_voice.present())
-        center_dock.pack_start(jarvis_btn, False, False, 0)
+        # macOS Spotlight Button
+        spotlight_btn = Gtk.Button(label="🔍")
+        spotlight_btn.get_style_context().add_class("stark-btn")
+        spotlight_btn.set_tooltip_text("Spotlight Search")
+        spotlight_btn.connect("clicked", lambda b: self.start_menu.present())
+        center_dock.pack_start(spotlight_btn, False, False, 0)
 
         center_align.pack_start(center_dock, False, False, 0)
         master_box.pack_start(center_align, True, True, 0)

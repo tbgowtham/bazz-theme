@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d3038"/>
+      <stop offset="100%" stop-color="#181a1f"/>
+    </linearGradient>
+    <filter id="appShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="54" height="54" rx="14" fill="url(#termBg)" filter="url(#appShadow)"/>
+  <!-- Top bar subtle highlight -->
+  <path d="M 5,16 L 59,16" stroke="#3e434f" stroke-width="1"/>
+  <!-- Traffic dots on terminal window header -->
+  <circle cx="12" cy="11" r="2" fill="#ff5f56"/>
+  <circle cx="18" cy="11" r="2" fill="#ffbd2e"/>
+  <circle cx="24" cy="11" r="2" fill="#27c93f"/>
+  <!-- Terminal Prompt >_ -->
+  <path d="M 14,26 L 24,34 L 14,42" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="28" y1="42" x2="42" y2="42" stroke="#4ade80" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="noteBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffd60a"/>
+      <stop offset="100%" stop-color="#ff9f0a"/>
+    </linearGradient>
+    <filter id="appShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="54" height="54" rx="14" fill="url(#noteBg)" filter="url(#appShadow)"/>
+  <!-- Paper lines -->
+  <line x1="16" y1="20" x2="48" y2="20" stroke="#b25e00" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <line x1="16" y1="28" x2="48" y2="28" stroke="#b25e00" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <line x1="16" y1="36" x2="48" y2="36" stroke="#b25e00" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <line x1="16" y1="44" x2="34" y2="44" stroke="#b25e00" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <!-- Yellow ballpoint pen -->
+  <polygon points="38,44 48,22 52,24 42,46 37,47" fill="#ffffff"/>
+  <polygon points="37,47 40,45 38,44" fill="#3a3a3c"/>
+</svg>

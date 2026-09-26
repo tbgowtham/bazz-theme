@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="musicBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fa233b"/>
+      <stop offset="100%" stop-color="#fb5c74"/>
+    </linearGradient>
+    <filter id="appShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="54" height="54" rx="14" fill="url(#musicBg)" filter="url(#appShadow)"/>
+  <!-- White Eighth Note -->
+  <circle cx="24" cy="42" r="5" fill="#ffffff"/>
+  <circle cx="40" cy="37" r="5" fill="#ffffff"/>
+  <path d="M 28,42 L 28,21 L 44,17 L 44,37" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="28,21 44,17 44,22 28,26" fill="#ffffff"/>
+</svg>
