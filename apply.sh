@@ -3,12 +3,13 @@
 # eDEX-UI // TRON SYSTEM-WIDE THEME & SHELL CONTROLLER
 # ==============================================================================
 # Applies the full eDEX-UI Tron desktop theme:
-# - Live OS Telemetry Wallpaper (CPU cores, RAM, storage, network, radar, cyber-deck)
-# - Real-time Background Daemon
 # - KDE Plasma 6 eDEX-TRON Color Scheme
 # - Konsole Terminal Profile & Colorscheme
-# - Active Terminal OSC Palette Shift
-# - Shell Prompt ([eDEX-UI // TRON])
+# - Active Terminal OSC Palette Shift (Neon Cyan / Deep Navy)
+# - Interactive Shell Prompt ([eDEX-UI // TRON])
+# - GTK 3/4 & Metacity Neon Cyan Borders
+# - Jarvis-White Minimalist Vector Icon Theme
+# - Audio Chime Feedback
 # - Optional Interactive Live TUI Monitor (`./apply.sh --app`)
 # ==============================================================================
 
