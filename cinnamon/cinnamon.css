@@ -1,0 +1,276 @@
+/* ===================================================================
+ * J.A.R.V.I.S. // STARK INDUSTRIES WINDOWS 11 CINNAMON DESKTOP SHELL
+ * Version: 8.5.2
+ * Target: Linux Cinnamon Desktop Environment (5.4 - 6.4+)
+ * Design: Windows 11 Centered Frosted Acrylic Glass + Stark HUD
+ * =================================================================== */
+
+/* Core Variables & Tokens */
+stage {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 10pt;
+  color: #f0f6fc;
+}
+
+/* ===================================================================
+ * 1. Bottom Panel (Windows 11 Centered Dock Layout)
+ * =================================================================== */
+#panel,
+.panel-bottom {
+  background-color: rgba(8, 14, 24, 0.88);
+  font-weight: 500;
+  height: 48px;
+  border-top: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 -1px 8px rgba(0, 229, 255, 0.2);
+}
+
+#panel:highlight {
+  border-image: none;
+  background-color: rgba(0, 229, 255, 0.5);
+}
+
+.panel-dummy {
+  background-color: rgba(0, 229, 255, 0.6);
+}
+
+/* Panel Applet Icons & Items */
+.applet-box {
+  padding: 0 6px;
+  color: #f1f5f9;
+  text-shadow: none;
+  transition: all 150ms ease-in-out;
+  border-radius: 6px;
+  margin: 3px 2px;
+}
+
+.applet-box:hover {
+  color: #00e5ff;
+  background-color: rgba(0, 229, 255, 0.15);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+}
+
+.applet-box:active {
+  background-color: rgba(0, 229, 255, 0.25);
+  color: #ffffff;
+}
+
+.applet-box:checked {
+  color: #00e5ff;
+}
+
+.applet-label {
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+/* Window List (Running App indicators like Windows 11) */
+.window-list-box {
+  spacing: 4px;
+  padding: 0 4px;
+}
+
+.window-list-item-box {
+  color: #e2e8f0;
+  background-color: transparent;
+  border-radius: 6px;
+  padding: 0 10px;
+  margin: 4px 2px;
+  transition: all 150ms ease-in-out;
+  border-bottom: 2px solid transparent;
+}
+
+.window-list-item-box:hover {
+  background-color: rgba(0, 229, 255, 0.12);
+  color: #ffffff;
+}
+
+.window-list-item-box:active,
+.window-list-item-box:checked,
+.window-list-item-box:focus {
+  background-color: rgba(0, 229, 255, 0.22);
+  color: #ffffff;
+  border-bottom: 3px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.35);
+}
+
+.window-list-item-demands-attention {
+  background-color: rgba(255, 42, 95, 0.4);
+  border-bottom: 3px solid #ff2a5f;
+}
+
+/* ===================================================================
+ * 2. Cinnamon Start Menu (Windows 11 Floating Frosted Glass)
+ * =================================================================== */
+.menu {
+  color: #f1f5f9;
+  background-color: rgba(10, 18, 30, 0.94);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 229, 255, 0.25);
+}
+
+.menu-background {
+  background-color: rgba(10, 18, 30, 0.94);
+  border-radius: 20px;
+}
+
+/* Menu Search Entry */
+.menu-search-box {
+  padding-left: 20px;
+}
+
+.menu-search-entry {
+  width: 320px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 12px;
+  color: #ffffff;
+  padding: 8px 14px;
+  font-size: 11pt;
+  selection-background-color: #00e5ff;
+  selected-color: #070b12;
+}
+
+.menu-search-entry:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+  background-color: rgba(0, 229, 255, 0.08);
+}
+
+/* Application Categories & Items */
+.menu-category-button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #cbd5e1;
+}
+
+.menu-category-button:hover,
+.menu-category-button-selected {
+  background-color: rgba(0, 229, 255, 0.18);
+  color: #00e5ff;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
+}
+
+.menu-application-button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #f1f5f9;
+}
+
+.menu-application-button:hover,
+.menu-application-button-selected {
+  background-color: rgba(0, 229, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+/* User & Favorites Button Box */
+.menu-favorites-box {
+  margin: 6px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+.menu-favorites-button {
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.menu-favorites-button:hover {
+  background-color: rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.25);
+}
+
+/* ===================================================================
+ * 3. Stark Notifications (HUD Overlays)
+ * =================================================================== */
+#notification {
+  background-color: rgba(8, 14, 24, 0.94);
+  border: 1px solid #00e5ff;
+  border-radius: 14px;
+  color: #f1f5f9;
+  padding: 14px 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+#notification .notification-button {
+  background-color: rgba(0, 229, 255, 0.15);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  color: #00e5ff;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-weight: 600;
+}
+
+#notification .notification-button:hover {
+  background-color: rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 10px #00e5ff;
+}
+
+/* ===================================================================
+ * 4. Run Dialog (Alt + F2 Stark Command Runner)
+ * =================================================================== */
+.run-dialog {
+  background-color: rgba(10, 18, 30, 0.94);
+  border: 1px solid #00e5ff;
+  border-radius: 16px;
+  padding: 18px 24px;
+  color: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 229, 255, 0.3);
+}
+
+.run-dialog-entry {
+  width: 320px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 10px;
+  color: #00e5ff;
+  padding: 8px 14px;
+  font-family: monospace;
+}
+
+.run-dialog-entry:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 12px #00e5ff;
+}
+
+/* ===================================================================
+ * 5. Workspace Switcher (Expo / Task View)
+ * =================================================================== */
+.workspace-switcher {
+  background-color: rgba(8, 14, 24, 0.9);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.workspace-button {
+  color: #94a3b8;
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+.workspace-button:outlined,
+.workspace-button:selected {
+  color: #070b12;
+  background-color: #00e5ff;
+  font-weight: 700;
+  box-shadow: 0 0 12px #00e5ff;
+}
+
+/* Sound and Slider applets */
+.popup-slider-menu-item {
+  height: 20px;
+  min-width: 15em;
+  -slider-height: 4px;
+  -slider-background-color: rgba(255, 255, 255, 0.2);
+  -slider-border-color: transparent;
+  -slider-active-background-color: #00e5ff;
+  -slider-active-border-color: transparent;
+  -slider-handle-radius: 8px;
+}

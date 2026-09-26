@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="arcGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#003366"/>
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="#070b14" stroke="#00e5ff" stroke-width="2"/>
+  <!-- Helmet schematic silhouette -->
+  <path d="M 30,35 Q 50,20 70,35 Q 75,55 70,72 Q 50,85 30,72 Q 25,55 30,35 Z" fill="#0f1e33" stroke="#00e5ff" stroke-width="2"/>
+  <!-- Faceplate eyes glowing cyan -->
+  <polygon points="36,48 45,50 44,54 36,52" fill="#00e5ff" filter="drop-shadow(0 0 4px #00e5ff)"/>
+  <polygon points="64,48 55,50 56,54 64,52" fill="#00e5ff" filter="drop-shadow(0 0 4px #00e5ff)"/>
+  <!-- Forehead crest -->
+  <polygon points="50,26 46,38 54,38" fill="#ffb703"/>
+</svg>

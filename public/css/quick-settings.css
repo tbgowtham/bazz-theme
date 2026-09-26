@@ -1,0 +1,458 @@
+/* Quick Settings / Action Center (Windows 11 Style) */
+#quick-settings-panel {
+  position: absolute;
+  bottom: calc(var(--taskbar-height) + 12px);
+  right: 12px;
+  width: 360px;
+  background: rgba(10, 18, 30, 0.90);
+  backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(0, 229, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+  z-index: 1002;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#quick-settings-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Quick Toggle Buttons Grid (6 buttons, 2x3) */
+.quick-toggles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.quick-toggle-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 72px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-ui);
+}
+
+.quick-toggle-btn:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.3);
+  color: #ffffff;
+}
+
+.quick-toggle-btn.active {
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.25), rgba(0, 136, 255, 0.35));
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.3);
+}
+
+.quick-toggle-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.quick-toggle-btn.active svg {
+  color: var(--accent-cyan);
+}
+
+.quick-toggle-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Sliders (Volume & Brightness) */
+.quick-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-cyan);
+}
+
+.quick-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+.quick-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.quick-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Quick Settings Footer (Battery & Settings button) */
+.quick-settings-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+.battery-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #cbd5e1;
+  font-family: var(--font-mono);
+}
+
+.battery-status-pill svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-green);
+}
+
+.quick-settings-gear-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid transparent;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-settings-gear-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  color: var(--accent-cyan);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.quick-settings-gear-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Calendar & Notifications Flyout */
+#calendar-flyout {
+  position: absolute;
+  bottom: calc(var(--taskbar-height) + 12px);
+  right: 12px;
+  width: 360px;
+  background: rgba(10, 18, 30, 0.92);
+  backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(0, 229, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  gap: 16px;
+  z-index: 1002;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#calendar-flyout.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendar-month-year {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.calendar-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--accent-cyan);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.calendar-day-header {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 0;
+}
+
+.calendar-day-cell {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #cbd5e1;
+}
+
+.calendar-day-cell:hover {
+  background: rgba(0, 229, 255, 0.15);
+  color: #ffffff;
+}
+
+.calendar-day-cell.today {
+  background: var(--accent-cyan);
+  color: #070b12;
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--accent-cyan);
+}
+
+/* Notifications Section in Calendar Flyout */
+.notifications-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.notification-card {
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notification-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+
+.notification-desc {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+/* Windows 11 Task View / Workspaces Switcher Overlay */
+#task-view-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - var(--taskbar-height));
+  background: rgba(5, 10, 18, 0.85);
+  backdrop-filter: blur(24px);
+  z-index: 999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+#task-view-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.task-view-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+.workspaces-container {
+  display: flex;
+  gap: 20px;
+}
+
+.workspace-card {
+  width: 240px;
+  height: 150px;
+  border-radius: var(--radius-lg);
+  background: rgba(14, 24, 40, 0.8);
+  border: 2px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.workspace-card:hover, .workspace-card.active {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 229, 255, 0.35);
+  transform: translateY(-6px);
+}
+
+.workspace-thumb {
+  flex: 1;
+  background-image: url('../assets/wallpapers/jarvis-master.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.75;
+}
+
+.workspace-label {
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(10, 16, 26, 0.95);
+  color: #e2e8f0;
+  text-align: center;
+}
+
+/* Stark Security Lock Screen Overlay */
+#lock-screen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../assets/wallpapers/jarvis-master.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 2000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(16px);
+}
+
+#lock-screen-overlay.open {
+  display: flex;
+}
+
+.lock-screen-glass {
+  padding: 36px 48px;
+  border-radius: var(--radius-xl);
+  background: rgba(8, 14, 24, 0.88);
+  backdrop-filter: blur(32px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 229, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.lock-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-cyan);
+  box-shadow: 0 0 20px var(--accent-cyan);
+}
+
+.lock-user-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.lock-pin-input {
+  width: 220px;
+  padding: 10px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 4px;
+  outline: none;
+}
+
+.lock-pin-input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+.lock-unlock-btn {
+  padding: 10px 24px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  border: none;
+  color: #070b12;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lock-unlock-btn:hover {
+  box-shadow: 0 0 20px var(--accent-cyan);
+  transform: scale(1.04);
+}

@@ -1,0 +1,294 @@
+/* Windows 11 Centered Taskbar */
+#taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--taskbar-height);
+  background: rgba(8, 14, 24, 0.85);
+  backdrop-filter: blur(28px) saturate(180%);
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  z-index: 1000;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4), 0 -1px 10px rgba(0, 229, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Left section: Stark HUD widget / Quick News button */
+.taskbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+}
+
+.taskbar-hud-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-mono);
+}
+
+.taskbar-hud-button:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.taskbar-hud-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-cyan);
+}
+
+.taskbar-hud-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.1;
+}
+
+.taskbar-hud-temp {
+  font-size: 11px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.taskbar-hud-desc {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* Center section: Windows 11 Centered App Icons */
+.taskbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+}
+
+.taskbar-item {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--text-main);
+}
+
+.taskbar-item:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.taskbar-item:active {
+  transform: scale(0.92);
+}
+
+.taskbar-item svg {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  transition: transform 0.2s ease;
+}
+
+.taskbar-item:hover svg {
+  transform: scale(1.08);
+}
+
+/* Start button - Windows 11 + Stark Arc Reactor logo */
+#start-btn {
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+}
+
+#start-btn:hover {
+  background: rgba(0, 229, 255, 0.25);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 16px var(--accent-cyan);
+}
+
+#start-btn svg {
+  color: var(--accent-cyan);
+}
+
+/* Jarvis AI Trigger in Taskbar */
+#jarvis-quick-btn {
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(0, 136, 255, 0.2));
+  border: 1px solid rgba(0, 229, 255, 0.4);
+}
+
+#jarvis-quick-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.3), rgba(0, 136, 255, 0.4));
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 18px var(--accent-cyan);
+}
+
+/* Taskbar running indicator pill */
+.taskbar-indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 3px;
+  background: rgba(0, 229, 255, 0.5);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.taskbar-item.running .taskbar-indicator {
+  display: block;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px var(--accent-cyan);
+}
+
+.taskbar-item.active-window .taskbar-indicator {
+  width: 14px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.taskbar-item.minimized .taskbar-indicator {
+  background: rgba(0, 229, 255, 0.4);
+  width: 6px;
+}
+
+/* Right section: System Tray & Clock */
+.taskbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 240px;
+  justify-content: flex-end;
+}
+
+.tray-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tray-group:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.tray-icon {
+  width: 16px;
+  height: 16px;
+  color: #cbd5e1;
+}
+
+.tray-pill {
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--accent-cyan);
+}
+
+/* Clock & Date Area */
+#clock-date-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 3px 8px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+#clock-date-group:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.clock-time {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f8fafc;
+  line-height: 1.1;
+  font-family: var(--font-mono);
+}
+
+.clock-date {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.1;
+  font-family: var(--font-mono);
+}
+
+/* Notification Bell */
+.notification-bell-btn {
+  position: relative;
+  width: 36px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.notification-bell-btn:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-crimson);
+  box-shadow: 0 0 6px var(--accent-crimson);
+}
+
+/* Show Desktop slice (far right edge) */
+.show-desktop-slice {
+  width: 6px;
+  height: 28px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  margin-left: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.show-desktop-slice:hover {
+  background: rgba(0, 229, 255, 0.3);
+}
