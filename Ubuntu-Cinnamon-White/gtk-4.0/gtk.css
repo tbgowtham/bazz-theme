@@ -1,37 +1,32 @@
 /* ===================================================================
-   Ubuntu Cinnamon Light Theme - GTK 4.0 / Libadwaita Stylesheet
-   Color Palette:
-   - Primary Background: #FFFFFF / #F7F7FA
-   - Accent Color: #E95420 (Ubuntu Orange)
-   - Primary Text: #2C2C2C (Dark Charcoal)
-   - Secondary Text: #666666 (Medium Gray)
-   - Borders: #DCDFE6 / #E2E4E8
+   Ubuntu Cinnamon macOS Elegance Edition - GTK 4.0 Stylesheet
+   Designed with macOS traffic lights, rounded buttons, and Finder aesthetic.
    =================================================================== */
 
 @define-color accent_color #E95420;
 @define-color accent_bg_color #E95420;
 @define-color accent_fg_color #FFFFFF;
 
-@define-color window_bg_color #F7F7FA;
-@define-color window_fg_color #2C2C2C;
+@define-color window_bg_color #EFECE8;
+@define-color window_fg_color #242220;
 
-@define-color view_bg_color #FFFFFF;
-@define-color view_fg_color #2C2C2C;
+@define-color view_bg_color #FAF8F5;
+@define-color view_fg_color #242220;
 
-@define-color headerbar_bg_color #F6F7FA;
-@define-color headerbar_fg_color #2C2C2C;
-@define-color headerbar_border_color #DCDFE6;
-@define-color headerbar_backdrop_color #FAFAFB;
+@define-color headerbar_bg_color #E8E4DF;
+@define-color headerbar_fg_color #242220;
+@define-color headerbar_border_color #D2CCC4;
+@define-color headerbar_backdrop_color #EEEBE6;
 
-@define-color card_bg_color #FFFFFF;
-@define-color card_fg_color #2C2C2C;
-@define-color card_border_color #DCDFE6;
+@define-color card_bg_color #FAF8F5;
+@define-color card_fg_color #242220;
+@define-color card_border_color #D2CCC4;
 
-@define-color popover_bg_color #FFFFFF;
-@define-color popover_fg_color #2C2C2C;
+@define-color popover_bg_color #FAF8F6;
+@define-color popover_fg_color #242220;
 
-@define-color borders #DCDFE6;
-@define-color unfocused_borders #E5E7EB;
+@define-color borders #D2CCC4;
+@define-color unfocused_borders #DDD8D0;
 
 /* Window & View Defaults */
 window {
@@ -43,46 +38,88 @@ headerbar {
     background-color: @headerbar_bg_color;
     color: @headerbar_fg_color;
     border-bottom: 1px solid @headerbar_border_color;
-    min-height: 42px;
+    min-height: 38px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 headerbar:backdrop {
     background-color: @headerbar_backdrop_color;
-    color: #777777;
+    color: #7A756F;
 }
 
-/* Window buttons */
+/* macOS Traffic Light Buttons */
+headerbar button.titlebutton {
+    min-width: 14px;
+    min-height: 14px;
+    margin: 0 4px;
+    padding: 0;
+}
+
 headerbar button.titlebutton.close {
     background-image: url("assets/titlebutton-close.svg");
     background-repeat: no-repeat;
     background-position: center;
 }
 
+headerbar button.titlebutton.close:hover {
+    background-image: url("assets/titlebutton-close-hover.svg");
+}
+
 headerbar:backdrop button.titlebutton.close {
     background-image: url("assets/titlebutton-close-backdrop.svg");
 }
 
-/* Buttons */
+headerbar button.titlebutton.minimize {
+    background-image: url("assets/titlebutton-min.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+headerbar button.titlebutton.minimize:hover {
+    background-image: url("assets/titlebutton-min-hover.svg");
+}
+
+headerbar:backdrop button.titlebutton.minimize {
+    background-image: url("assets/titlebutton-min-backdrop.svg");
+}
+
+headerbar button.titlebutton.maximize {
+    background-image: url("assets/titlebutton-max.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+headerbar button.titlebutton.maximize:hover {
+    background-image: url("assets/titlebutton-max-hover.svg");
+}
+
+headerbar:backdrop button.titlebutton.maximize {
+    background-image: url("assets/titlebutton-max-backdrop.svg");
+}
+
+/* Buttons (macOS Rounded Push Buttons) */
 button {
-    border-radius: 4px;
-    border: 1px solid #D0D4DC;
-    background-color: #FFFFFF;
-    color: #2C2C2C;
-    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #CCC6BE;
+    background-color: #F5F3EF;
+    color: #242220;
+    padding: 5px 14px;
     font-weight: 500;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
     transition: all 120ms ease;
 }
 
 button:hover {
-    background-color: #FDFDFD;
-    border-color: #B8BDC8;
+    background-color: #FAF8F5;
+    border-color: #B5AFA6;
     color: #111111;
 }
 
 button:active,
 button:checked {
-    background-color: #F0F1F4;
-    border-color: #A0A5B2;
+    background-color: #E4DFD8;
+    border-color: #9E988F;
 }
 
 button.suggested-action {
@@ -101,21 +138,22 @@ button.suggested-action:active {
 
 /* Entries */
 entry {
-    background-color: #FFFFFF;
-    border: 1px solid #D0D4DC;
-    border-radius: 4px;
-    color: #2C2C2C;
-    padding: 6px 10px;
+    background-color: #FAF8F5;
+    border: 1px solid #CCC6BE;
+    border-radius: 6px;
+    color: #242220;
+    padding: 6px 12px;
 }
 
 entry:focus-within {
     border-color: #E95420;
+    background-color: #FFFFFF;
     outline: 2px solid rgba(233, 84, 32, 0.25);
 }
 
 /* Switches */
 switch {
-    background-color: #E0E2E6;
+    background-color: #D8D3CC;
     border-radius: 12px;
 }
 
@@ -125,7 +163,7 @@ switch:checked {
 
 /* Sliders */
 scale trough {
-    background-color: #E2E4E8;
+    background-color: #DDD8D0;
     border-radius: 3px;
 }
 
@@ -135,7 +173,7 @@ scale highlight {
 }
 
 scale slider {
-    background-color: #FFFFFF;
+    background-color: #FAF8F5;
     border: 1.5px solid #E95420;
     border-radius: 50%;
 }
@@ -156,5 +194,5 @@ list row:selected {
 
 listview row:hover,
 list row:hover {
-    background-color: #FDF2EE;
+    background-color: rgba(0, 0, 0, 0.05);
 }

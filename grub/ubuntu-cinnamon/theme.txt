@@ -1,11 +1,11 @@
 # ===================================================================
-# Ubuntu Cinnamon Light Theme for GRUB (1366x867)
-# Clean off-white background with Ubuntu Orange #E95420 accent
+# Ubuntu Cinnamon Professional Theme for GRUB (1366x867)
+# Non-glaring dark slate background with Ubuntu Orange #E95420 accent
 # ===================================================================
 
 title-text: ""
 desktop-image: "background.png"
-desktop-color: "#F5F6F9"
+desktop-color: "#262124"
 terminal-font: "Unifont Regular 16"
 terminal-box: "select_c.png"
 
@@ -15,7 +15,7 @@ terminal-box: "select_c.png"
     top = 28%
     width = 56%
     height = 42%
-    item_color = "#2C2C2C"
+    item_color = "#E0DCD8"
     selected_item_color = "#FFFFFF"
     item_height = 40
     item_padding = 10
@@ -35,8 +35,8 @@ terminal-box: "select_c.png"
     height = 6
     show_text = false
     fg_color = "#E95420"
-    bg_color = "#E2E4E8"
-    border_color = "#D5D8DF"
+    bg_color = "#382F33"
+    border_color = "#483F43"
 }
 
 # Navigation Guide
@@ -45,7 +45,7 @@ terminal-box: "select_c.png"
     left = 22%
     width = 56%
     align = "center"
-    color = "#666666"
+    color = "#A8A09A"
     text = "Use the arrow keys to select an OS, then press Enter to boot."
 }
 
@@ -54,6 +54,6 @@ terminal-box: "select_c.png"
     left = 22%
     width = 56%
     align = "center"
-    color = "#888888"
+    color = "#7A736E"
     text = "Press 'e' to edit boot parameters or 'c' for a command-line."
 }

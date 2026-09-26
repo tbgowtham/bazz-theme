@@ -6,60 +6,54 @@ def create_grub_theme():
     icons_dir = os.path.join(grub_dir, "icons")
     os.makedirs(icons_dir, exist_ok=True)
 
-    # 1. Background image (1366 x 867 as specified)
+    # 1. Background image (1366 x 867) - Elegant Dark Slate / Aubergine
     width, height = 1366, 867
-    bg = Image.new('RGB', (width, height), color='#F5F6F9')
+    bg = Image.new('RGB', (width, height), color='#262124')
     draw = ImageDraw.Draw(bg)
 
-    # Off-white vertical gradient
+    # Dark slate gradient (comfortable on eyes at boot time)
     for y in range(height):
         ratio = y / height
-        r = int(252 - ratio * 10)
-        g = int(253 - ratio * 9)
-        b = int(255 - ratio * 8)
+        r = int(45 - ratio * 15)
+        g = int(38 - ratio * 14)
+        b = int(41 - ratio * 15)
         draw.line([(0, y), (width, y)], fill=(r, g, b))
 
     # Right side geometric facets
-    draw.polygon([(850, 0), (width, 0), (width, 500), (950, 350)], fill='#F0F2F6')
-    draw.polygon([(920, 100), (1250, 60), (1150, 480), (900, 380)], fill='#FFFFFF', outline='#E5E7EB')
-    draw.polygon([(1000, 180), (1200, 130), (1120, 400)], fill='#E95420')
-    draw.polygon([(1120, 400), (1230, 460), (1050, 520)], fill='#FFA07A')
+    draw.polygon([(850, 0), (width, 0), (width, 520), (950, 360)], fill='#2F282B')
+    draw.polygon([(920, 100), (1260, 60), (1160, 500), (900, 390)], fill='#382F33', outline='#50454A')
+    draw.polygon([(1000, 180), (1200, 130), (1120, 420)], fill='#E95420')
+    draw.polygon([(1120, 420), (1240, 480), (1050, 540)], fill='#C74010')
 
     # Ubuntu minimalist emblem on right
-    cx, cy = 1050, 290
-    draw.ellipse([cx-50, cy-50, cx+50, cy+50], outline='#FFFFFF', width=6)
-    draw.ellipse([cx-50, cy-50, cx+50, cy+50], outline='#E95420', width=4)
-    draw.ellipse([cx-15, cy-15, cx+15, cy+15], fill='#E95420')
+    cx, cy = 1060, 300
+    draw.ellipse([cx-52, cy-52, cx+52, cy+52], outline='#251F22', width=8)
+    draw.ellipse([cx-52, cy-52, cx+52, cy+52], outline='#E95420', width=5)
+    draw.ellipse([cx-16, cy-16, cx+16, cy+16], fill='#E95420')
 
     # Top Header Logo/Text
-    # Clean dark charcoal header
-    draw.rounded_rectangle([width//2 - 140, 90, width//2 + 140, 140], radius=8, fill='#FFFFFF', outline='#E2E4E8')
-    # Ubuntu orange pill badge inside header
+    draw.rounded_rectangle([width//2 - 140, 90, width//2 + 140, 140], radius=8, fill='#2F282B', outline='#483F43')
     draw.rounded_rectangle([width//2 - 130, 98, width//2 - 50, 132], radius=6, fill='#E95420')
 
     bg.save(os.path.join(grub_dir, "background.png"))
-    print("GRUB background.png created (1366x867)")
+    print("GRUB background.png updated (1366x867 dark slate)")
 
     # 2. Selection bar slices (3-slice or single slice)
-    # select_w.png (left cap), select_c.png (center stretch), select_e.png (right cap)
     sel_h = 38
-    # Left cap
     im_w = Image.new('RGBA', (8, sel_h), (0, 0, 0, 0))
     d_w = ImageDraw.Draw(im_w)
     d_w.rounded_rectangle([0, 0, 16, sel_h-1], radius=6, fill='#E95420')
     im_w.save(os.path.join(grub_dir, "select_w.png"))
 
-    # Center fill
     im_c = Image.new('RGBA', (16, sel_h), '#E95420')
     im_c.save(os.path.join(grub_dir, "select_c.png"))
 
-    # Right cap
     im_e = Image.new('RGBA', (8, sel_h), (0, 0, 0, 0))
     d_e = ImageDraw.Draw(im_e)
     d_e.rounded_rectangle([-8, 0, 7, sel_h-1], radius=6, fill='#E95420')
     im_e.save(os.path.join(grub_dir, "select_e.png"))
 
-    # 3. Boot Icons (Ubuntu, Linux Mint, Linux generic, Windows, UEFI)
+    # 3. Boot Icons
     def make_icon(fill_color, symbol=''):
         ico = Image.new('RGBA', (24, 24), (0, 0, 0, 0))
         d = ImageDraw.Draw(ico)
@@ -76,19 +70,19 @@ def create_grub_theme():
         return ico
 
     make_icon('#E95420', 'ubuntu').save(os.path.join(icons_dir, "ubuntu.png"))
-    make_icon('#2C2C2C', 'ubuntu').save(os.path.join(icons_dir, "gnu-linux.png"))
+    make_icon('#483F43', 'ubuntu').save(os.path.join(icons_dir, "gnu-linux.png"))
     make_icon('#688F30', 'mint').save(os.path.join(icons_dir, "linuxmint.png"))
     make_icon('#0078D7', 'win').save(os.path.join(icons_dir, "windows.png"))
 
     # 4. theme.txt
     theme_txt = f'''# ===================================================================
-# Ubuntu Cinnamon Light Theme for GRUB (1366x867)
-# Clean off-white background with Ubuntu Orange #E95420 accent
+# Ubuntu Cinnamon Professional Theme for GRUB (1366x867)
+# Non-glaring dark slate background with Ubuntu Orange #E95420 accent
 # ===================================================================
 
 title-text: ""
 desktop-image: "background.png"
-desktop-color: "#F5F6F9"
+desktop-color: "#262124"
 terminal-font: "Unifont Regular 16"
 terminal-box: "select_c.png"
 
@@ -98,7 +92,7 @@ terminal-box: "select_c.png"
     top = 28%
     width = 56%
     height = 42%
-    item_color = "#2C2C2C"
+    item_color = "#E0DCD8"
     selected_item_color = "#FFFFFF"
     item_height = 40
     item_padding = 10
@@ -118,8 +112,8 @@ terminal-box: "select_c.png"
     height = 6
     show_text = false
     fg_color = "#E95420"
-    bg_color = "#E2E4E8"
-    border_color = "#D5D8DF"
+    bg_color = "#382F33"
+    border_color = "#483F43"
 }}
 
 # Navigation Guide
@@ -128,7 +122,7 @@ terminal-box: "select_c.png"
     left = 22%
     width = 56%
     align = "center"
-    color = "#666666"
+    color = "#A8A09A"
     text = "Use the arrow keys to select an OS, then press Enter to boot."
 }}
 
@@ -137,13 +131,13 @@ terminal-box: "select_c.png"
     left = 22%
     width = 56%
     align = "center"
-    color = "#888888"
+    color = "#7A736E"
     text = "Press 'e' to edit boot parameters or 'c' for a command-line."
 }}
 '''
     with open(os.path.join(grub_dir, "theme.txt"), "w") as f:
         f.write(theme_txt)
 
-    print("GRUB theme created successfully")
+    print("GRUB theme updated successfully")
 
 create_grub_theme()

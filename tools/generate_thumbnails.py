@@ -1,72 +1,69 @@
-from PIL import Image, ImageDraw, ImageFont
-import os
+from PIL import Image, ImageDraw
 
-def create_cinnamon_thumbnail():
+def create_thumbnails():
     width, height = 280, 180
-    im = Image.new('RGB', (width, height), color='#F5F6F9')
+    im = Image.new('RGB', (width, height), color='#1E1A1D')
     draw = ImageDraw.Draw(im)
 
-    # Wallpaper background preview with subtle geometric orange accent
+    # Dark slate wallpaper background with macOS sweeping curves
     for y in range(height):
         ratio = y / height
-        # off-white gradient
-        r = int(250 - ratio * 8)
-        g = int(251 - ratio * 7)
-        b = int(253 - ratio * 6)
+        r = int(36 - ratio * 15)
+        g = int(28 - ratio * 13)
+        b = int(33 - ratio * 15)
         draw.line([(0, y), (width, y)], fill=(r, g, b))
 
-    # Geometric orange accents on right
-    draw.polygon([(180, 20), (270, 10), (250, 110), (160, 90)], fill='#FFFFFF', outline='#E5E7EB')
-    draw.polygon([(190, 40), (260, 30), (230, 100)], fill='#E95420')
-    draw.polygon([(230, 100), (260, 115), (210, 135)], fill='#FFA07A')
+    # macOS Sweeping Waves on right
+    draw.polygon([(140, height), (200, 90), (280, 30), (280, height)], fill='#481A2D')
+    draw.polygon([(160, height), (220, 110), (280, 50), (280, height)], fill='#E95420')
+    draw.polygon([(185, height), (240, 130), (280, 75), (280, height)], fill='#FFA07A')
 
-    # Window preview
-    win_x, win_y, win_w, win_h = 30, 25, 170, 105
+    # Window preview (macOS Window with Traffic Lights)
+    win_x, win_y, win_w, win_h = 28, 20, 175, 115
     # Window shadow
-    draw.rounded_rectangle([win_x-1, win_y-1, win_x+win_w+1, win_y+win_h+1], radius=6, fill='#E2E4E8')
+    draw.rounded_rectangle([win_x-2, win_y-2, win_x+win_w+2, win_y+win_h+2], radius=8, fill='#110E10')
     # Window body
-    draw.rounded_rectangle([win_x, win_y, win_x+win_w, win_y+win_h], radius=5, fill='#FFFFFF')
-    # Window titlebar
-    draw.rectangle([win_x, win_y, win_x+win_w, win_y+20], fill='#F8F9FA')
-    draw.line([(win_x, win_y+20), (win_x+win_w, win_y+20)], fill='#E5E7EB')
+    draw.rounded_rectangle([win_x, win_y, win_x+win_w, win_y+win_h], radius=7, fill='#F8F6F3')
+    # Window titlebar (warm stone)
+    draw.rectangle([win_x, win_y, win_x+win_w, win_y+22], fill='#E8E4DF')
+    draw.line([(win_x, win_y+22), (win_x+win_w, win_y+22)], fill='#D2CCC4')
 
-    # Window controls (close = orange, min/max = gray)
-    draw.ellipse([win_x+6, win_y+5, win_x+16, win_y+15], fill='#E95420')
-    draw.ellipse([win_x+20, win_y+5, win_x+30, win_y+15], fill='#D0D3D9')
-    draw.ellipse([win_x+34, win_y+5, win_x+44, win_y+15], fill='#D0D3D9')
+    # macOS Traffic Lights (Red, Yellow, Green)
+    draw.ellipse([win_x+8, win_y+7, win_x+16, win_y+15], fill='#FF5F56')
+    draw.ellipse([win_x+20, win_y+7, win_x+28, win_y+15], fill='#FEBC2E')
+    draw.ellipse([win_x+32, win_y+7, win_x+40, win_y+15], fill='#28C840')
 
-    # Window content (sidebar + Nemo view)
-    draw.rectangle([win_x, win_y+21, win_x+45, win_y+win_h-1], fill='#F7F8FA')
-    draw.line([(win_x+45, win_y+21), (win_x+45, win_y+win_h-1)], fill='#E5E7EB')
+    # Window content (sidebar + Nemo Finder view)
+    draw.rectangle([win_x, win_y+23, win_x+48, win_y+win_h-1], fill='#EAE6E1')
+    draw.line([(win_x+48, win_y+23), (win_x+48, win_y+win_h-1)], fill='#D5CFC7')
     # Selected sidebar item
-    draw.rounded_rectangle([win_x+4, win_y+30, win_x+41, win_y+42], radius=3, fill='#FDF2EE', outline='#FFA07A')
+    draw.rounded_rectangle([win_x+4, win_y+32, win_x+44, win_y+44], radius=4, fill='#FDF2EE', outline='#FFA07A')
     
-    # Selection in content
-    draw.rounded_rectangle([win_x+55, win_y+32, win_x+110, win_y+62], radius=3, fill='#FDF2EE', outline='#E95420')
-    draw.rectangle([win_x+65, win_y+38, win_x+77, win_y+48], fill='#E95420') # orange folder
+    # Selection in content (macOS folder)
+    draw.rounded_rectangle([win_x+58, win_y+34, win_x+115, win_y+65], radius=4, fill='#FDF2EE', outline='#E95420')
+    draw.rounded_rectangle([win_x+68, win_y+40, win_x+82, win_y+52], radius=2, fill='#E95420') # orange folder
 
-    # Cinnamon Bottom Panel (height 28)
-    panel_y = height - 28
-    draw.rectangle([0, panel_y, width, height], fill='#FAFAFB')
-    draw.line([(0, panel_y), (width, panel_y)], fill='#E2E4E8')
+    # Cinnamon Top/Bottom Menu Bar (macOS translucent style)
+    panel_y = height - 26
+    draw.rectangle([0, panel_y, width, height], fill='#E3DFD9')
+    draw.line([(0, panel_y), (width, panel_y)], fill='#CCC6BE')
 
-    # Menu button (Ubuntu orange icon/circle)
-    draw.ellipse([8, panel_y+6, 24, panel_y+22], fill='#E95420')
-    draw.ellipse([13, panel_y+11, 19, panel_y+17], fill='#FFFFFF')
+    # Menu button (Ubuntu orange icon)
+    draw.ellipse([8, panel_y+5, 22, panel_y+19], fill='#E95420')
+    draw.ellipse([12, panel_y+9, 18, panel_y+15], fill='#FFFFFF')
 
     # Active window list item with Ubuntu orange underline
-    draw.rounded_rectangle([32, panel_y+3, 105, panel_y+25], radius=3, fill='#FDECE5')
-    draw.line([(32, panel_y+26), (105, panel_y+26)], fill='#E95420', width=2)
+    draw.rounded_rectangle([28, panel_y+3, 105, panel_y+23], radius=4, fill='#FAF8F5')
+    draw.line([(28, panel_y+24), (105, panel_y+24)], fill='#E95420', width=2)
 
     # Tray applets on right
-    draw.ellipse([width-55, panel_y+10, width-47, panel_y+18], fill='#555555')
-    draw.ellipse([width-40, panel_y+10, width-32, panel_y+18], fill='#555555')
-    draw.rectangle([width-24, panel_y+8, width-14, panel_y+20], fill='#E5E7EB', outline='#555555')
-    draw.line([(width-4, panel_y), (width-4, height)], fill='#E2E4E8')
+    draw.ellipse([width-55, panel_y+9, width-47, panel_y+17], fill='#48423E')
+    draw.ellipse([width-40, panel_y+9, width-32, panel_y+17], fill='#48423E')
+    draw.rectangle([width-24, panel_y+7, width-14, panel_y+19], fill='#D5CFC7', outline='#48423E')
 
     im.save("Ubuntu-Cinnamon-White/cinnamon/thumbnail.png")
     im.save("Ubuntu-Cinnamon-White/gtk-3.0/thumbnail.png")
     im.save("Ubuntu-Cinnamon-White/metacity-1/thumbnail.png")
-    print("Thumbnails generated successfully")
+    print("Updated thumbnails with macOS elegance successfully")
 
-create_cinnamon_thumbnail()
+create_thumbnails()

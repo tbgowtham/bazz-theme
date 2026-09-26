@@ -10,31 +10,33 @@
 
 <!-- ::: CONSTANTS ::: -->
 
-<constant name="C_title_focused" value="#2C2C2C" />
-<constant name="C_title_unfocused" value="#777777" />
+<constant name="C_title_focused" value="#242220" />
+<constant name="C_title_unfocused" value="#7A756F" />
 
-<constant name="C_wm_bg" value="#F6F7FA" />
-<constant name="C_wm_bg_unfocused" value="#FAFAFB" />
+<constant name="C_wm_bg" value="#E6E3DE" />
+<constant name="C_wm_bg_unfocused" value="#EEEBE6" />
 
-<constant name="C_wm_border" value="#DCDFE6" />
-<constant name="C_wm_border_unfocused" value="#E5E7EB" />
-<constant name="C_wm_highlight" value="#FFFFFF" />
+<constant name="C_wm_border" value="#CBC6BD" />
+<constant name="C_wm_border_unfocused" value="#DDD8D0" />
+<constant name="C_wm_highlight" value="#F5F3EF" />
 
 <!-- window button colors -->
 
 <!-- close -->
-<constant name="C_button_close_bg_focused" value="#E95420" />
-<constant name="C_button_close_bg_hover" value="#FF6332" />
-<constant name="C_button_close_bg_active" value="#C74010" />
+<constant name="C_button_close_bg_focused" value="#FF5F56" />
+<constant name="C_button_min_bg_focused" value="#FEBC2E" />
+<constant name="C_button_max_bg_focused" value="#28C840" />
+<constant name="C_button_close_bg_hover" value="#FF736B" />
+<constant name="C_button_close_bg_active" value="#D83C34" />
 
 <constant name="C_icon_close_bg" value="#FFFFFF" />
 
 <!-- minimize, maximize -->
 <constant name="C_button_bg_hover" value="#FDF2EE" />
-<constant name="C_button_bg_active" value="#DCDFE6" />
+<constant name="C_button_bg_active" value="#D8D2CA" />
 
-<constant name="C_icon_bg_focused" value="#2C2C2C" />
-<constant name="C_icon_bg_unfocused" value="#A0A0A0" />
+<constant name="C_icon_bg_focused" value="#2E2A27" />
+<constant name="C_icon_bg_unfocused" value="#9A948D" />
 <constant name="C_icon_bg_hover" value="#E95420" />
 <constant name="C_icon_bg_active" value="#FFFFFF" />
 
@@ -221,7 +223,7 @@
 <!-- ::: TITLES ::: -->
 
 <draw_ops name="title_focused">
-    <title version="< 3.1"
+    <title version="&lt; 3.1"
         x="(0 `max` ((width - title_width) / 2))"
         y="(0 `max` ((height - title_height) /2))"
         color="C_title_focused" />
@@ -233,7 +235,7 @@
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-    <title version="< 3.1"
+    <title version="&lt; 3.1"
         x="(0 `max` ((width - title_width) / 2))"
         y="(0 `max` ((height - title_height) /2))"
         color="C_title_unfocused" />
@@ -288,7 +290,8 @@
 
 <!--maximize-->
 <draw_ops name="maximize_focused">
-	<image filename="max-icon.svg" colorize="C_icon_bg_focused" x="(width-object_width)/2" y="(height-object_height)/2" width="object_width" height="object_height"/>
+	<image filename="button-bg.svg" colorize="C_button_max_bg_focused" x="(width-object_width)/2" y="(height-object_height)/2" width="object_width" height="object_height"/>
+	<image filename="max-icon.svg" colorize="C_icon_close_bg" x="(width-object_width)/2" y="(height-object_height)/2" width="object_width" height="object_height"/>
 </draw_ops>
 
 <draw_ops name="maximize_focused_pressed">
@@ -326,7 +329,8 @@
 
 <!--minimize-->
 <draw_ops name="minimize_focused">
-	<image filename="min-icon.svg" colorize="C_icon_bg_focused" x="(width-object_width)/2" y="(height-object_height)/2" width="object_width" height="object_height"/>
+	<image filename="button-bg.svg" colorize="C_button_min_bg_focused" x="(width-object_width)/2" y="(height-object_height)/2" width="object_width" height="object_height"/>
+	<image filename="min-icon.svg" colorize="C_icon_close_bg" x="(width-object_width)/2" y="(height-object_height)/2" width="object_width" height="object_height"/>
 </draw_ops>
 
 <draw_ops name="minimize_focused_pressed">

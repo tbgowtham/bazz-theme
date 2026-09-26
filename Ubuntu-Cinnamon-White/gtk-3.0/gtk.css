@@ -1,38 +1,32 @@
 /* ===================================================================
-   Ubuntu Cinnamon Light Theme - GTK 3.0 Stylesheet
-   Color Palette:
-   - Primary Background: #FFFFFF / #F7F7FA
-   - Accent Color: #E95420 (Ubuntu Orange)
-   - Primary Text: #2C2C2C (Dark Charcoal)
-   - Secondary Text: #666666 (Medium Gray)
-   - Borders: #DCDFE6 / #E2E4E8
-   - Hover Background: #FDF2EE
-   - Selected / Active: #E95420 with #FFFFFF
+   Ubuntu Cinnamon macOS Elegance Edition - GTK 3.0 Stylesheet
+   Designed with macOS traffic lights, Finder sidebar aesthetic,
+   smooth rounded push buttons, and Ubuntu Orange (#E95420) accents.
    =================================================================== */
 
-@define-color theme_base_color #FFFFFF;
-@define-color theme_bg_color #F7F7FA;
-@define-color theme_fg_color #2C2C2C;
-@define-color theme_text_color #2C2C2C;
+@define-color theme_base_color #FAF8F5;
+@define-color theme_bg_color #EFECE8;
+@define-color theme_fg_color #242220;
+@define-color theme_text_color #242220;
 @define-color theme_selected_bg_color #E95420;
 @define-color theme_selected_fg_color #FFFFFF;
-@define-color placeholder_text_color #888888;
-@define-color borders #DCDFE6;
-@define-color unfocused_borders #E5E7EB;
+@define-color placeholder_text_color #8A847C;
+@define-color borders #D2CCC4;
+@define-color unfocused_borders #DDD8D0;
 @define-color warning_color #F27835;
 @define-color error_color #E95420;
 @define-color success_color #38B44A;
 
-@define-color wm_title #2C2C2C;
-@define-color wm_unfocused_title #777777;
-@define-color wm_bg #F6F7FA;
-@define-color wm_bg_unfocused #FAFAFB;
-@define-color wm_border #DCDFE6;
+@define-color wm_title #242220;
+@define-color wm_unfocused_title #7A756F;
+@define-color wm_bg #E8E4DF;
+@define-color wm_bg_unfocused #EEEBE6;
+@define-color wm_border #CBC6BD;
 
-@define-color content_view_bg #FFFFFF;
-@define-color sidebar_bg #F5F6F8;
-@define-color headerbar_bg #F6F7FA;
-@define-color headerbar_fg #2C2C2C;
+@define-color content_view_bg #F8F6F3;
+@define-color sidebar_bg #EAE6E1;
+@define-color headerbar_bg #E8E4DF;
+@define-color headerbar_fg #242220;
 
 @define-color accent_color #E95420;
 @define-color accent_bg_color #E95420;
@@ -43,8 +37,6 @@
     -GtkArrow-arrow-scaling: 0.6;
     -GtkCheckButton-indicator-size: 16;
     -GtkCheckMenuItem-indicator-size: 14;
-    -GtkMenu-horizontal-padding: 0;
-    -GtkMenu-vertical-padding: 4px;
     -GtkScrolledWindow-overlay-scrolling: true;
     -GtkTextView-error-underline-color: #E95420;
     outline-color: rgba(233, 84, 32, 0.4);
@@ -64,11 +56,11 @@ dialog {
     color: @theme_fg_color;
 }
 
-/* --- Header Bars & Window Titlebars --- */
+/* --- Header Bars & Window Titlebars (macOS Style) --- */
 headerbar {
-    min-height: 40px;
-    padding-left: 8px;
-    padding-right: 8px;
+    min-height: 38px;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: @headerbar_bg;
     color: @headerbar_fg;
     border-bottom: 1px solid @borders;
@@ -82,8 +74,8 @@ headerbar:backdrop {
 }
 
 headerbar .title {
-    font-weight: bold;
-    font-size: 10pt;
+    font-weight: 600;
+    font-size: 9.5pt;
     color: @wm_title;
 }
 
@@ -92,16 +84,16 @@ headerbar:backdrop .title {
 }
 
 headerbar .subtitle {
-    font-size: 8.5pt;
-    color: #666666;
+    font-size: 8pt;
+    color: #635E58;
 }
 
-/* Window Titlebar Controls */
+/* Window Titlebar Controls (macOS Traffic Lights) */
 headerbar button.titlebutton {
-    min-width: 24px;
-    min-height: 24px;
+    min-width: 14px;
+    min-height: 14px;
     padding: 0;
-    margin: 2px;
+    margin: 0 4px;
     border: none;
     background: transparent;
     box-shadow: none;
@@ -111,6 +103,10 @@ headerbar button.titlebutton.close {
     background-image: url("assets/titlebutton-close.svg");
     background-repeat: no-repeat;
     background-position: center;
+}
+
+headerbar button.titlebutton.close:hover {
+    background-image: url("assets/titlebutton-close-hover.svg");
 }
 
 headerbar:backdrop button.titlebutton.close {
@@ -123,42 +119,60 @@ headerbar button.titlebutton.minimize {
     background-position: center;
 }
 
+headerbar button.titlebutton.minimize:hover {
+    background-image: url("assets/titlebutton-min-hover.svg");
+}
+
+headerbar:backdrop button.titlebutton.minimize {
+    background-image: url("assets/titlebutton-min-backdrop.svg");
+}
+
 headerbar button.titlebutton.maximize {
     background-image: url("assets/titlebutton-max.svg");
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* --- Buttons --- */
+headerbar button.titlebutton.maximize:hover {
+    background-image: url("assets/titlebutton-max-hover.svg");
+}
+
+headerbar:backdrop button.titlebutton.maximize {
+    background-image: url("assets/titlebutton-max-backdrop.svg");
+}
+
+/* --- Buttons (macOS Rounded Push Buttons) --- */
 button {
-    min-height: 26px;
-    min-width: 28px;
-    padding: 4px 10px;
-    border-radius: 4px;
+    min-height: 24px;
+    min-width: 24px;
+    padding: 4px 12px;
+    border-radius: 6px;
     font-weight: 500;
-    border: 1px solid #D0D4DC;
-    background-color: #FFFFFF;
-    color: #2C2C2C;
+    border: 1px solid #CCC6BE;
+    background-color: #F5F3EF;
+    color: #242220;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
     transition: all 120ms ease-in-out;
 }
 
 button:hover {
-    background-color: #FDFDFD;
-    border-color: #B8BDC8;
+    background-color: #FAF8F5;
+    border-color: #B5AFA6;
     color: #111111;
 }
 
 button:active,
 button:checked {
-    background-color: #F0F1F4;
-    border-color: #A0A5B2;
+    background-color: #E4DFD8;
+    border-color: #9E988F;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 button:disabled {
-    background-color: #F5F6F8;
-    border-color: #E2E4E8;
-    color: #A0A0A0;
+    background-color: #ECE9E4;
+    border-color: #DDD8D0;
+    color: #9C968E;
+    box-shadow: none;
 }
 
 /* Suggested Action (Ubuntu Orange Button) */
@@ -167,6 +181,7 @@ button.default {
     background-color: #E95420;
     border: 1px solid #C74010;
     color: #FFFFFF;
+    box-shadow: 0 1px 2px rgba(233, 84, 32, 0.25);
 }
 
 button.suggested-action:hover,
@@ -202,37 +217,38 @@ button.flat {
 }
 
 button.flat:hover {
-    background-color: #FDF2EE;
+    background-color: rgba(0, 0, 0, 0.06);
     color: #E95420;
     border-color: transparent;
 }
 
 button.flat:active,
 button.flat:checked {
-    background-color: #FDECE5;
+    background-color: rgba(233, 84, 32, 0.15);
     color: #E95420;
 }
 
-/* --- Text Fields & Inputs --- */
+/* --- Text Fields & Inputs (macOS Rounded Inputs) --- */
 entry {
     min-height: 28px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    border: 1px solid #D0D4DC;
-    background-color: #FFFFFF;
-    color: #2C2C2C;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #CCC6BE;
+    background-color: #FAF8F5;
+    color: #242220;
     transition: all 120ms ease-in-out;
 }
 
 entry:focus {
     border-color: #E95420;
+    background-color: #FFFFFF;
     box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.22);
 }
 
 entry:disabled {
-    background-color: #F5F6F8;
-    border-color: #E2E4E8;
-    color: #A0A0A0;
+    background-color: #ECE9E4;
+    border-color: #DDD8D0;
+    color: #9C968E;
 }
 
 entry selection {
@@ -240,11 +256,11 @@ entry selection {
     color: #FFFFFF;
 }
 
-/* Search Entry */
+/* macOS Search Pill Entry */
 entry.search {
-    border-radius: 14px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-radius: 18px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 /* --- Checkboxes & Radios --- */
@@ -290,13 +306,13 @@ radiobutton radio:checked:hover {
     background-image: url("assets/radio-checked-hover.svg");
 }
 
-/* --- Switches --- */
+/* --- Switches (macOS Style Pill) --- */
 switch {
     min-width: 38px;
     min-height: 20px;
     border-radius: 10px;
-    background-color: #E0E2E6;
-    border: 1px solid #D0D3D9;
+    background-color: #D8D3CC;
+    border: 1px solid #CCC6BE;
     transition: all 150ms ease-in-out;
 }
 
@@ -309,7 +325,7 @@ switch slider {
     min-width: 16px;
     min-height: 16px;
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: #FAF8F5;
     margin: 1px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
@@ -318,7 +334,7 @@ switch slider {
 scale trough {
     min-height: 4px;
     border-radius: 2px;
-    background-color: #E2E4E8;
+    background-color: #DDD8D0;
 }
 
 scale highlight {
@@ -331,7 +347,7 @@ scale slider {
     min-width: 16px;
     min-height: 16px;
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: #FAF8F5;
     border: 1.5px solid #E95420;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
@@ -355,7 +371,7 @@ scrollbar slider {
     min-width: 6px;
     min-height: 6px;
     border-radius: 3px;
-    background-color: #C8CCD5;
+    background-color: #C5BFB7;
     margin: 2px;
 }
 
@@ -365,11 +381,11 @@ scrollbar slider:hover {
 
 /* --- Notebooks & Tabs --- */
 notebook {
-    background-color: @theme_base_color;
+    background-color: @content_view_bg;
 }
 
 notebook > header {
-    background-color: #F5F6F8;
+    background-color: #E6E2DD;
     border-bottom: 1px solid @borders;
 }
 
@@ -378,20 +394,20 @@ notebook > header > tabs > tab {
     padding: 6px 14px;
     border: none;
     border-bottom: 2px solid transparent;
-    color: #555555;
+    color: #555048;
     font-weight: 500;
     background-color: transparent;
     transition: all 120ms ease;
 }
 
 notebook > header > tabs > tab:hover {
-    color: #2C2C2C;
+    color: #242220;
     background-color: #FDF2EE;
 }
 
 notebook > header > tabs > tab:checked {
     color: #E95420;
-    background-color: #FFFFFF;
+    background-color: #FAF8F5;
     border-bottom: 2px solid #E95420;
     font-weight: 600;
 }
@@ -400,7 +416,7 @@ notebook > header > tabs > tab:checked {
 progressbar trough {
     min-height: 6px;
     border-radius: 3px;
-    background-color: #ECEEF2;
+    background-color: #DDD8D0;
 }
 
 progressbar progress {
@@ -409,11 +425,11 @@ progressbar progress {
     background-color: #E95420;
 }
 
-/* --- Menus, Popovers & Context Menus --- */
+/* --- Menus, Popovers & Context Menus (macOS Context Menu Elegance) --- */
 menubar {
-    background-color: #F6F7FA;
-    border-bottom: 1px solid #E2E4E8;
-    color: #2C2C2C;
+    background-color: #E8E4DF;
+    border-bottom: 1px solid #D5CFC7;
+    color: #242220;
 }
 
 menubar > menuitem {
@@ -422,65 +438,66 @@ menubar > menuitem {
 }
 
 menubar > menuitem:hover {
-    background-color: #FDF2EE;
-    color: #E95420;
+    background-color: #E95420;
+    color: #FFFFFF;
 }
 
 menu,
 .menu,
 popover {
-    background-color: #FFFFFF;
-    color: #2C2C2C;
-    border: 1px solid #DCDFE6;
-    border-radius: 6px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    padding: 4px;
+    background-color: #FAF8F6;
+    color: #242220;
+    border: 1px solid #D5CFC7;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+    padding: 6px;
 }
 
 menuitem {
     min-height: 24px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    color: #2C2C2C;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: #242220;
+    margin: 1px 0;
 }
 
 menuitem:hover {
-    background-color: #FDF2EE;
-    color: #E95420;
+    background-color: #E95420;
+    color: #FFFFFF;
 }
 
 menuitem:active {
-    background-color: #E95420;
+    background-color: #C74010;
     color: #FFFFFF;
 }
 
 menuitem separator {
     min-height: 1px;
-    background-color: #EAECEF;
-    margin: 4px 2px;
+    background-color: #E4DFD8;
+    margin: 4px 6px;
 }
 
 /* --- Tooltips --- */
 tooltip {
-    background-color: #2C2C2C;
-    color: #FFFFFF;
-    border: 1px solid #3E3E3E;
-    border-radius: 4px;
-    padding: 4px 8px;
+    background-color: #242220;
+    color: #FAF8F5;
+    border: 1px solid #383430;
+    border-radius: 6px;
+    padding: 4px 10px;
     font-size: 8.5pt;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 tooltip label {
-    color: #FFFFFF;
+    color: #FAF8F5;
 }
 
 /* --- Views, Lists, Sidebars & Treeviews --- */
 view,
 treeview,
 list {
-    background-color: #FFFFFF;
-    color: #2C2C2C;
+    background-color: @content_view_bg;
+    color: #242220;
 }
 
 view:selected,
@@ -492,28 +509,30 @@ row:selected {
 
 view:hover,
 row:hover {
-    background-color: #FDF2EE;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* --- Nemo File Manager Styling --- */
+/* --- Nemo File Manager (macOS Finder Elegance) --- */
 .nemo-window {
-    background-color: #FFFFFF;
+    background-color: @content_view_bg;
 }
 
 .nemo-window .sidebar {
-    background-color: #F6F7F9;
-    border-right: 1px solid #E2E4E8;
-    color: #2C2C2C;
+    background-color: #EAE6E1;
+    border-right: 1px solid #D5CFC7;
+    color: #242220;
+    padding: 6px 0;
 }
 
 .nemo-window .sidebar row {
-    padding: 4px 6px;
-    border-radius: 4px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin: 1px 6px;
 }
 
 .nemo-window .sidebar row:hover {
-    background-color: #FDF2EE;
-    color: #E95420;
+    background-color: rgba(0, 0, 0, 0.06);
+    color: #111111;
 }
 
 .nemo-window .sidebar row:selected {
@@ -522,37 +541,40 @@ row:hover {
 }
 
 .nemo-window .nemo-window-pane {
-    background-color: #FFFFFF;
+    background-color: @content_view_bg;
 }
 
 .nemo-window .toolbar {
-    background-color: #F6F7FA;
-    border-bottom: 1px solid #E2E4E8;
-    padding: 4px;
+    background-color: #E8E4DF;
+    border-bottom: 1px solid #D5CFC7;
+    padding: 4px 8px;
 }
 
 /* Nemo Desktop Canvas */
 .nemo-desktop.nemo-canvas-item {
     color: #FFFFFF;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.85);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .nemo-desktop.nemo-canvas-item:selected {
     background-color: rgba(233, 84, 32, 0.35);
     border: 1px solid #E95420;
-    border-radius: 4px;
+    border-radius: 6px;
     color: #FFFFFF;
 }
 
-/* Pathbar Breadcrumbs */
+/* Pathbar Breadcrumbs (macOS Finder Style Path Pills) */
 .nemo-window .path-bar button {
-    border-radius: 4px;
-    margin: 1px;
+    background-color: #F5F3EF;
+    border: 1px solid #CCC6BE;
+    border-radius: 6px;
+    margin: 1px 2px;
+    padding: 3px 8px;
 }
 
 .nemo-window .path-bar button:checked {
-    background-color: #FDF2EE;
-    color: #E95420;
-    border-color: #FFA07A;
+    background-color: #E95420;
+    color: #FFFFFF;
+    border-color: #C74010;
     font-weight: bold;
 }

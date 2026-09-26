@@ -1,56 +1,49 @@
 /* ===================================================================
-   Ubuntu Cinnamon Light Theme - Cinnamon Desktop Shell Stylesheet
-   Color Palette:
-   - Primary Background: #FAFAFB / #FFFFFF (Crisp White / Off-White)
-   - Accent Color: #E95420 (Ubuntu Orange)
-   - Primary Text: #2C2C2C (Dark Charcoal)
-   - Secondary Text: #666666 (Medium Gray)
-   - Borders: #E2E4E8 (Subtle Light Gray)
-   - Hover Background: #FDF2EE (Very Light Warm Orange Tint)
-   - Active / Selected: #E95420 (Ubuntu Orange)
-   - Focus Outline: rgba(233, 84, 32, 0.3)
+   Ubuntu Cinnamon macOS Elegance Edition - Cinnamon Desktop Shell
+   Designed with macOS-inspired refinement, floating rounded cards,
+   sleek top-bar styling, and signature Ubuntu Orange (#E95420) accents.
    =================================================================== */
 
 /* --- Base Stage & Fonts --- */
 stage {
-    font-family: "Ubuntu", "Ubuntu Sans", "Cantarell", "Noto Sans", "Segoe UI", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Ubuntu", "SF Pro Display", "Cantarell", sans-serif;
     font-size: 9.5pt;
-    color: #2C2C2C;
+    color: #242220;
 }
 
-/* --- Panel --- */
+/* --- Panel (macOS Menu Bar / Dock Styling) --- */
 #panel {
-    background-color: #FAFAFB;
-    color: #2C2C2C;
+    background-color: rgba(235, 232, 227, 0.96);
+    color: #242220;
     font-size: 9.5pt;
     font-weight: 500;
-    height: 38px;
-    box-shadow: none;
+    height: 36px;
+    width: 32px;
 }
 
 .panel-bottom {
-    border-top: 1px solid #E2E4E8;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: none;
     border-left: none;
     border-right: none;
 }
 
 .panel-top {
-    border-bottom: 1px solid #E2E4E8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     border-top: none;
     border-left: none;
     border-right: none;
 }
 
 .panel-left {
-    border-right: 1px solid #E2E4E8;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
     border-left: none;
     border-top: none;
     border-bottom: none;
 }
 
 .panel-right {
-    border-left: 1px solid #E2E4E8;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
     border-right: none;
     border-top: none;
     border-bottom: none;
@@ -60,65 +53,50 @@ stage {
     spacing: 4px;
 }
 
-#panelLeft:dnd {
-    background-gradient-direction: vertical;
-    background-gradient-start: rgba(233, 84, 32, 0.15);
-    background-gradient-end: rgba(233, 84, 32, 0.25);
-}
-
-#panelCenter:dnd {
-    background-gradient-direction: vertical;
-    background-gradient-start: rgba(233, 84, 32, 0.15);
-    background-gradient-end: rgba(233, 84, 32, 0.25);
-}
-
-#panelRight:dnd {
-    background-gradient-direction: vertical;
-    background-gradient-start: rgba(233, 84, 32, 0.15);
-    background-gradient-end: rgba(233, 84, 32, 0.25);
+#panelLeft:dnd, #panelCenter:dnd, #panelRight:dnd {
+    background-color: rgba(233, 84, 32, 0.20);
+    border-radius: 6px;
 }
 
 .panel-dummy {
-    background-color: rgba(233, 84, 32, 0.4);
+    background-color: rgba(233, 84, 32, 0.35);
+    border-radius: 6px;
 }
 
-/* --- Applets --- */
+/* --- Applets (macOS Menu Bar Items) --- */
 .applet-box {
-    padding-left: 7px;
-    padding-right: 7px;
-    color: #2C2C2C;
-    text-shadow: none;
-    transition-duration: 120ms;
-    border-radius: 4px;
-    margin: 2px 1px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #242220;
+    transition-duration: 100ms;
+    border-radius: 6px;
+    margin: 3px 1px;
 }
 
 .applet-box:hover {
-    color: #E95420;
-    background-color: #FDF2EE;
+    color: #111111;
+    background-color: rgba(0, 0, 0, 0.07);
 }
 
 .applet-box:active,
 .applet-box:checked {
     color: #E95420;
-    background-color: #FCE8E0;
+    background-color: rgba(233, 84, 32, 0.15);
 }
 
 .applet-box:highlight {
-    background-image: none;
-    border-image: none;
     background-color: #E95420;
     color: #FFFFFF;
+    border-radius: 6px;
 }
 
 .applet-label {
     font-weight: 500;
-    color: #2C2C2C;
-    text-shadow: none;
+    color: #242220;
 }
 
 .applet-box:hover > .applet-label {
-    color: #E95420;
+    color: #111111;
 }
 
 .applet-box:active > .applet-label,
@@ -127,12 +105,8 @@ stage {
 }
 
 .applet-icon {
-    color: #2C2C2C;
+    color: #242220;
     icon-size: 16px;
-}
-
-.applet-box:hover > .applet-icon {
-    color: #E95420;
 }
 
 .applet-separator {
@@ -141,202 +115,170 @@ stage {
 
 .applet-separator-line {
     width: 1px;
-    background-color: #E2E4E8;
+    background-color: rgba(0, 0, 0, 0.10);
 }
 
 .applet-separator-line-vertical {
     border: 0px solid rgba(0,0,0,0);
     border-bottom-width: 1px;
-    border-color: #E2E4E8;
+    border-color: rgba(0, 0, 0, 0.10);
 }
 
 /* Cornerbar / Show Desktop */
 .applet-cornerbar {
-    width: 10px;
+    width: 12px;
     background-color: transparent;
-    border-left: 1px solid #E2E4E8;
+    border-left: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 .applet-cornerbar:hover {
     background-color: #E95420;
 }
 
-/* --- Window List & Grouped Window List --- */
+/* --- Window List (macOS Dock-style App Indicators) --- */
 .window-list-box {
-    spacing: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
+    spacing: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 .window-list-item-box {
-    color: #2C2C2C;
+    color: #242220;
     background-color: transparent;
-    border-radius: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin: 2px 1px;
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 3px 2px;
     border-bottom: 2px solid transparent;
     transition-duration: 120ms;
 }
 
 .window-list-item-box:hover {
-    background-color: #FDF2EE;
-    color: #2C2C2C;
+    background-color: rgba(0, 0, 0, 0.06);
+    color: #111111;
     border-bottom: 2px solid #FFA07A;
 }
 
 .window-list-item-box:active,
 .window-list-item-box:checked,
 .window-list-item-box:focus {
-    background-color: #FDECE5;
+    background-color: rgba(255, 255, 255, 0.90);
     color: #111111;
     border-bottom: 2px solid #E95420;
+    border-radius: 6px 6px 4px 4px;
 }
 
 .window-list-item-demands-attention {
-    background-color: #FFF2EC;
-    border-bottom: 2px solid #E95420;
-}
-
-/* Grouped window list items */
-.grouped-window-list-item-box {
-    color: #2C2C2C;
-    border-radius: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin: 2px 1px;
-    border-bottom: 2px solid transparent;
-    transition-duration: 120ms;
-}
-
-.grouped-window-list-item-box:hover {
     background-color: #FDF2EE;
-    border-bottom: 2px solid #FFA07A;
-}
-
-.grouped-window-list-item-box:active,
-.grouped-window-list-item-box:checked {
-    background-color: #FDECE5;
     border-bottom: 2px solid #E95420;
 }
 
+/* Grouped Window List Badge (macOS Counter Badge) */
 .grouped-window-list-badge {
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #E95420;
     color: #FFFFFF;
     font-size: 8pt;
     font-weight: bold;
-    padding: 1px 5px;
+    padding: 1px 6px;
 }
 
 /* Window Thumbnail Preview */
 .window-list-preview {
-    background-color: #FFFFFF;
-    border: 1px solid #DCDFE6;
-    border-radius: 6px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    padding: 8px;
-    color: #2C2C2C;
+    background-color: rgba(250, 248, 246, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    padding: 10px;
+    color: #242220;
     font-size: 9pt;
 }
 
-/* --- Cinnamon Application Menu & Popups --- */
+/* --- Cinnamon Application Menu (macOS Spotlight / Launchpad Elegance) --- */
 .menu,
 .popup-menu,
 .popup-menu-content {
-    background-color: #FFFFFF;
-    color: #2C2C2C;
-    border: 1px solid #DCDFE6;
-    border-radius: 6px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    padding: 6px;
+    background-color: rgba(250, 248, 246, 0.98);
+    color: #242220;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 8px;
 }
 
 .popup-sub-menu {
-    background-color: #F9FAFB;
-    border: 1px solid #E5E7EB;
-    border-radius: 4px;
-    box-shadow: none;
-}
-
-.popup-sub-menu .popup-menu-item:ltr {
-    padding-right: 1.75em;
-}
-
-.popup-sub-menu .popup-menu-item:rtl {
-    padding-left: 1.75em;
+    background-color: rgba(239, 236, 232, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
 }
 
 .popup-menu-item {
-    padding: 6px 12px;
-    spacing: 8px;
-    border-radius: 4px;
-    color: #2C2C2C;
-    transition-duration: 100ms;
+    padding: 7px 14px;
+    spacing: 10px;
+    border-radius: 6px;
+    color: #242220;
+    transition-duration: 80ms;
 }
 
 .popup-menu-item:hover {
-    background-color: #FDF2EE;
-    color: #E95420;
-}
-
-.popup-menu-item:active {
     background-color: #E95420;
     color: #FFFFFF;
 }
 
+.popup-menu-item:active {
+    background-color: #C74010;
+    color: #FFFFFF;
+}
+
 .popup-menu-item:insensitive {
-    color: #A0A0A0;
+    color: #A09A92;
     background-color: transparent;
 }
 
 .popup-separator-menu-item {
     height: 1px;
-    background-color: #EAECEF;
-    margin: 4px 6px;
+    background-color: rgba(0, 0, 0, 0.08);
+    margin: 4px 8px;
 }
 
-/* Menu Search Field */
+/* Menu Search Field (macOS Spotlight Search Pill) */
 #menu-search-entry,
 #appmenu-search-entry {
-    background-color: #F5F6F8;
-    border: 1px solid #D0D4DC;
-    border-radius: 4px;
-    color: #2C2C2C;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    border-radius: 20px;
+    color: #242220;
     selected-color: #FFFFFF;
     selection-background-color: #E95420;
-    caret-color: #E95420;
     caret-size: 1px;
-    padding: 7px 10px;
-    margin: 4px;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+    padding: 8px 14px;
+    margin: 6px 8px;
+    font-size: 10pt;
 }
 
 #menu-search-entry:focus,
 #appmenu-search-entry:focus {
     background-color: #FFFFFF;
     border: 1px solid #E95420;
-    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.18);
 }
 
 #menu-search-entry:hover,
 #appmenu-search-entry:hover {
-    border-color: #C0C4CC;
+    border-color: rgba(0, 0, 0, 0.18);
 }
 
-/* Application Menu Categories & Applications */
+/* Application Menu Categories & Applications (macOS Sidebar Style) */
 .menu-category-button,
 .appmenu-category-button {
-    padding: 7px 12px;
-    border-radius: 4px;
-    color: #333333;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #242220;
     font-weight: 500;
+    margin: 1px 4px;
 }
 
 .menu-category-button:hover,
 .appmenu-category-button:hover {
-    background-color: #FDF2EE;
-    color: #E95420;
+    background-color: rgba(0, 0, 0, 0.06);
+    color: #111111;
 }
 
 .menu-category-button-selected,
@@ -344,6 +286,7 @@ stage {
     background-color: #E95420;
     color: #FFFFFF;
     font-weight: 600;
+    border-radius: 8px;
 }
 
 .menu-category-button-selected:hover,
@@ -354,15 +297,16 @@ stage {
 
 .menu-application-button,
 .appmenu-application-button {
-    padding: 6px 10px;
-    border-radius: 4px;
-    color: #2C2C2C;
+    padding: 7px 12px;
+    border-radius: 8px;
+    color: #242220;
+    margin: 1px 4px;
 }
 
 .menu-application-button:hover,
 .appmenu-application-button:hover {
-    background-color: #FDF2EE;
-    color: #E95420;
+    background-color: #E95420;
+    color: #FFFFFF;
 }
 
 .menu-application-button-selected,
@@ -378,27 +322,28 @@ stage {
 
 .menu-favorites-button,
 .appmenu-system-button {
-    padding: 7px;
-    border-radius: 4px;
-    color: #2C2C2C;
+    padding: 8px;
+    border-radius: 8px;
+    color: #242220;
 }
 
 .menu-favorites-button:hover,
 .appmenu-system-button:hover {
-    background-color: #FDF2EE;
+    background-color: rgba(0, 0, 0, 0.06);
     color: #E95420;
 }
 
-/* --- Calendar & Clock Popup --- */
+/* --- Calendar & Clock Popup (macOS Widget Style) --- */
 .calendar-main-box {
-    background-color: #FFFFFF;
-    padding: 10px;
+    background-color: rgba(250, 248, 246, 0.98);
+    padding: 12px;
+    border-radius: 12px;
 }
 
 .calendar-month-header {
     font-weight: bold;
-    color: #2C2C2C;
-    padding-bottom: 8px;
+    color: #242220;
+    padding-bottom: 10px;
     font-size: 10pt;
 }
 
@@ -406,19 +351,19 @@ stage {
 .calendar-change-month-forward {
     width: 24px;
     height: 24px;
-    border-radius: 4px;
-    color: #555555;
+    border-radius: 12px;
+    color: #555048;
     transition-duration: 100ms;
 }
 
 .calendar-change-month-back:hover,
 .calendar-change-month-forward:hover {
-    color: #E95420;
-    background-color: #FDF2EE;
+    color: #FFFFFF;
+    background-color: #E95420;
 }
 
 .calendar-day-heading {
-    color: #777777;
+    color: #7A746E;
     font-size: 8.5pt;
     font-weight: bold;
     padding: 4px;
@@ -426,9 +371,9 @@ stage {
 }
 
 .calendar-day {
-    color: #2C2C2C;
-    border-radius: 4px;
-    padding: 5px;
+    color: #242220;
+    border-radius: 6px;
+    padding: 6px;
     text-align: center;
 }
 
@@ -438,18 +383,18 @@ stage {
 }
 
 .calendar-non-work-day {
-    color: #888888;
+    color: #8A847C;
 }
 
 .calendar-other-month-day {
-    color: #BDBDBD;
+    color: #B5AFA7;
 }
 
 .calendar-today {
     background-color: #E95420;
     color: #FFFFFF;
     font-weight: bold;
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 .calendar-today:hover {
@@ -466,110 +411,107 @@ stage {
 }
 
 .calendar-event-button {
-    border-radius: 4px;
-    background-color: #F9FAFB;
+    border-radius: 8px;
+    background-color: #EFECE8;
     border-left: 3px solid #E95420;
-    padding: 6px 10px;
-    margin-top: 4px;
+    padding: 8px 12px;
+    margin-top: 6px;
 }
 
-/* --- Notifications --- */
+/* --- Notifications (macOS Notification Cards) --- */
 #notification {
-    background-color: #FFFFFF;
-    border: 1px solid #DCDFE6;
-    border-left: 4px solid #E95420;
-    border-radius: 6px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09);
+    background-color: rgba(250, 248, 246, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 4px solid #E95420;
+    border-radius: 12px;
     padding: 14px 18px;
     spacing-rows: 8px;
     spacing-columns: 12px;
-    margin-from-right-edge-of-screen: 16px;
+    margin-from-right-edge-of-screen: 20px;
     width: 32em;
-    color: #2C2C2C;
+    color: #242220;
 }
 
 #notification-title {
     font-weight: 600;
     font-size: 10pt;
-    color: #2C2C2C;
+    color: #242220;
 }
 
 #notification-body {
-    color: #555555;
+    color: #555048;
     font-size: 9pt;
 }
 
 .notification-button {
-    background-color: #F5F6F8;
-    border: 1px solid #D0D4DC;
-    border-radius: 4px;
-    color: #2C2C2C;
-    padding: 6px 16px;
+    background-color: #EFECE8;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 18px;
+    color: #242220;
+    padding: 6px 18px;
     font-weight: 500;
-    transition-duration: 120ms;
+    transition-duration: 100ms;
 }
 
 .notification-button:hover {
-    background-color: #FDF2EE;
-    border-color: #E95420;
-    color: #E95420;
-}
-
-.notification-button:active {
     background-color: #E95420;
     border-color: #E95420;
     color: #FFFFFF;
 }
 
+.notification-button:active {
+    background-color: #C74010;
+    border-color: #C74010;
+    color: #FFFFFF;
+}
+
 .notification-icon-button {
-    border-radius: 4px;
-    padding: 5px;
-    color: #555555;
+    border-radius: 12px;
+    padding: 6px;
+    color: #555048;
 }
 
 .notification-icon-button:hover {
     color: #E95420;
-    background-color: #FDF2EE;
+    background-color: rgba(0, 0, 0, 0.06);
 }
 
-/* --- Sliders (Volume, Brightness, Sound Applet) --- */
+/* --- Sliders (macOS Rounded Audio / Brightness Tracks) --- */
 .popup-slider-menu-item,
 .slider {
-    -slider-height: 4px;
-    -slider-background-color: #E2E4E8;
+    -slider-height: 5px;
+    -slider-background-color: #DDD8D0;
     -slider-active-background-color: #E95420;
     -slider-border-width: 0px;
-    -slider-handle-radius: 7px;
+    -slider-handle-radius: 8px;
     height: 18px;
     min-width: 14em;
     border: 0 solid transparent;
-    border-right-width: 1px;
-    border-left-width: 1px;
     color: #E95420;
 }
 
 /* --- Sound Applet Controls --- */
 .sound-player {
-    background-color: #F9FAFB;
-    border: 1px solid #E5E7EB;
-    border-radius: 6px;
+    background-color: #EFECE8;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
     padding: 12px;
 }
 
 .sound-player StButton {
-    color: #2C2C2C;
-    border-radius: 4px;
-    padding: 4px 8px;
+    color: #242220;
+    border-radius: 6px;
+    padding: 5px 10px;
 }
 
 .sound-player StButton:hover {
-    color: #E95420;
-    background-color: #FDF2EE;
+    color: #FFFFFF;
+    background-color: #E95420;
 }
 
 .sound-player StButton:active {
     color: #FFFFFF;
-    background-color: #E95420;
+    background-color: #C74010;
 }
 
 /* --- Workspace Switcher & Expo Overview --- */
@@ -578,15 +520,15 @@ stage {
 }
 
 .workspace-button {
-    color: #2C2C2C;
-    border-radius: 3px;
+    color: #242220;
+    border-radius: 4px;
     padding: 2px 8px;
     margin: 1px;
     font-weight: 500;
 }
 
 .workspace-button:hover {
-    background-color: #FDF2EE;
+    background-color: rgba(0, 0, 0, 0.06);
     color: #E95420;
 }
 
@@ -598,12 +540,12 @@ stage {
 
 #overview,
 .expo-background {
-    background-color: rgba(246, 247, 249, 0.96);
+    background-color: rgba(25, 20, 23, 0.94);
 }
 
 .expo-workspace-thumbnail {
-    border: 2px solid #D0D4DC;
-    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
 }
 
 .expo-workspace-thumbnail:selected,
@@ -611,56 +553,51 @@ stage {
     border: 2px solid #E95420;
 }
 
-/* --- Cinnamon Modal Dialogs & Run Dialog --- */
+/* --- Cinnamon Modal Dialogs (macOS Sheets Elegance) --- */
 .modal-dialog {
-    background-color: #FFFFFF;
-    border: 1px solid #DCDFE6;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-    color: #2C2C2C;
-    padding: 22px;
+    background-color: rgba(250, 248, 246, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 14px;
+    color: #242220;
+    padding: 24px;
 }
 
 #run-dialog {
-    background-color: #FFFFFF;
-    border: 1px solid #DCDFE6;
-    border-radius: 8px;
-    padding: 18px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background-color: rgba(250, 248, 246, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 14px;
+    padding: 20px;
 }
 
 .run-dialog-entry {
-    background-color: #F5F6F8;
-    border: 1px solid #D0D4DC;
-    border-radius: 4px;
-    color: #2C2C2C;
-    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    color: #242220;
+    padding: 8px 14px;
     font-size: 10pt;
     selected-color: #FFFFFF;
     selection-background-color: #E95420;
-    caret-color: #E95420;
 }
 
 .run-dialog-entry:focus {
     background-color: #FFFFFF;
     border-color: #E95420;
-    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.18);
 }
 
 .modal-dialog-button {
-    background-color: #F5F6F8;
-    border: 1px solid #D0D4DC;
-    border-radius: 4px;
-    color: #2C2C2C;
-    padding: 7px 18px;
+    background-color: #EFECE8;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    color: #242220;
+    padding: 7px 20px;
     font-weight: 500;
     transition-duration: 100ms;
 }
 
 .modal-dialog-button:hover {
-    background-color: #FDF2EE;
-    border-color: #E95420;
-    color: #E95420;
+    background-color: rgba(0, 0, 0, 0.06);
+    color: #111111;
 }
 
 .modal-dialog-button:default {
@@ -676,11 +613,11 @@ stage {
 
 /* Polkit / Password entry */
 .prompt-dialog-password-entry {
-    background-color: #F5F6F8;
-    border: 1px solid #D0D4DC;
-    border-radius: 4px;
-    color: #2C2C2C;
-    padding: 7px 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    color: #242220;
+    padding: 8px 12px;
     selected-color: #FFFFFF;
     selection-background-color: #E95420;
 }
@@ -688,45 +625,42 @@ stage {
 .prompt-dialog-password-entry:focus {
     background-color: #FFFFFF;
     border-color: #E95420;
-    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.18);
 }
 
-/* --- OSD HUD (Volume / Brightness Popup) --- */
+/* --- OSD HUD (macOS Big Sur / Sonoma Square Floating Card) --- */
 .osd-window {
-    background-color: rgba(255, 255, 255, 0.96);
-    border: 1px solid #DCDFE6;
-    border-radius: 8px;
-    color: #2C2C2C;
-    padding: 18px 24px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    background-color: rgba(30, 24, 28, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    color: #FAF8F5;
+    padding: 20px 26px;
 }
 
 .osd-window .level {
-    height: 6px;
-    border-radius: 3px;
-    background-color: #E2E4E8;
+    height: 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.20);
     color: #E95420;
 }
 
 .osd-window .level-bar {
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: #E95420;
 }
 
 /* --- Tooltips --- */
 #Tooltip {
-    background-color: #2C2C2C;
-    color: #FFFFFF;
-    border: 1px solid #3E3E3E;
-    border-radius: 4px;
-    padding: 4px 8px;
+    background-color: rgba(30, 24, 28, 0.94);
+    color: #FAF8F5;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 6px;
+    padding: 5px 10px;
     font-size: 8.5pt;
     font-weight: 500;
     text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-/* --- Scrollbars in Cinnamon UI --- */
+/* --- Scrollbars --- */
 StScrollBar {
     padding: 2px;
 }
@@ -737,8 +671,8 @@ StScrollView StScrollBar StButton#trough {
 
 StScrollView StScrollBar StButton#vhandle,
 StScrollView StScrollBar StButton#hhandle {
-    background-color: #D0D4DC;
-    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.20);
+    border-radius: 4px;
     margin: 1px;
 }
 
@@ -780,71 +714,68 @@ StScrollView StScrollBar StButton#hhandle:hover {
 
 /* --- Cinnamon Screensaver & Lock Screen Shield --- */
 .screen-shield {
-    background-color: #F6F7FA;
-    color: #2C2C2C;
+    background-color: #1E1A1C;
+    color: #FAF8F5;
 }
 
 .screen-shield .screen-shield-background {
-    background-color: #F6F7FA;
+    background-color: #1E1A1C;
 }
 
 .screen-shield .clock-widget .clock-time-label {
     font-size: 64pt;
-    font-weight: 300;
-    color: #2C2C2C;
+    font-weight: 200;
+    color: #FAF8F5;
+    letter-spacing: -1px;
 }
 
 .screen-shield .clock-widget .clock-date-label {
     font-size: 15pt;
     font-weight: 500;
-    color: #555555;
+    color: #D2CCC4;
 }
 
 .screen-shield .clock-widget .clock-message-label {
     font-size: 12pt;
-    color: #777777;
+    color: #A8A098;
 }
 
 .screen-shield .prompt-dialog {
-    background-color: #FFFFFF;
-    border: 1px solid #DCDFE6;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    padding: 24px;
+    background-color: rgba(40, 32, 36, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 26px;
 }
 
 .screen-shield .prompt-dialog .user-widget-label {
-    color: #2C2C2C;
+    color: #FAF8F5;
     font-size: 18pt;
     font-weight: 600;
 }
 
 .screen-shield .prompt-dialog-password-entry {
-    background-color: #F5F6F8;
-    border: 1px solid #D0D4DC;
-    border-radius: 4px;
-    color: #2C2C2C;
-    caret-color: #E95420;
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    color: #FAF8F5;
     selection-background-color: #E95420;
     selected-color: #FFFFFF;
-    padding: 8px 12px;
+    padding: 8px 14px;
 }
 
 .screen-shield .prompt-dialog-password-entry:focus {
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.15);
     border-color: #E95420;
-    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.2);
 }
 
 .screen-shield .icon-button {
-    background-color: #FFFFFF;
-    border: 1px solid #D0D4DC;
-    color: #2C2C2C;
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #FAF8F5;
 }
 
 .screen-shield .icon-button:hover {
-    background-color: #FDF2EE;
+    background-color: #E95420;
     border-color: #E95420;
-    color: #E95420;
+    color: #FFFFFF;
 }
-

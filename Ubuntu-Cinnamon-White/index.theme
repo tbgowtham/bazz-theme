@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
 Name=Ubuntu-Cinnamon-White
-Comment=A clean, professional Ubuntu-inspired white and orange theme for Linux Cinnamon
+Comment=Ubuntu-inspired theme with macOS elegance, traffic lights, and warm stone foundation
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
@@ -9,5 +9,5 @@ GtkTheme=Ubuntu-Cinnamon-White
 MetacityTheme=Ubuntu-Cinnamon-White
 IconTheme=Ubuntu-Cinnamon-Orange-Icons
 CursorTheme=DMZ-White
-ButtonLayout=:minimize,maximize,close
+ButtonLayout=close,minimize,maximize:
 CinnamonTheme=Ubuntu-Cinnamon-White

@@ -1,8 +1,9 @@
 # ===================================================================
-# Ubuntu Cinnamon Light Theme - GTK 2.0 Fallback Configuration
+# Ubuntu Cinnamon Light Theme - GTK 2.0 Configuration
+# Soft warm stone palette with Ubuntu Orange accents
 # ===================================================================
 
-gtk-color-scheme = "base_color:#FFFFFF\nbg_color:#F6F7FA\ntooltip_bg_color:#2C2C2C\nselected_bg_color:#E95420\ntext_color:#2C2C2C\nfg_color:#2C2C2C\ntooltip_fg_color:#FFFFFF\nselected_fg_color:#FFFFFF"
+gtk-color-scheme = "base_color:#FAF8F5\nbg_color:#EFECE8\ntooltip_bg_color:#242220\nselected_bg_color:#E95420\ntext_color:#242220\nfg_color:#242220\ntooltip_fg_color:#FAF8F5\nselected_fg_color:#FFFFFF"
 
 style "default" {
     xthickness = 1
@@ -55,16 +56,16 @@ class "GtkWidget" style "default"
 style "button" {
     xthickness = 3
     ythickness = 3
-    bg[NORMAL]   = "#FFFFFF"
-    bg[PRELIGHT] = "#FAFAFB"
-    bg[ACTIVE]   = "#EDEFE4"
+    bg[NORMAL]   = "#F5F3EF"
+    bg[PRELIGHT] = "#FAF8F5"
+    bg[ACTIVE]   = "#E4DFD8"
 }
 class "GtkButton" style "button"
 
 style "menu" {
     xthickness = 2
     ythickness = 2
-    bg[NORMAL]   = "#FFFFFF"
+    bg[NORMAL]   = "#FAF8F6"
     bg[PRELIGHT] = "#FDF2EE"
     fg[PRELIGHT] = "#E95420"
 }
@@ -74,6 +75,6 @@ class "GtkMenuItem" style "menu"
 style "entry" {
     xthickness = 3
     ythickness = 3
-    base[NORMAL] = "#FFFFFF"
+    base[NORMAL] = "#FAF8F5"
 }
 class "GtkEntry" style "entry"

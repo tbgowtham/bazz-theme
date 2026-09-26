@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+import os
+
+def generate_macos_ubuntu_wave_svg(width=3840, height=2160):
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">
   <defs>
     <!-- Deep Velvety Slate / Aubergine Backdrop -->
     <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -61,57 +64,68 @@
   </defs>
 
   <!-- Base Smooth Background -->
-  <rect width="3840" height="2160" fill="url(#bg-grad)" />
-  <rect width="3840" height="2160" fill="url(#glow-ambient)" />
+  <rect width="{width}" height="{height}" fill="url(#bg-grad)" />
+  <rect width="{width}" height="{height}" fill="url(#glow-ambient)" />
 
   <!-- macOS Sweeping Waves (Layered Organic Bezier Ribbons) -->
   
   <!-- Wave Layer 1: Back Deep Wine Wave -->
-  <path d="M 1612.8 2160 
-           C 1920.0 1404.0, 2380.8 756.0, 3148.7999999999997 388.8
-           C 3532.8 172.8, 3763.2 108.0, 3840 0
-           L 3840 2160 Z" 
+  <path d="M {width*0.42} {height} 
+           C {width*0.50} {height*0.65}, {width*0.62} {height*0.35}, {width*0.82} {height*0.18}
+           C {width*0.92} {height*0.08}, {width*0.98} {height*0.05}, {width} 0
+           L {width} {height} Z" 
         fill="url(#wave-wine)" />
 
   <!-- Wave Layer 2: Translucent Glass Contour Wave -->
-  <path d="M 1843.1999999999998 2160 
-           C 2073.6000000000004 1555.2, 2496.0 1036.8, 3072.0 604.8000000000001
-           C 3456.0 345.6, 3686.3999999999996 259.2, 3840 172.8
-           L 3840 2160 Z" 
+  <path d="M {width*0.48} {height} 
+           C {width*0.54} {height*0.72}, {width*0.65} {height*0.48}, {width*0.80} {height*0.28}
+           C {width*0.90} {height*0.16}, {width*0.96} {height*0.12}, {width} {height*0.08}
+           L {width} {height} Z" 
         fill="url(#wave-dark-glass)" filter="url(#shadow-deep)" />
 
   <!-- Wave Layer 3: Ubuntu Orange Hero Wave (Curved, silky, majestic) -->
-  <path d="M 2112.0 2160 
-           C 2304.0 1684.8, 2611.2000000000003 1166.4, 3148.7999999999997 777.6
-           C 3532.8 475.2, 3724.7999999999997 388.8, 3840 324.0
-           L 3840 1771.1999999999998
-           C 3532.8 1814.3999999999999, 3072.0 1900.8, 2688.0 2160 Z" 
+  <path d="M {width*0.55} {height} 
+           C {width*0.60} {height*0.78}, {width*0.68} {height*0.54}, {width*0.82} {height*0.36}
+           C {width*0.92} {height*0.22}, {width*0.97} {height*0.18}, {width} {height*0.15}
+           L {width} {height*0.82}
+           C {width*0.92} {height*0.84}, {width*0.80} {height*0.88}, {width*0.70} {height} Z" 
         fill="url(#wave-orange-main)" filter="url(#shadow-deep)" />
 
   <!-- Wave Layer 4: Upper Amber Wave Crest -->
-  <path d="M 2380.8 2160 
-           C 2611.2000000000003 1771.1999999999998, 2918.4 1382.4, 3302.4 993.6
-           C 3609.6 691.2, 3763.2 561.6, 3840 518.4
-           L 3840 972.0
-           C 3532.8 1123.2, 3148.7999999999997 1425.6000000000001, 2841.6 1771.1999999999998 Z" 
+  <path d="M {width*0.62} {height} 
+           C {width*0.68} {height*0.82}, {width*0.76} {height*0.64}, {width*0.86} {height*0.46}
+           C {width*0.94} {height*0.32}, {width*0.98} {height*0.26}, {width} {height*0.24}
+           L {width} {height*0.45}
+           C {width*0.92} {height*0.52}, {width*0.82} {height*0.66}, {width*0.74} {height*0.82} Z" 
         fill="url(#wave-amber)" filter="url(#shadow-medium)" />
 
   <!-- Specular Light Lines (macOS Glass Edge Detail) -->
-  <path d="M 2112.0 2160 
-           C 2304.0 1684.8, 2611.2000000000003 1166.4, 3148.7999999999997 777.6
-           C 3532.8 475.2, 3724.7999999999997 388.8, 3840 324.0"
+  <path d="M {width*0.55} {height} 
+           C {width*0.60} {height*0.78}, {width*0.68} {height*0.54}, {width*0.82} {height*0.36}
+           C {width*0.92} {height*0.22}, {width*0.97} {height*0.18}, {width} {height*0.15}"
         fill="none" stroke="url(#specular-line)" stroke-width="2.5" stroke-linecap="round" />
 
-  <path d="M 2380.8 2160 
-           C 2611.2000000000003 1771.1999999999998, 2918.4 1382.4, 3302.4 993.6
-           C 3609.6 691.2, 3763.2 561.6, 3840 518.4"
+  <path d="M {width*0.62} {height} 
+           C {width*0.68} {height*0.82}, {width*0.76} {height*0.64}, {width*0.86} {height*0.46}
+           C {width*0.94} {height*0.32}, {width*0.98} {height*0.26}, {width} {height*0.24}"
         fill="none" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="1.8" stroke-linecap="round" />
 
   <!-- Minimal Elegant Brand Typography (Bottom Right) -->
-  <g transform="translate(3379.2, 2052.0)" font-family="-apple-system, BlinkMacSystemFont, 'Ubuntu', 'SF Pro Display', sans-serif">
+  <g transform="translate({width*0.88}, {height*0.95})" font-family="-apple-system, BlinkMacSystemFont, 'Ubuntu', 'SF Pro Display', sans-serif">
     <text x="0" y="0" font-size="18" font-weight="600" fill="#E8E4DF" opacity="0.6" letter-spacing="4">UBUNTU</text>
     <text x="105" y="0" font-size="18" font-weight="300" fill="#E95420" opacity="0.9" letter-spacing="4">CINNAMON</text>
     <text x="0" y="22" font-size="10" font-weight="400" fill="#9C958F" opacity="0.4" letter-spacing="2">MACOS ELEGANCE EDITION</text>
   </g>
 
 </svg>
+"""
+    return svg
+
+with open("wallpapers/ubuntu-cinnamon-macos-wave.svg", "w") as f:
+    f.write(generate_macos_ubuntu_wave_svg(3840, 2160))
+
+# Also set as default wallpapers
+with open("wallpapers/ubuntu-cinnamon-minimal-light.svg", "w") as f:
+    f.write(generate_macos_ubuntu_wave_svg(3840, 2160))
+
+print("Created macOS Ubuntu Wave wallpaper SVG successfully")
