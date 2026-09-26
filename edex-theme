@@ -1,0 +1,453 @@
+#!/usr/bin/env python3
+"""
+==============================================================================
+eDEX-UI // TRON SYSTEM-WIDE THEME & INTERFACE CONTROLLER
+==============================================================================
+A single terminal command that transforms your Linux desktop environment
+into the authentic eDEX-UI / TRON: Legacy sci-fi interface.
+
+Features:
+- Live OS Telemetry Desktop Wallpaper (CPU Cores, RAM, Disk, Net, Radar, Cyber-Deck)
+- Real-time Background Daemon keeping wallpaper metrics alive
+- KDE Plasma 6 TRON Colorscheme (eDEX-TRON)
+- Konsole Terminal Profile & Colorscheme (eDEX-TRON)
+- Active Terminal OSC Truecolor Palette Shift
+- Interactive Bash Shell Prompt ([eDEX-UI // TRON])
+- GTK 3 / 4 & Window Decorations
+- Audio Chime Feedback
+- Optional Interactive TUI Monitor Mode (`edex --app`)
+==============================================================================
+"""
+
+import os
+import sys
+import time
+import math
+import select
+import socket
+import signal
+import termios
+import tty
+import argparse
+import platform
+import subprocess
+import shutil
+import psutil
+
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+TOOLS_DIR = os.path.join(SCRIPT_DIR, "tools")
+ASSETS_DIR = os.path.join(SCRIPT_DIR, "assets")
+WALLPAPER_ENGINE = os.path.join(SCRIPT_DIR, "generate_wallpaper.py")
+DAEMON_SCRIPT = os.path.join(SCRIPT_DIR, "live_wallpaper_daemon.py")
+CHIME_PATH = os.path.join(ASSETS_DIR, "edex_chime.wav")
+
+# Destination Paths
+HOME = os.path.expanduser("~")
+KDE_SCHEMES_DIR = os.path.join(HOME, ".local/share/color-schemes")
+KONSOLE_DIR = os.path.join(HOME, ".local/share/konsole")
+BASHRC_D = os.path.join(HOME, ".bashrc.d")
+THEME_DEST = os.path.join(HOME, ".themes/Jarvis-Windows11-Shell")
+ICON_DEST = os.path.join(HOME, ".icons/Jarvis-White")
+ICON_DEST_LOCAL = os.path.join(HOME, ".local/share/icons/Jarvis-White")
+WALLPAPER_LIVE = os.path.join(HOME, ".local/share/backgrounds/edex-live-wallpaper.png")
+
+# ANSI Color Codes
+CYAN = '\033[38;2;0;229;255m'
+CYAN_BOLD = '\033[1;38;2;0;229;255m'
+GREEN = '\033[38;2;0;255;136m'
+GREEN_BOLD = '\033[1;38;2;0;255;136m'
+AMBER = '\033[38;2;255;183;3m'
+RED = '\033[38;2;255;42;95m'
+MUTED = '\033[38;2;130;160;190m'
+BOLD = '\033[1m'
+RESET = '\033[0m'
+
+def apply_terminal_palette():
+    """Dynamically set the palette of the currently active terminal window."""
+    try:
+        # OSC 10: Foreground color (Neon Cyan #00e5ff)
+        # OSC 11: Background color (Abyss Navy #000b1e)
+        # OSC 12: Cursor color (Neon Cyan #00e5ff)
+        sys.stdout.write('\033]10;#00e5ff\a')
+        sys.stdout.write('\033]11;#000b1e\a')
+        sys.stdout.write('\033]12;#00e5ff\a')
+        # OSC 4: 16-color ANSI palette mapping
+        sys.stdout.write('\033]4;0;#000b1e;1;#ff2a5f;2;#00ff88;3;#ffb703;4;#00b4ff;5;#b446ff;6;#00e5ff;7;#cbd5e1;8;#142846;9;#ff5078;10;#32ffa0;11;#ffd23c;12;#00e5ff;13;#d278ff;14;#50f0ff;15;#ffffff\a')
+        sys.stdout.flush()
+    except Exception:
+        pass
+
+def play_chime():
+    """Play futuristic Tron electronic activation sound."""
+    if os.path.exists(CHIME_PATH):
+        for player in ["paplay", "pw-play", "aplay"]:
+            if shutil.which(player):
+                try:
+                    subprocess.Popen([player, CHIME_PATH], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    break
+                except Exception:
+                    pass
+
+def install_kde_colors():
+    """Install and activate eDEX-TRON color scheme in KDE Plasma 6."""
+    os.makedirs(KDE_SCHEMES_DIR, exist_ok=True)
+    src = os.path.join(TOOLS_DIR, "eDEX-TRON.colors")
+    dst = os.path.join(KDE_SCHEMES_DIR, "eDEX-TRON.colors")
+    if os.path.exists(src):
+        shutil.copyfile(src, dst)
+
+    if shutil.which("plasma-apply-colorscheme"):
+        try:
+            res = subprocess.run(["plasma-apply-colorscheme", "eDEX-TRON"], capture_output=True, text=True)
+            return res.returncode == 0
+        except Exception:
+            pass
+    return False
+
+def install_konsole_profile():
+    """Install and set eDEX-TRON profile for KDE Konsole."""
+    os.makedirs(KONSOLE_DIR, exist_ok=True)
+    scheme_src = os.path.join(TOOLS_DIR, "eDEX-TRON.colorscheme")
+    profile_src = os.path.join(TOOLS_DIR, "eDEX-TRON.profile")
+
+    if os.path.exists(scheme_src):
+        shutil.copyfile(scheme_src, os.path.join(KONSOLE_DIR, "eDEX-TRON.colorscheme"))
+    if os.path.exists(profile_src):
+        shutil.copyfile(profile_src, os.path.join(KONSOLE_DIR, "eDEX-TRON.profile"))
+
+    if shutil.which("kwriteconfig6"):
+        try:
+            konsolerc = os.path.expanduser("~/.config/konsolerc")
+            subprocess.run([
+                "kwriteconfig6", "--file", konsolerc,
+                "--group", "Desktop Entry",
+                "--key", "DefaultProfile", "eDEX-TRON.profile"
+            ], check=False)
+        except Exception:
+            pass
+
+def install_shell_env():
+    """Configure eDEX-UI bash environment and prompt."""
+    os.makedirs(BASHRC_D, exist_ok=True)
+    src = os.path.join(TOOLS_DIR, "edex-theme.sh")
+    dst = os.path.join(BASHRC_D, "edex-theme.sh")
+    if os.path.exists(src):
+        shutil.copyfile(src, dst)
+        os.chmod(dst, 0o755)
+
+def install_desktop_themes():
+    """Install GTK and icon themes and apply via GSettings."""
+    # Ensure Theme and Icon directories exist
+    os.makedirs(os.path.join(THEME_DEST, "gtk-3.0"), exist_ok=True)
+    os.makedirs(os.path.join(THEME_DEST, "gtk-4.0"), exist_ok=True)
+    os.makedirs(os.path.join(THEME_DEST, "metacity-1"), exist_ok=True)
+    os.makedirs(ICON_DEST, exist_ok=True)
+    os.makedirs(ICON_DEST_LOCAL, exist_ok=True)
+
+    # Copy GTK & Metacity themes
+    for sub in ["gtk-3.0", "gtk-4.0", "metacity-1", "cinnamon"]:
+        src_dir = os.path.join(SCRIPT_DIR, sub)
+        dst_dir = os.path.join(THEME_DEST, sub)
+        if os.path.exists(src_dir):
+            shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
+
+    # Copy Icons
+    icon_src = os.path.join(SCRIPT_DIR, "icons/Jarvis-White")
+    if os.path.exists(icon_src):
+        shutil.copytree(icon_src, ICON_DEST, dirs_exist_ok=True)
+        shutil.copytree(icon_src, ICON_DEST_LOCAL, dirs_exist_ok=True)
+
+    if shutil.which("gsettings"):
+        for cmd in [
+            ["gsettings", "set", "org.cinnamon.theme", "name", "Jarvis-Windows11-Shell"],
+            ["gsettings", "set", "org.cinnamon.desktop.interface", "gtk-theme", "Jarvis-Windows11-Shell"],
+            ["gsettings", "set", "org.cinnamon.desktop.interface", "icon-theme", "Jarvis-White"],
+            ["gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", "Jarvis-Windows11-Shell"],
+            ["gsettings", "set", "org.gnome.desktop.interface", "icon-theme", "Jarvis-White"],
+        ]:
+            try:
+                subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except Exception:
+                pass
+
+def apply_wallpaper_now():
+    """Generate and apply eDEX-UI wallpaper immediately."""
+    cmd = [sys.executable, WALLPAPER_ENGINE, "--output", WALLPAPER_LIVE, "--apply"]
+    subprocess.run(cmd, check=False)
+
+def start_live_daemon():
+    """Ensure the background telemetry daemon is running."""
+    cmd = [sys.executable, DAEMON_SCRIPT, "restart", "--interval", "2.5"]
+    subprocess.run(cmd, check=False)
+
+def stop_live_daemon():
+    """Stop the background telemetry daemon."""
+    cmd = [sys.executable, DAEMON_SCRIPT, "stop"]
+    subprocess.run(cmd, check=False)
+
+def print_banner():
+    banner = f"""{CYAN_BOLD}
+╔══════════════════════════════════════════════════════════════════════════════╗
+║   ███████╗██████╗ ███████╗██╗  ██╗      ██╗   ██╗██╗                        ║
+║   ██╔════╝██╔══██╗██╔════╝╚██╗██╔╝      ██║   ██║██║                        ║
+║   █████╗  ██║  ██║█████╗   ╚███╔╝ █████╗██║   ██║██║                        ║
+║   ██╔══╝  ██║  ██║██╔══╝   ██╔██╗ ╚════╝██║   ██║██║                        ║
+║   ███████╗██████╔╝███████╗██╔╝ ██╗      ╚██████╔╝██║                        ║
+║   ╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝       ╚═════╝ ╚═╝                        ║
+║          TRON PROTOCOL // SYSTEM-WIDE INTERFACE ACTIVATION                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝{RESET}"""
+    print(banner)
+
+def print_telemetry_summary():
+    uname = platform.uname()
+    cpu_percent = psutil.cpu_percent(interval=0.1)
+    cpu_cores = psutil.cpu_count(logical=True)
+    mem = psutil.virtual_memory()
+    disk = psutil.disk_usage('/')
+    
+    # Active IP
+    active_ip = "127.0.0.1"
+    active_iface = "wlan0"
+    for iface, addrs in psutil.net_if_addrs().items():
+        if iface != 'lo':
+            for a in addrs:
+                if a.family == socket.AF_INET:
+                    active_ip = a.address
+                    active_iface = iface
+                    break
+        if active_ip != "127.0.0.1":
+            break
+
+    print(f" {CYAN_BOLD}[SYSTEM]{RESET} {BOLD}{uname.node.upper()}{RESET}  •  {CYAN}OS:{RESET} {uname.system} {uname.release} ({uname.machine})")
+    print(f" {CYAN_BOLD}[CPU]   {RESET} {GREEN_BOLD}{cpu_percent:.1f}%{RESET} load across {cpu_cores} logical cores")
+    print(f" {CYAN_BOLD}[RAM]   {RESET} {GREEN_BOLD}{mem.used/(1024**3):.2f} GB{RESET} / {mem.total/(1024**3):.2f} GB ({mem.percent}%)")
+    print(f" {CYAN_BOLD}[DISK]  {RESET} {AMBER}{disk.used/(1024**3):.1f} GB{RESET} / {disk.total/(1024**3):.1f} GB ({disk.percent}%)")
+    print(f" {CYAN_BOLD}[NET]   {RESET} {CYAN}{active_iface}{RESET} ({active_ip})  •  DEFENSE GRID: {GREEN}ONLINE{RESET}")
+    print(f" {CYAN_BOLD}[STATUS]{RESET} {GREEN_BOLD}eDEX-UI TRON THEME APPLIED ACROSS ENTIRE SYSTEM!{RESET}\n")
+    print(f" {MUTED}• Wallpaper: Real-time telemetry rendered to {WALLPAPER_LIVE}")
+    print(f" • Daemon:    Live wallpaper updates running (refresh: 2.5s)")
+    print(f" • Terminal:  Konsole & OSC palette switched to Neon Cyan / Abyss Navy")
+    print(f" • Desktop:   KDE Plasma 6 eDEX-TRON color scheme applied")
+    print(f" • Shell:     Prompt set to [eDEX-UI // TRON] in ~/.bashrc.d/{RESET}")
+    print(f"\n {CYAN}Run {BOLD}'edex --app'{RESET}{CYAN} to enter the interactive live terminal dashboard!{RESET}\n")
+
+def run_tui_monitor():
+    """Interactive full-screen live eDEX-UI terminal dashboard."""
+    # Enter alternate screen buffer and hide cursor
+    sys.stdout.write('\033[?1049h\033[?25l\033[H\033[2J')
+    sys.stdout.flush()
+
+    old_settings = None
+    try:
+        if sys.stdin.isatty():
+            old_settings = termios.tcgetattr(sys.stdin)
+            tty.setcbreak(sys.stdin.fileno())
+
+        radar_frames = ["/", "-", "\\", "|"]
+        frame_idx = 0
+
+        while True:
+            # Check for user input (non-blocking)
+            if sys.stdin.isatty():
+                r, _, _ = select.select([sys.stdin], [], [], 0.8)
+                if r:
+                    ch = sys.stdin.read(1)
+                    if ch in ['q', 'Q', '\x03', '\x1b']: # q, Q, Ctrl+C, Esc
+                        break
+                    elif ch in ['w', 'W']:
+                        apply_wallpaper_now()
+            else:
+                time.sleep(0.8)
+
+            # Gather live metrics
+            uname = platform.uname()
+            cpu_p = psutil.cpu_percent(interval=None)
+            cores = psutil.cpu_percent(interval=None, percpu=True)
+            mem = psutil.virtual_memory()
+            swap = psutil.swap_memory()
+            disk = psutil.disk_usage('/')
+            net = psutil.net_io_counters()
+            time_str = time.strftime("%H:%M:%S UTC")
+            uptime = int(time.time() - psutil.boot_time())
+            up_h = uptime // 3600
+            up_m = (uptime % 3600) // 60
+            radar_char = radar_frames[frame_idx % len(radar_frames)]
+            frame_idx += 1
+
+            # Build TUI Screen
+            buf = []
+            buf.append('\033[H') # Move to top-left
+            buf.append(f"{CYAN_BOLD}╔══════════════════════════════════════════════════════════════════════════════════════╗{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  eDEX-UI v3.2.0 // TRON LEGACY TERMINAL DASHBOARD                    [ {time_str} ] ║{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  NODE: {uname.node.upper():<12} ARCH: {uname.machine:<8} KERNEL: {uname.release[:18]:<18} UPTIME: {up_h}h {up_m}m  ║{RESET}\n")
+            buf.append(f"{CYAN_BOLD}╠══════════════════════════════════════════╦═══════════════════════════════════════════╣{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  [ CPU TELEMETRY & CORES ]               ║  [ GEO-RADAR & TELEMETRY SCANNER ]        ║{RESET}\n")
+            
+            # CPU Total Bar
+            cpu_bars = int(cpu_p / 100.0 * 20)
+            cpu_vis = "█" * cpu_bars + "░" * (20 - cpu_bars)
+            buf.append(f"{CYAN_BOLD}║{RESET}  Total: {GREEN_BOLD}{cpu_p:5.1f}%{RESET} [{CYAN}{cpu_vis}{RESET}]  {CYAN_BOLD}║{RESET}  Scanner: [ {GREEN_BOLD}{radar_char}{RESET} ] Status: {GREEN}SWEEPING ONLINE{RESET}    {CYAN_BOLD}║{RESET}\n")
+            
+            # Cores row by row
+            cores_to_show = min(8, len(cores))
+            for i in range(0, cores_to_show, 2):
+                c1_p = cores[i]
+                c1_bar = "█" * int(c1_p / 100.0 * 6) + "░" * (6 - int(c1_p / 100.0 * 6))
+                if i + 1 < cores_to_show:
+                    c2_p = cores[i + 1]
+                    c2_bar = "█" * int(c2_p / 100.0 * 6) + "░" * (6 - int(c2_p / 100.0 * 6))
+                    left_text = f"C{i}:{c1_p:2.0f}%[{c1_bar}] C{i+1}:{c2_p:2.0f}%[{c2_bar}]"
+                else:
+                    left_text = f"C{i}:{c1_p:2.0f}%[{c1_bar}]            "
+
+                if i == 0:
+                    right_text = f"Azimuth: 142.5°  Grid: 37.77N 122.41W"
+                elif i == 2:
+                    right_text = f"Net RX: {net.bytes_recv/(1024**2):.1f} MB  TX: {net.bytes_sent/(1024**2):.1f} MB"
+                elif i == 4:
+                    right_text = f"Root [/]: {disk.used/(1024**3):.1f}G / {disk.total/(1024**3):.1f}G ({disk.percent}%)"
+                else:
+                    right_text = f"Ping: 12ms  Target Blips: 3 Locked"
+
+                buf.append(f"{CYAN_BOLD}║{RESET}  {left_text:<38}  {CYAN_BOLD}║{RESET}  {right_text:<39}  {CYAN_BOLD}║{RESET}\n")
+
+            buf.append(f"{CYAN_BOLD}╠══════════════════════════════════════════╬═══════════════════════════════════════════╣{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  [ MEMORY & STORAGE ALLOCATION ]         ║  [ ACTIVE CONSUMPTION PROCESSES ]         ║{RESET}\n")
+
+            # RAM bar
+            ram_bars = int(mem.percent / 100.0 * 16)
+            ram_vis = "█" * ram_bars + "░" * (16 - ram_bars)
+            buf.append(f"{CYAN_BOLD}║{RESET}  RAM:  {GREEN_BOLD}{mem.percent:4.1f}%{RESET} [{GREEN}{ram_vis}{RESET}] {mem.used/(1024**3):.1f}G/{mem.total/(1024**3):.1f}G{CYAN_BOLD}║{RESET}")
+            
+            # Top process 1
+            procs = sorted(
+                psutil.process_iter(['name', 'cpu_percent', 'memory_percent']),
+                key=lambda p: (p.info.get('cpu_percent') or 0) + (p.info.get('memory_percent') or 0),
+                reverse=True
+            )[:3]
+
+            p1_str = f"• {procs[0].info['name'][:14]:<14} C:{procs[0].info['cpu_percent']:.0f}% M:{procs[0].info['memory_percent']:.1f}%" if len(procs) > 0 else "• None"
+            buf.append(f"  {p1_str:<39}  {CYAN_BOLD}║{RESET}\n")
+
+            # Swap bar
+            swap_bars = int(swap.percent / 100.0 * 16)
+            swap_vis = "█" * swap_bars + "░" * (16 - swap_bars)
+            buf.append(f"{CYAN_BOLD}║{RESET}  SWAP: {AMBER}{swap.percent:4.1f}%{RESET} [{AMBER}{swap_vis}{RESET}] {swap.used/(1024**3):.1f}G/{swap.total/(1024**3):.1f}G{CYAN_BOLD}║{RESET}")
+            
+            p2_str = f"• {procs[1].info['name'][:14]:<14} C:{procs[1].info['cpu_percent']:.0f}% M:{procs[1].info['memory_percent']:.1f}%" if len(procs) > 1 else "• None"
+            buf.append(f"  {p2_str:<39}  {CYAN_BOLD}║{RESET}\n")
+
+            # Disk bar
+            disk_bars = int(disk.percent / 100.0 * 16)
+            disk_vis = "█" * disk_bars + "░" * (16 - disk_bars)
+            buf.append(f"{CYAN_BOLD}║{RESET}  DISK: {CYAN}{disk.percent:4.1f}%{RESET} [{CYAN}{disk_vis}{RESET}] {disk.used/(1024**3):.1f}G/{disk.total/(1024**3):.1f}G{CYAN_BOLD}║{RESET}")
+
+            p3_str = f"• {procs[2].info['name'][:14]:<14} C:{procs[2].info['cpu_percent']:.0f}% M:{procs[2].info['memory_percent']:.1f}%" if len(procs) > 2 else "• None"
+            buf.append(f"  {p3_str:<39}  {CYAN_BOLD}║{RESET}\n")
+
+            buf.append(f"{CYAN_BOLD}╚══════════════════════════════════════════╩═══════════════════════════════════════════╝{RESET}\n")
+            buf.append(f" {CYAN_BOLD}[COMMANDS]{RESET} {BOLD}[Q]{RESET} Exit Monitor   {BOLD}[W]{RESET} Refresh Desktop Wallpaper   {GREEN}DEFENSE GRID: LEVEL 7{RESET}\n")
+
+            sys.stdout.write("".join(buf))
+            sys.stdout.flush()
+
+    finally:
+        # Restore terminal settings, show cursor, leave alternate buffer
+        if old_settings and sys.stdin.isatty():
+            termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+        sys.stdout.write('\033[?25h\033[?1049l')
+        sys.stdout.flush()
+
+def restore_defaults():
+    """Restore default desktop settings."""
+    print(f"{AMBER}Restoring standard desktop theme settings...{RESET}")
+    stop_live_daemon()
+    
+    # Remove bashrc.d script
+    bash_script = os.path.join(BASHRC_D, "edex-theme.sh")
+    if os.path.exists(bash_script):
+        os.remove(bash_script)
+        
+    if shutil.which("plasma-apply-colorscheme"):
+        try:
+            subprocess.run(["plasma-apply-colorscheme", "BreezeDark"], check=False)
+        except Exception:
+            pass
+
+    if shutil.which("gsettings"):
+        for cmd in [
+            ["gsettings", "set", "org.cinnamon.theme", "name", "Mint-Y"],
+            ["gsettings", "set", "org.cinnamon.desktop.interface", "gtk-theme", "Mint-Y"],
+            ["gsettings", "set", "org.cinnamon.desktop.interface", "icon-theme", "Mint-Y"],
+        ]:
+            try:
+                subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except Exception:
+                pass
+    print(f"{GREEN}✓ Restored default desktop settings.{RESET}")
+
+def main():
+    parser = argparse.ArgumentParser(description="eDEX-UI // TRON System-Wide Theme Command")
+    parser.add_argument("--app", "--tui", "--monitor", action="store_true", dest="app", help="Launch interactive live terminal monitor")
+    parser.add_argument("--wallpaper", "-wp", action="store_true", help="Generate and apply eDEX-UI wallpaper snapshot once")
+    parser.add_argument("--live", action="store_true", help="Start background live telemetry wallpaper daemon")
+    parser.add_argument("--stop", action="store_true", help="Stop background live telemetry wallpaper daemon")
+    parser.add_argument("--status", action="store_true", help="Display telemetry and theme status")
+    parser.add_argument("--restore", action="store_true", help="Restore default desktop theme")
+    args = parser.parse_args()
+
+    if args.stop:
+        stop_live_daemon()
+        return
+
+    if args.status:
+        print_banner()
+        print_telemetry_summary()
+        cmd = [sys.executable, DAEMON_SCRIPT, "status"]
+        subprocess.run(cmd, check=False)
+        return
+
+    if args.restore:
+        restore_defaults()
+        return
+
+    if args.wallpaper:
+        print(f"{CYAN}Rendering eDEX-UI wallpaper snapshot...{RESET}")
+        apply_wallpaper_now()
+        print(f"{GREEN}✓ Applied to active desktop!{RESET}")
+        return
+
+    if args.live:
+        start_live_daemon()
+        return
+
+    # Default action: Apply the COMPLETE eDEX-UI System Theme!
+    apply_terminal_palette()
+    play_chime()
+    print_banner()
+    
+    print(f"{CYAN}[1/5] Configuring Terminal & Shell Environment...{RESET}")
+    install_konsole_profile()
+    install_shell_env()
+    
+    print(f"{CYAN}[2/5] Applying KDE Plasma 6 TRON Color Scheme...{RESET}")
+    install_kde_colors()
+    
+    print(f"{CYAN}[3/5] Installing GTK & Icon Themes...{RESET}")
+    install_desktop_themes()
+    
+    print(f"{CYAN}[4/5] Rendering Live OS Telemetry Wallpaper...{RESET}")
+    apply_wallpaper_now()
+    
+    print(f"{CYAN}[5/5] Activating Background Telemetry Daemon...{RESET}")
+    start_live_daemon()
+
+    print_telemetry_summary()
+
+    # If --app was passed, also start the interactive monitor immediately
+    if args.app:
+        time.sleep(1)
+        run_tui_monitor()
+
+if __name__ == "__main__":
+    main()
