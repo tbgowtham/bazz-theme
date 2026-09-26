@@ -38,7 +38,9 @@ usage() {
     echo "  --wallpaper, -wp  Generate & apply real OS telemetry wallpaper once"
     echo "  --live            Start background daemon updating real-time CPU/RAM on wallpaper"
     echo "  --stop-live       Stop the background live telemetry wallpaper daemon"
-    echo "  --status          Check status of the live wallpaper daemon"
+    echo "  --shell           Start the native Stark Desktop Shell (panel, start menu, tray)"
+    echo "  --stop-shell      Stop the native Stark Desktop Shell"
+    echo "  --status          Check status of the live wallpaper daemon and shell"
     echo "  --icons           Install only the Jarvis-White icon theme"
     echo "  --restore, -r     Restore default desktop and icon settings"
     echo "  --help, -h        Show this help message"
@@ -140,9 +142,38 @@ install_icons_only() {
     echo -e "${GREEN}✓ Jarvis-White icon theme installed!${NC}"
 }
 
+SHELL_PID_FILE="/tmp/stark_shell.pid"
+
+start_native_shell() {
+    if [ -f "${SHELL_PID_FILE}" ] && kill -0 "$(cat "${SHELL_PID_FILE}")" 2>/dev/null; then
+        echo -e "${GOLD}Stark Shell is already running (PID: $(cat "${SHELL_PID_FILE}")).${NC}"
+        return
+    fi
+    echo -e "${CYAN}Starting native Stark Desktop Shell...${NC}"
+    "${SCRIPT_DIR}/stark-shell" >/dev/null 2>&1 &
+    local pid=$!
+    echo "${pid}" > "${SHELL_PID_FILE}"
+    echo -e "${GREEN}✓ Native Stark Shell is online (PID: ${pid})!${NC}"
+}
+
+stop_native_shell() {
+    if [ -f "${SHELL_PID_FILE}" ]; then
+        local pid
+        pid=$(cat "${SHELL_PID_FILE}")
+        if kill -0 "${pid}" 2>/dev/null; then
+            kill "${pid}" 2>/dev/null || true
+            echo -e "${GREEN}✓ Stopped Stark Shell (PID: ${pid}).${NC}"
+        fi
+        rm -f "${SHELL_PID_FILE}"
+    else
+        echo -e "${GOLD}Stark Shell is not currently running.${NC}"
+    fi
+}
+
 restore_defaults() {
     echo -e "${GOLD}Restoring default theme and icon settings...${NC}"
     stop_live_daemon || true
+    stop_native_shell || true
     if command -v gsettings >/dev/null 2>&1; then
         gsettings set org.cinnamon.theme name "Mint-Y" 2>/dev/null || true
         gsettings set org.cinnamon.desktop.interface gtk-theme "Mint-Y" 2>/dev/null || true
@@ -166,8 +197,19 @@ case "${ACTION}" in
     --stop-live|stop-live)
         stop_live_daemon
         ;;
+    --shell|shell)
+        start_native_shell
+        ;;
+    --stop-shell|stop-shell)
+        stop_native_shell
+        ;;
     --status|status)
         check_daemon_status
+        if [ -f "${SHELL_PID_FILE}" ] && kill -0 "$(cat "${SHELL_PID_FILE}")" 2>/dev/null; then
+            echo -e "${GREEN}[STARK SHELL]: Native desktop shell is ONLINE (PID: $(cat "${SHELL_PID_FILE}")).${NC}"
+        else
+            echo -e "${GOLD}[STARK SHELL]: Native desktop shell is OFFLINE.${NC}"
+        fi
         ;;
     --icons|icons)
         install_icons_only

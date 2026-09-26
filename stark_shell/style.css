@@ -1,0 +1,153 @@
+/* ===================================================================
+ * STARK SHELL // WINDOWS 11 FROSTED GLASS GTK CSS
+ * =================================================================== */
+
+@define-color cyan_accent #00E5FF;
+@define-color blue_accent #0088FF;
+@define-color crimson_accent #FF2A5F;
+@define-color green_accent #00FF88;
+@define-color glass_bg rgba(8, 14, 24, 0.92);
+@define-color card_bg rgba(14, 24, 40, 0.85);
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #F0F6FC;
+}
+
+/* Master Taskbar Panel (Wayland & X11) */
+.stark-panel {
+  background-color: @glass_bg;
+  border-top: 1px solid rgba(0, 229, 255, 0.4);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.7);
+  padding: 0 12px;
+}
+
+/* Taskbar Centered App Buttons */
+.stark-btn {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 8px;
+  transition: all 150ms ease;
+  min-height: 36px;
+}
+
+.stark-btn:hover {
+  background-color: rgba(0, 229, 255, 0.16);
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+}
+
+.stark-btn:active {
+  background-color: rgba(0, 229, 255, 0.28);
+}
+
+/* Arc Start Button */
+.stark-start-btn {
+  background-color: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+.stark-start-btn:hover {
+  background-color: rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 15px @cyan_accent;
+}
+
+/* System Tray Badges */
+.tray-badge {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin: 4px 2px;
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: @cyan_accent;
+}
+
+.tray-badge:hover {
+  background-color: rgba(0, 229, 255, 0.15);
+  border-color: @cyan_accent;
+}
+
+.clock-btn {
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.clock-btn:hover {
+  background-color: rgba(0, 229, 255, 0.15);
+}
+
+/* Floating Frosted Start Menu Window */
+.stark-start-menu {
+  background-color: rgba(10, 18, 30, 0.96);
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 229, 255, 0.25);
+  padding: 20px;
+}
+
+.start-search-entry {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: #FFFFFF;
+  font-size: 13px;
+}
+
+.start-search-entry:focus {
+  border-color: @cyan_accent;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
+
+.start-app-item {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: all 120ms ease;
+}
+
+.start-app-item:hover {
+  background-color: rgba(0, 229, 255, 0.18);
+  border-color: rgba(0, 229, 255, 0.4);
+}
+
+.start-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+/* Quick Settings Window */
+.stark-quick-settings {
+  background-color: rgba(10, 18, 30, 0.96);
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  padding: 16px;
+}
+
+.quick-tile {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 90px;
+  min-height: 60px;
+}
+
+.quick-tile:hover {
+  background-color: rgba(0, 229, 255, 0.16);
+  border-color: @cyan_accent;
+}
+
+.quick-tile.active {
+  background-color: rgba(0, 229, 255, 0.28);
+  border-color: @cyan_accent;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+}

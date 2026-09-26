@@ -62,6 +62,15 @@ theme/
 │   ├── gtk.css                          # Dark obsidian glass headerbars & cyan accents
 │   └── gtk-dark.css                     # Dark mode overrides
 │
+├── stark-shell                          # Native Linux Desktop Shell executable
+├── stark_shell/                         # Native Desktop Shell Engine (GTK + LayerShell)
+│   ├── panel.py                         # Windows 11 centered dock with live tray
+│   ├── start_menu.py                    # Floating frosted Start Menu with real app search
+│   ├── quick_settings.py                # Action Center with real PipeWire/Pulse volume
+│   ├── jarvis_voice.py                  # J.A.R.V.I.S. voice assistant with speech synthesis
+│   ├── app_scanner.py                   # Real Linux desktop app scanner
+│   └── style.css                        # Native GTK CSS styling
+│
 ├── wallpapers/                          # Base 4K wallpapers
 │   └── jarvis-master.jpg                # 4K master cyberpunk cockpit & arc-reactor
 │
@@ -74,9 +83,22 @@ theme/
 
 ## 🛠️ Usage & Installation
 
-### 1. Install Full Desktop Suite (One Command)
+### 1. Launch the Native Stark Desktop Shell
+Run the real Linux desktop shell directly on your current desktop (Wayland or X11):
 ```bash
 cd /home/MR_Gray/muteX/theme
+
+# Launch native shell (anchored dock, Windows 11 centered start menu, real app launcher)
+./apply.sh --shell
+# or directly:
+./stark-shell
+
+# Stop the native shell
+./apply.sh --stop-shell
+```
+
+### 2. Install Full Desktop Suite (Themes, Icons, Window Decor, & Wallpaper)
+```bash
 ./apply.sh --all
 ```
 This automatically:
@@ -85,26 +107,27 @@ This automatically:
 - Installs the **Jarvis-White Icon Theme** to `~/.icons/Jarvis-White`
 - Generates and applies the **Live OS Telemetry Wallpaper** with your current CPU/RAM metrics to your active desktop session (supports Cinnamon, KDE Plasma 6 Wayland, and GNOME).
 
-### 2. Enable Real-Time Live Wallpaper Updates
+### 3. Enable Real-Time Live Wallpaper Updates
 To keep the wallpaper continuously updated with your live CPU and RAM consumption in the background:
 ```bash
 # Start the live background daemon (updates every 3 seconds)
 ./apply.sh --live
 
-# Check daemon status
+# Check daemon and shell status
 ./apply.sh --status
 
 # Stop the daemon
 ./apply.sh --stop-live
 ```
 
-### 3. Generate Snapshot Wallpaper Once
+### 4. Generate Snapshot Wallpaper Once
 ```bash
 ./apply.sh --wallpaper
 ```
 
-### 4. Restore Default Settings
+### 5. Restore Default Settings
 ```bash
 ./apply.sh --restore
 ```
+
 
