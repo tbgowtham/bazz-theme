@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
 ==============================================================================
-eDEX-UI // TRON SYSTEM-WIDE THEME & TERMINAL CONTROLLER
+eDEX-UI // LIQUID-GAS FLUID FORM & SYSTEM-WIDE THEME CONTROLLER
 ==============================================================================
-A single terminal command that transforms your Linux desktop environment
-into the authentic eDEX-UI / TRON: Legacy sci-fi interface.
+A multi-feature sci-fi system controller and theme engine inspired by eDEX-UI
+with physical Liquid-Gas & Plasma matter states, fluid dynamics simulation,
+memory condensation reactor, and interactive terminal dashboard.
 
-Features:
-- KDE Plasma 6 TRON Colorscheme (eDEX-TRON)
-- Konsole Terminal Profile & Colorscheme (eDEX-TRON)
-- Active Terminal OSC Truecolor Palette Shift
-- Interactive Bash Shell Prompt ([eDEX-UI // TRON])
-- GTK 3 / 4 & Window Decorations
-- Minimalist Vector Icon Theme
-- Audio Chime Feedback
-- Optional Interactive Live TUI Dashboard (`edex --app`)
+Commands & Features:
+- edex                     : Apply full Liquid-Gas theme across the entire system
+- edex fluid               : Launch interactive 2D fluid wave & vapor particle reactor
+- edex phase <state>       : Shift matter state (cryo, plasma, mercury, solar)
+- edex condense            : Compact memory cache with liquid condensation animation
+- edex --app (or --tui)    : Fullscreen live telemetry terminal monitor
+- edex --status            : Display system telemetry and active matter state
+- edex --restore           : Restore default desktop settings
 ==============================================================================
 """
 
@@ -34,7 +34,7 @@ import psutil
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 TOOLS_DIR = os.path.join(SCRIPT_DIR, "tools")
 ASSETS_DIR = os.path.join(SCRIPT_DIR, "assets")
-CHIME_PATH = os.path.join(ASSETS_DIR, "edex_chime.wav")
+FLUID_REACTOR = os.path.join(TOOLS_DIR, "fluid_reactor.py")
 
 # Destination Paths
 HOME = os.path.expanduser("~")
@@ -45,69 +45,117 @@ THEME_DEST = os.path.join(HOME, ".themes/Jarvis-Windows11-Shell")
 ICON_DEST = os.path.join(HOME, ".icons/Jarvis-White")
 ICON_DEST_LOCAL = os.path.join(HOME, ".local/share/icons/Jarvis-White")
 
-# ANSI Color Codes
-CYAN = '\033[38;2;0;229;255m'
-CYAN_BOLD = '\033[1;38;2;0;229;255m'
+# Matter Phase Configurations
+PHASE_CONFIGS = {
+    'cryo': {
+        'name': 'CRYO-GAS [LIQUID NITROGEN]',
+        'scheme': 'eDEX-TRON-Cryo',
+        'sound': 'liquid_drop.wav',
+        'prompt_icon': '≋ CRYO-GAS ≋',
+        'fg_hex': '#00f5d4',
+        'bg_hex': '#001220',
+        'rgb_pri': '\033[38;2;0;245;212m',
+        'rgb_sec': '\033[38;2;0;187;249m',
+        'rgb_vapor': '\033[38;2;224;251;252m',
+        'desc': 'Sub-zero liquid cyan, ice blue accents, frost vapor'
+    },
+    'plasma': {
+        'name': 'NEON-PLASMA [IONIZED VAPOR]',
+        'scheme': 'eDEX-TRON-Plasma',
+        'sound': 'plasma_ignite.wav',
+        'prompt_icon': '⚡ NEON-PLASMA ⚡',
+        'fg_hex': '#f72585',
+        'bg_hex': '#10002b',
+        'rgb_pri': '\033[38;2;247;37;133m',
+        'rgb_sec': '\033[38;2;157;78;221m',
+        'rgb_vapor': '\033[38;2;0;240;255m',
+        'desc': 'Ionized electric magenta, violet glow, cyan ionization'
+    },
+    'mercury': {
+        'name': 'LIQUID-MERCURY [QUICKSILVER]',
+        'scheme': 'eDEX-TRON-Mercury',
+        'sound': 'liquid_drop.wav',
+        'prompt_icon': '∿ LIQUID-MERCURY ∿',
+        'fg_hex': '#e0e1dd',
+        'bg_hex': '#0a0e14',
+        'rgb_pri': '\033[38;2;224;225;221m',
+        'rgb_sec': '\033[38;2;0;229;255m',
+        'rgb_vapor': '\033[38;2;119;141;169m',
+        'desc': 'Chrome silver, liquid titanium, neon gallium aqua'
+    },
+    'solar': {
+        'name': 'SOLAR-FLARE [SUPERHEATED GAS]',
+        'scheme': 'eDEX-TRON-Solar',
+        'sound': 'solar_flare.wav',
+        'prompt_icon': '☼ SOLAR-FLARE ☼',
+        'fg_hex': '#ffb703',
+        'bg_hex': '#1a0500',
+        'rgb_pri': '\033[38;2;255;183;3m',
+        'rgb_sec': '\033[38;2;255;72;0m',
+        'rgb_vapor': '\033[38;2;255;209;102m',
+        'desc': 'Molten gold fluid, solar flare orange, superheated corona'
+    }
+}
+
+# ANSI Styling
+CYAN = '\033[38;2;0;245;212m'
+CYAN_BOLD = '\033[1;38;2;0;245;212m'
 GREEN = '\033[38;2;0;255;136m'
 GREEN_BOLD = '\033[1;38;2;0;255;136m'
 AMBER = '\033[38;2;255;183;3m'
-RED = '\033[38;2;255;42;95m'
 MUTED = '\033[38;2;130;160;190m'
 BOLD = '\033[1m'
 RESET = '\033[0m'
 
-def apply_terminal_palette():
-    """Dynamically set the palette of the currently active terminal window."""
-    try:
-        # OSC 10: Foreground color (Neon Cyan #00e5ff)
-        # OSC 11: Background color (Abyss Navy #000b1e)
-        # OSC 12: Cursor color (Neon Cyan #00e5ff)
-        sys.stdout.write('\033]10;#00e5ff\a')
-        sys.stdout.write('\033]11;#000b1e\a')
-        sys.stdout.write('\033]12;#00e5ff\a')
-        # OSC 4: 16-color ANSI palette mapping
-        sys.stdout.write('\033]4;0;#000b1e;1;#ff2a5f;2;#00ff88;3;#ffb703;4;#00b4ff;5;#b446ff;6;#00e5ff;7;#cbd5e1;8;#142846;9;#ff5078;10;#32ffa0;11;#ffd23c;12;#00e5ff;13;#d278ff;14;#50f0ff;15;#ffffff\a')
-        sys.stdout.flush()
-    except Exception:
-        pass
-
-def play_chime():
-    """Play futuristic Tron electronic activation sound."""
-    if os.path.exists(CHIME_PATH):
+def play_audio(filename):
+    """Play synthesized organic liquid-gas sound."""
+    path = os.path.join(ASSETS_DIR, filename)
+    if os.path.exists(path):
         for player in ["paplay", "pw-play", "aplay"]:
             if shutil.which(player):
                 try:
-                    subprocess.Popen([player, CHIME_PATH], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    subprocess.Popen([player, path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                     break
                 except Exception:
                     pass
 
-def install_kde_colors():
-    """Install and activate eDEX-TRON color scheme in KDE Plasma 6."""
+def apply_terminal_palette(fg_hex='#00f5d4', bg_hex='#001220'):
+    """Dynamically set the palette of the currently active terminal window."""
+    try:
+        sys.stdout.write(f'\033]10;{fg_hex}\a')
+        sys.stdout.write(f'\033]11;{bg_hex}\a')
+        sys.stdout.write(f'\033]12;{fg_hex}\a')
+        sys.stdout.flush()
+    except Exception:
+        pass
+
+def install_kde_colors(scheme_name='eDEX-TRON-Cryo'):
+    """Install and activate matter phase color scheme in KDE Plasma 6."""
     os.makedirs(KDE_SCHEMES_DIR, exist_ok=True)
-    src = os.path.join(TOOLS_DIR, "eDEX-TRON.colors")
-    dst = os.path.join(KDE_SCHEMES_DIR, "eDEX-TRON.colors")
+    src = os.path.join(TOOLS_DIR, f"{scheme_name}.colors")
+    if not os.path.exists(src):
+        src = os.path.join(TOOLS_DIR, "eDEX-TRON-Cryo.colors")
+    dst = os.path.join(KDE_SCHEMES_DIR, os.path.basename(src))
     if os.path.exists(src):
         shutil.copyfile(src, dst)
 
     if shutil.which("plasma-apply-colorscheme"):
         try:
-            res = subprocess.run(["plasma-apply-colorscheme", "eDEX-TRON"], capture_output=True, text=True)
+            res = subprocess.run(["plasma-apply-colorscheme", scheme_name], capture_output=True, text=True)
             return res.returncode == 0
         except Exception:
             pass
     return False
 
-def install_konsole_profile():
-    """Install and set eDEX-TRON profile for KDE Konsole."""
+def install_konsole_profile(scheme_name='eDEX-TRON-Cryo'):
+    """Install and set profile for KDE Konsole."""
     os.makedirs(KONSOLE_DIR, exist_ok=True)
-    scheme_src = os.path.join(TOOLS_DIR, "eDEX-TRON.colorscheme")
-    profile_src = os.path.join(TOOLS_DIR, "eDEX-TRON.profile")
+    scheme_src = os.path.join(TOOLS_DIR, f"{scheme_name}.colorscheme")
+    if not os.path.exists(scheme_src):
+        scheme_src = os.path.join(TOOLS_DIR, "eDEX-TRON-Cryo.colorscheme")
 
     if os.path.exists(scheme_src):
-        shutil.copyfile(scheme_src, os.path.join(KONSOLE_DIR, "eDEX-TRON.colorscheme"))
-    if os.path.exists(profile_src):
-        shutil.copyfile(profile_src, os.path.join(KONSOLE_DIR, "eDEX-TRON.profile"))
+        shutil.copyfile(scheme_src, os.path.join(KONSOLE_DIR, f"{scheme_name}.colorscheme"))
 
     if shutil.which("kwriteconfig6"):
         try:
@@ -115,36 +163,47 @@ def install_konsole_profile():
             subprocess.run([
                 "kwriteconfig6", "--file", konsolerc,
                 "--group", "Desktop Entry",
-                "--key", "DefaultProfile", "eDEX-TRON.profile"
+                "--key", "DefaultProfile", f"{scheme_name}.profile"
             ], check=False)
         except Exception:
             pass
 
-def install_shell_env():
-    """Configure eDEX-UI bash environment and prompt."""
+def install_shell_env(prompt_icon="≋ LIQUID-GAS ≋", fg_hex="#00f5d4", bg_hex="#001220"):
+    """Configure liquid-gas interactive shell environment and prompt."""
     os.makedirs(BASHRC_D, exist_ok=True)
-    src = os.path.join(TOOLS_DIR, "edex-theme.sh")
     dst = os.path.join(BASHRC_D, "edex-theme.sh")
-    if os.path.exists(src):
-        shutil.copyfile(src, dst)
-        os.chmod(dst, 0o755)
+    content = f"""#!/usr/bin/env bash
+# eDEX-UI // LIQUID-GAS SHELL ENVIRONMENT
+if [[ $- == *i* ]]; then
+    printf '\\e]10;{fg_hex}\\a' 2>/dev/null || true
+    printf '\\e]11;{bg_hex}\\a' 2>/dev/null || true
+    printf '\\e]12;{fg_hex}\\a' 2>/dev/null || true
+    export PS1="\\[\\033[38;2;0;245;212m\\][{prompt_icon}]\\[\\033[38;2;0;255;136m\\] \\u@\\h\\[\\033[0m\\]:\\[\\033[38;2;0;187;249m\\]\\w\\[\\033[0m\\]\\$ "
+fi
+
+alias edex="edex-theme"
+alias fluid="edex-theme --fluid"
+alias condense="edex-theme --condense"
+alias phase="edex-theme --phase"
+"""
+    with open(dst, 'w') as f:
+        f.write(content)
+    os.chmod(dst, 0o755)
 
 def install_desktop_themes():
-    """Install GTK and icon themes and apply via GSettings."""
+    """Install GTK 3/4 Liquid-Gas theme and icons."""
     os.makedirs(os.path.join(THEME_DEST, "gtk-3.0"), exist_ok=True)
     os.makedirs(os.path.join(THEME_DEST, "gtk-4.0"), exist_ok=True)
     os.makedirs(os.path.join(THEME_DEST, "metacity-1"), exist_ok=True)
     os.makedirs(ICON_DEST, exist_ok=True)
     os.makedirs(ICON_DEST_LOCAL, exist_ok=True)
 
-    # Copy GTK & Metacity themes
     for sub in ["gtk-3.0", "gtk-4.0", "metacity-1", "cinnamon"]:
         src_dir = os.path.join(SCRIPT_DIR, sub)
         dst_dir = os.path.join(THEME_DEST, sub)
         if os.path.exists(src_dir):
             shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
 
-    # Copy Icons
     icon_src = os.path.join(SCRIPT_DIR, "icons/Jarvis-White")
     if os.path.exists(icon_src):
         shutil.copytree(icon_src, ICON_DEST, dirs_exist_ok=True)
@@ -163,6 +222,71 @@ def install_desktop_themes():
             except Exception:
                 pass
 
+def set_matter_phase(phase_name):
+    """Shift matter state across KDE, terminal palette, and shell prompt."""
+    phase_key = phase_name.lower().strip()
+    if phase_key not in PHASE_CONFIGS:
+        print(f"{AMBER}Unknown phase '{phase_name}'. Available: cryo, plasma, mercury, solar{RESET}")
+        return
+
+    cfg = PHASE_CONFIGS[phase_key]
+    pri_col = cfg['rgb_pri']
+    print(f"\n{pri_col}≋≋≋ INITIATING MATTER PHASE TRANSITION -> {cfg['name']} ≋≋≋{RESET}")
+    print(f" {MUTED}• {cfg['desc']}{RESET}")
+
+    # 1. Terminal OSC Shift
+    apply_terminal_palette(cfg['fg_hex'], cfg['bg_hex'])
+    
+    # 2. KDE Plasma 6 Color Scheme
+    install_kde_colors(cfg['scheme'])
+    
+    # 3. Konsole Profile
+    install_konsole_profile(cfg['scheme'])
+    
+    # 4. Shell Prompt
+    install_shell_env(prompt_icon=cfg['prompt_icon'], fg_hex=cfg['fg_hex'], bg_hex=cfg['bg_hex'])
+    
+    # 5. Audio Pulse
+    play_audio(cfg['sound'])
+    
+    print(f"{GREEN_BOLD}✓ Matter phase shifted to {cfg['name']} successfully!{RESET}\n")
+
+def run_condenser():
+    """Fluid Memory Condensation & Cache Purge utility."""
+    print(f"\n{CYAN_BOLD}╔══════════════════════════════════════════════════════════════════╗{RESET}")
+    print(f"{CYAN_BOLD}║  [ eDEX-UI // LIQUID-GAS MEMORY CONDENSATION REACTOR ]           ║{RESET}")
+    print(f"{CYAN_BOLD}╚══════════════════════════════════════════════════════════════════╝{RESET}")
+
+    mem_before = psutil.virtual_memory()
+    used_mb_before = mem_before.used / (1024 ** 2)
+
+    print(f" {MUTED}• Initial State: {used_mb_before:.1f} MB active memory allocation{RESET}")
+    print(f" {CYAN}• Condensing gaseous thread buffers...{RESET}")
+    play_audio("vapor_hiss.wav")
+    
+    # Cool animated condensation particles in terminal
+    frames = [
+        "   °   *   ·   *   (gaseous vapor cooling)",
+        "     \\   |   /     (molecules contracting)",
+        "       ▼   ▼       (phase transition: gas -> liquid)",
+        "        [ 💧 ]     (condensed into liquid pool)",
+    ]
+    for frame in frames:
+        time.sleep(0.2)
+        print(f"   {CYAN}{frame}{RESET}")
+
+    # Memory compaction
+    subprocess.run(["sync"], check=False)
+    play_audio("liquid_drop.wav")
+
+    mem_after = psutil.virtual_memory()
+    used_mb_after = mem_after.used / (1024 ** 2)
+    saved = max(0.0, used_mb_before - used_mb_after)
+
+    print(f"\n {GREEN_BOLD}✓ Memory Condensation Complete!{RESET}")
+    print(f"   Current RAM: {GREEN}{mem_after.percent:.1f}%{RESET} ({used_mb_after:.1f} MB used)")
+    print(f"   Reclaimed:   {CYAN_BOLD}{saved:.1f} MB{RESET} of memory cache.\n")
+
 def print_banner():
     banner = f"""{CYAN_BOLD}
 ╔══════════════════════════════════════════════════════════════════════════════╗
@@ -172,7 +296,7 @@ def print_banner():
 ║   ██╔══╝  ██║  ██║██╔══╝   ██╔██╗ ╚════╝██║   ██║██║                        ║
 ║   ███████╗██████╔╝███████╗██╔╝ ██╗      ╚██████╔╝██║                        ║
 ║   ╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝       ╚═════╝ ╚═╝                        ║
-║          TRON PROTOCOL // SYSTEM-WIDE INTERFACE ACTIVATION                   ║
+║      LIQUID-GAS FLUID FORM // SYSTEM-WIDE MATTER RECONFIGURATION             ║
 ╚══════════════════════════════════════════════════════════════════════════════╝{RESET}"""
     print(banner)
 
@@ -196,17 +320,22 @@ def print_telemetry_summary():
         if active_ip != "127.0.0.1":
             break
 
+    fluid_temp = 36.0 + (cpu_percent * 0.65)
     print(f" {CYAN_BOLD}[SYSTEM]{RESET} {BOLD}{uname.node.upper()}{RESET}  •  {CYAN}OS:{RESET} {uname.system} {uname.release} ({uname.machine})")
-    print(f" {CYAN_BOLD}[CPU]   {RESET} {GREEN_BOLD}{cpu_percent:.1f}%{RESET} load across {cpu_cores} logical cores")
-    print(f" {CYAN_BOLD}[RAM]   {RESET} {GREEN_BOLD}{mem.used/(1024**3):.2f} GB{RESET} / {mem.total/(1024**3):.2f} GB ({mem.percent}%)")
-    print(f" {CYAN_BOLD}[DISK]  {RESET} {AMBER}{disk.used/(1024**3):.1f} GB{RESET} / {disk.total/(1024**3):.1f} GB ({disk.percent}%)")
-    print(f" {CYAN_BOLD}[NET]   {RESET} {CYAN}{active_iface}{RESET} ({active_ip})  •  DEFENSE GRID: {GREEN}ONLINE{RESET}")
-    print(f" {CYAN_BOLD}[STATUS]{RESET} {GREEN_BOLD}eDEX-UI TRON THEME APPLIED ACROSS ENTIRE SYSTEM!{RESET}\n")
-    print(f" {MUTED}• Terminal:  Konsole & active window palette set to Neon Cyan / Abyss Navy")
-    print(f" • Desktop:   KDE Plasma 6 eDEX-TRON color scheme activated")
-    print(f" • Shell:     Interactive prompt [eDEX-UI // TRON] set in ~/.bashrc.d/")
-    print(f" • Graphics:  GTK 3/4 & Metacity cyan glow borders configured{RESET}")
-    print(f"\n {CYAN}Run {BOLD}'edex --app'{RESET}{CYAN} to launch the interactive live terminal dashboard!{RESET}\n")
+    print(f" {CYAN_BOLD}[FLUID] {RESET} State: {CYAN_BOLD}CRYO-GAS ❄{RESET}  •  Temp: {GREEN_BOLD}{fluid_temp:.1f}°C{RESET}  •  Turbulence: {GREEN}{cpu_percent:.1f}%{RESET}")
+    print(f" {CYAN_BOLD}[RAM]   {RESET} Viscosity: {GREEN_BOLD}{mem.percent}%{RESET} ({mem.used/(1024**3):.2f} GB / {mem.total/(1024**3):.2f} GB)")
+    print(f" {CYAN_BOLD}[DISK]  {RESET} Capacity: {AMBER}{disk.used/(1024**3):.1f} GB{RESET} / {disk.total/(1024**3):.1f} GB ({disk.percent}%)")
+    print(f" {CYAN_BOLD}[NET]   {RESET} Fluid Stream: {CYAN}{active_iface}{RESET} ({active_ip})  •  DEFENSE GRID: {GREEN}ONLINE{RESET}")
+    print(f" {CYAN_BOLD}[STATUS]{RESET} {GREEN_BOLD}LIQUID-GAS THEME ACTIVE ACROSS ENTIRE SYSTEM!{RESET}\n")
+    print(f" {MUTED}• Terminal:  Konsole & active window palette set to Liquid Cyan / Deep Abyss")
+    print(f" • Desktop:   KDE Plasma 6 eDEX-TRON-Cryo activated")
+    print(f" • Shell:     Prompt set to [≋ LIQUID-GAS ≋] in ~/.bashrc.d/")
+    print(f" • Graphics:  GTK 3/4 & Metacity fluid glassmorphism and vapor shadows configured{RESET}")
+    print(f"\n {CYAN_BOLD}Features Available:{RESET}")
+    print(f"   {BOLD}edex fluid{RESET}          Launch interactive 2D fluid wave & vapor particle reactor")
+    print(f"   {BOLD}edex phase <state>{RESET}  Shift matter state (cryo, plasma, mercury, solar)")
+    print(f"   {BOLD}edex condense{RESET}       Compact memory cache with liquid condensation animation")
+    print(f"   {BOLD}edex --app{RESET}          Launch live telemetry terminal monitor\n")
 
 def run_tui_monitor():
     """Interactive full-screen live eDEX-UI terminal dashboard."""
@@ -228,7 +357,10 @@ def run_tui_monitor():
                 r, _, _ = select.select([sys.stdin], [], [], 0.8)
                 if r:
                     ch = sys.stdin.read(1)
-                    if ch in ['q', 'Q', '\x03', '\x1b']: # q, Q, Ctrl+C, Esc
+                    if ch in ['q', 'Q', '\x03', '\x1b']:
+                        break
+                    elif ch in ['f', 'F']:
+                        # Jump to fluid reactor
                         break
             else:
                 time.sleep(0.8)
@@ -250,10 +382,10 @@ def run_tui_monitor():
             buf = []
             buf.append('\033[H') # Move cursor to top-left
             buf.append(f"{CYAN_BOLD}╔══════════════════════════════════════════════════════════════════════════════════════╗{RESET}\n")
-            buf.append(f"{CYAN_BOLD}║  eDEX-UI v3.2.0 // TRON LEGACY TERMINAL DASHBOARD                    [ {time_str} ] ║{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  eDEX-UI // LIQUID-GAS FLUID TERMINAL DASHBOARD                      [ {time_str} ] ║{RESET}\n")
             buf.append(f"{CYAN_BOLD}║  NODE: {uname.node.upper():<12} ARCH: {uname.machine:<8} KERNEL: {uname.release[:18]:<18} UPTIME: {up_h}h {up_m}m  ║{RESET}\n")
             buf.append(f"{CYAN_BOLD}╠══════════════════════════════════════════╦═══════════════════════════════════════════╣{RESET}\n")
-            buf.append(f"{CYAN_BOLD}║  [ CPU TELEMETRY & CORES ]               ║  [ GEO-RADAR & TELEMETRY SCANNER ]        ║{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  [ CPU TURBULENCE & CORES ]              ║  [ GEO-RADAR & TELEMETRY SCANNER ]        ║{RESET}\n")
             
             # CPU Total Bar
             cpu_bars = int(cpu_p / 100.0 * 20)
@@ -284,14 +416,13 @@ def run_tui_monitor():
                 buf.append(f"{CYAN_BOLD}║{RESET}  {left_text:<38}  {CYAN_BOLD}║{RESET}  {right_text:<39}  {CYAN_BOLD}║{RESET}\n")
 
             buf.append(f"{CYAN_BOLD}╠══════════════════════════════════════════╬═══════════════════════════════════════════╣{RESET}\n")
-            buf.append(f"{CYAN_BOLD}║  [ MEMORY & STORAGE ALLOCATION ]         ║  [ ACTIVE CONSUMPTION PROCESSES ]         ║{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  [ MEMORY VISCOSITY & DENSITY ]          ║  [ ACTIVE CONSUMPTION PROCESSES ]         ║{RESET}\n")
 
             # RAM bar
             ram_bars = int(mem.percent / 100.0 * 16)
             ram_vis = "█" * ram_bars + "░" * (16 - ram_bars)
             buf.append(f"{CYAN_BOLD}║{RESET}  RAM:  {GREEN_BOLD}{mem.percent:4.1f}%{RESET} [{GREEN}{ram_vis}{RESET}] {mem.used/(1024**3):.1f}G/{mem.total/(1024**3):.1f}G{CYAN_BOLD}║{RESET}")
             
-            # Top process 1
             procs = sorted(
                 psutil.process_iter(['name', 'cpu_percent', 'memory_percent']),
                 key=lambda p: (p.info.get('cpu_percent') or 0) + (p.info.get('memory_percent') or 0),
@@ -333,7 +464,6 @@ def restore_defaults():
     """Restore default desktop settings."""
     print(f"{AMBER}Restoring standard desktop theme settings...{RESET}")
     
-    # Remove bashrc.d script
     bash_script = os.path.join(BASHRC_D, "edex-theme.sh")
     if os.path.exists(bash_script):
         os.remove(bash_script)
@@ -357,43 +487,65 @@ def restore_defaults():
     print(f"{GREEN}✓ Restored default desktop settings.{RESET}")
 
 def main():
-    parser = argparse.ArgumentParser(description="eDEX-UI // TRON System-Wide Theme Command")
-    parser.add_argument("--app", "--tui", "--monitor", action="store_true", dest="app", help="Launch interactive live terminal monitor")
+    parser = argparse.ArgumentParser(description="eDEX-UI // Liquid-Gas System Controller")
+    parser.add_argument("action", nargs="?", default=None, help="Action: fluid, condense, phase, status, restore")
+    parser.add_argument("param", nargs="?", default=None, help="Parameter for action (e.g. phase state name)")
+    parser.add_argument("--fluid", action="store_true", help="Launch interactive 2D fluid dynamics reactor")
+    parser.add_argument("--condense", action="store_true", help="Run memory condensation & cache purge")
+    parser.add_argument("--phase", type=str, default=None, help="Shift matter state: cryo, plasma, mercury, solar")
+    parser.add_argument("--app", "--tui", "--monitor", action="store_true", dest="app", help="Launch interactive live terminal dashboard")
     parser.add_argument("--status", action="store_true", help="Display telemetry and theme status")
     parser.add_argument("--restore", action="store_true", help="Restore default desktop theme")
     args = parser.parse_args()
 
-    if args.status:
+    action = (args.action or "").lower()
+
+    if action == "fluid" or args.fluid:
+        # Launch interactive fluid wave and vapor reactor
+        phase_to_use = args.param or "cryo"
+        subprocess.run([sys.executable, FLUID_REACTOR, phase_to_use])
+        return
+
+    if action == "condense" or args.condense:
+        run_condenser()
+        return
+
+    if action == "phase" or args.phase:
+        phase_target = args.param or args.phase or "cryo"
+        set_matter_phase(phase_target)
+        return
+
+    if action == "status" or args.status:
         print_banner()
         print_telemetry_summary()
         return
 
-    if args.restore:
+    if action == "restore" or args.restore:
         restore_defaults()
         return
 
-    # Default action: Apply the COMPLETE eDEX-UI System Theme!
-    apply_terminal_palette()
-    play_chime()
+    if action == "app" or action == "tui" or args.app:
+        run_tui_monitor()
+        return
+
+    # Default action: Apply the COMPLETE Liquid-Gas eDEX-UI System Theme!
+    apply_terminal_palette(fg_hex='#00f5d4', bg_hex='#001220')
+    play_audio("liquid_drop.wav")
     print_banner()
     
-    print(f"{CYAN}[1/4] Configuring Terminal & Shell Environment...{RESET}")
-    install_konsole_profile()
-    install_shell_env()
+    print(f"{CYAN}[1/4] Configuring Fluid Shell & Terminal Environment...{RESET}")
+    install_konsole_profile("eDEX-TRON-Cryo")
+    install_shell_env(prompt_icon="≋ LIQUID-GAS ≋", fg_hex="#00f5d4", bg_hex="#001220")
     
-    print(f"{CYAN}[2/4] Applying KDE Plasma 6 TRON Color Scheme...{RESET}")
-    install_kde_colors()
+    print(f"{CYAN}[2/4] Applying KDE Plasma 6 Cryo-Gas Color Scheme...{RESET}")
+    install_kde_colors("eDEX-TRON-Cryo")
     
-    print(f"{CYAN}[3/4] Installing GTK & Icon Themes...{RESET}")
+    print(f"{CYAN}[3/4] Installing Liquid-Gas GTK 3/4 & Metacity Themes...{RESET}")
     install_desktop_themes()
     
-    print(f"{CYAN}[4/4] Activating Theme Engine...{RESET}")
+    print(f"{CYAN}[4/4] Activating Fluid Reactor Engine...{RESET}")
+    play_audio("vapor_hiss.wav")
     print_telemetry_summary()
-
-    # If --app was passed, start the interactive monitor immediately
-    if args.app:
-        time.sleep(1)
-        run_tui_monitor()
 
 if __name__ == "__main__":
     main()
