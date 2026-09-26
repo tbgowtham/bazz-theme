@@ -1,88 +1,90 @@
-# eDEX-UI // LIQUID-GAS FLUID SYSTEM CONTROLLER 🌊⚡
+# eDEX-UI // ROBOTIC MECHA & LIQUID-GAS SYSTEM CONTROLLER 🤖⚡
 
-> An authentic, futuristic **Liquid-Gas Form & eDEX-UI** interface suite for Linux. Transform your desktop and terminal into an organic sci-fi command environment with **physical matter phase shifting, real-time 2D fluid wave & vapor reactor, memory condensation utility, KDE Plasma 6 themes, Konsole profiles, fluid GTK 3/4 glassmorphism, and synthesized organic audio feedback**.
-
----
-
-## 🌊 The Liquid-Gas Concept: It's Not Just a Theme
-
-This project treats the desktop interface as a living, reactive **Liquid-Gas physical system**:
-- **Meniscus & Fluid Level**: Directly bound to physical RAM allocation.
-- **Fluid Temperature & Turbulence**: Bound to real-time CPU utilization (higher CPU load heats fluid, causing turbulent waves and boiling vapor eruption).
-- **Vapor Particles & Bubbles**: Network stream packet traffic causes gas bubbles to rise and burst at the surface.
-- **Matter Phase Shifting**: Instantly shift the desktop and terminal between 4 distinct physical matter states.
+> An ultra-futuristic **Robotic Mecha & Liquid-Gas** cybernetic desktop suite for Linux. Engineered with features standard desktop environments like Cinnamon do not possess: a **fullscreen biometric robotic screen locker, onboard robotic AI voice synthesizer, mecha hardware diagnostic scanner, physical matter phase shifting, 2D fluid dynamics reactor, and full KDE Plasma 6 & Konsole mecha styling**.
 
 ---
 
-## 🚀 Terminal Commands & Features
+## ⚡ What Makes This Different (Beyond Cinnamon & Traditional Desktops)
+
+Cinnamon and standard desktop environments provide traditional flat panels, static menus, and basic themes. This system upgrades your OS into an **onboard combat mecha AI**:
+
+1. **Fullscreen Biometric Robotic Screen Locker (`edex lock`)**:
+   - Hardware-accelerated GTK 3 & Cairo cybernetic HUD.
+   - Dual-ring counter-rotating mecha gears & targeting crosshairs.
+   - Vertical laser retinal/biometric scanline sweeping across the HUD.
+   - Real-time CPU, RAM, battery, and defense grid telemetry displayed on the locked screen.
+   - Mechanical hydraulic lock sound (`mech_lock.wav`) and pneumatic unlock release (`mech_unlock.wav`).
+   - Robotic voice announcements: *"SECURITY PROTOCOL ACTIVE. WORKSTATION LOCKED."* / *"AUTHENTICATION CONFIRMED. ACCESS GRANTED."*
+   - Secure verification via Linux user password or emergency bypass PIN (`1234`).
+2. **Onboard Robotic AI Voice Synthesizer**:
+   - Mechanical formant-modulated speech AI that speaks system status, matter phase shifts, lock events, and diagnostic verdicts.
+   - Can be toggled anytime via `edex voice on` / `edex voice off`.
+3. **Robotic Mecha System Diagnostic Scanner (`edex diag`)**:
+   - Live hardware bus and security audit in your terminal: Quantum CPU multi-core audit, neural memory bus test, NVMe storage integrity, and defense uplink check with cybernetic sonar beeps.
+4. **Physical Matter Phase Shifting (`edex phase <state>`)**:
+   - Instant system-wide matter phase transitions across KDE Plasma, Konsole, GTK, and shell prompt:
+     - **`mecha`** : Titanium Black (`#070a10`), Mecha Hazard Gold (`#ffb703`), Core Cyan (`#00f0ff`).
+     - **`cryo`** : Sub-zero Liquid Nitrogen (`#00f5d4`), Arctic Ice Blue (`#00bbf9`), Frost Mist.
+     - **`plasma`** : Ionized Neon Plasma (`#f72585`), Electric Violet (`#9d4edd`), Cyan Glow.
+     - **`mercury`** : Liquid Metal Quicksilver (`#e0e1dd`), Liquid Titanium, Gallium Aqua.
+     - **`solar`** : Superheated Solar Flare (`#ffb703`), Molten Orange (`#ff4800`), Crimson Core.
+5. **Interactive 2D Liquid-Gas Terminal Reactor (`edex fluid`)**:
+   - Real-time fluid wave equation and vapor particle physics reacting to live CPU temperature and RAM viscosity.
+6. **Memory Condensation Reactor (`edex condense`)**:
+   - Terminal animation of gaseous threads cooling and condensing into a pure liquid pool while compacting memory caches.
+
+---
+
+## 🚀 The Terminal Command: `edex`
 
 Because it is installed in your `$PATH`, you can run `edex` from **any terminal window**:
 
-### 1. Apply System-Wide Liquid-Gas Theme
 ```bash
+# Apply the master Robotic Mecha theme across entire system
 edex
 ```
-- Shifts active terminal window and Konsole to Liquid Cyan (`#00f5d4`) on Deep Abyss (`#001220`).
-- Activates KDE Plasma 6 `eDEX-TRON-Cryo` color scheme.
-- Configures GTK 3/4 & Metacity fluid glassmorphism, liquid orb buttons, and neon vapor shadows.
-- Sets interactive prompt `[≋ LIQUID-GAS ≋]` in `~/.bashrc.d/`.
-- Plays organic fluid droplet sound.
 
----
+### Specialized Commands:
 
-### 2. Interactive 2D Liquid-Gas Terminal Reactor
 ```bash
+# 1. Lock screen with robotic biometric HUD
+edex lock
+# (or simply: edex-lock)
+
+# 2. Run mecha system hardware & security diagnostic
+edex diag
+
+# 3. Switch immediately to Titanium Mecha state & voice
+edex mecha
+
+# 4. Launch interactive 2D fluid dynamics reactor
 edex fluid
-# or
-fluid
-```
-Launches an interactive, live 2D fluid wave equation and vapor particle reactor in your terminal:
-- **Real-Time Fluid Wave Surface**: Rendered with glowing truecolor gradients (`≋`, `∿`, `≈`, `~`).
-- **Live Gaseous Vapor**: Rising steam particles and erupting boiling bubbles.
-- **Telemetry Driven**: CPU temperature, RAM viscosity, and Network stream injection.
-- **Interactive Controls**:
-  - `[SPACE]` : Drop a droplet into the fluid (creates wave ripple + sound).
-  - `[B]`     : Release a vapor bubble surge.
-  - `[P]`     : Cycle matter phase (Cryo ⇄ Plasma ⇄ Mercury ⇄ Solar).
-  - `[C]`     : Trigger memory condensation reactor.
-  - `[Q]`     : Exit reactor.
 
----
+# 5. Shift matter state (mecha, cryo, plasma, mercury, solar)
+edex phase plasma
 
-### 3. Matter Phase Shifting
-```bash
-edex phase <cryo | plasma | mercury | solar>
-# or
-phase plasma
-```
-Shift your entire Linux desktop between 4 physical matter phases with matching audio pulses:
-
-| Matter Phase | State Description | Color Signature | Audio Tone |
-| :--- | :--- | :--- | :--- |
-| **`cryo`** | Sub-zero Liquid Nitrogen | Arctic Cyan (`#00f5d4`), Ice Blue, Frost Mist | Liquid Droplet Plink |
-| **`plasma`** | Ionized High-Energy Vapor | Electric Magenta (`#f72585`), Violet, Cyan Glow | Plasma Ignition Surge |
-| **`mercury`** | Liquid Metal Quicksilver | Chrome Silver (`#e0e1dd`), Liquid Titanium, Aqua | Metallic Resonance |
-| **`solar`** | Superheated Plasma Flare | Molten Gold (`#ffb703`), Solar Orange, Crimson | Solar Flare Hiss |
-
----
-
-### 4. Fluid Memory Condenser & Purge Reactor
-```bash
+# 6. Compact memory cache with liquid condensation animation
 edex condense
-# or
-condense
+
+# 7. Toggle robotic AI voice synthesizer
+edex voice on   # or: edex voice off
+
+# 8. Launch live telemetry terminal dashboard
+edex --app
 ```
-A practical Linux memory utility that compacts memory caches while displaying a fluid condensation animation in your terminal, showing gaseous threads condensing into a pure liquid pool.
 
 ---
 
-### 5. Live Telemetry Dashboard
-```bash
-edex --app
-# or
-edex --tui
-```
-Fullscreen alternate-screen live terminal monitor with animated ASCII radar, CPU multi-core load bars, memory meters, and top active processes.
+## 🔒 The Robotic Screen Locker (`edex lock` / `edex-lock`)
+
+When you run `edex lock`:
+- Takes over the display in fullscreen mode.
+- Locks the workstation with rotating mecha gears and a sweeping laser reticle.
+- Robotic Voice speaks: *"SECURITY PROTOCOL ACTIVE. WORKSTATION LOCKED. AUTHENTICATION REQUIRED."*
+- Enter your Linux user password (or default bypass PIN `1234`) and press `Enter`:
+  - **Wrong Password**: Alarm buzzer sounds, screen flashes red, and AI announces *"ACCESS DENIED. INTRUSION ATTEMPT LOGGED."*
+  - **Correct Password**: Pneumatic depressurize sound, emerald green glow, and AI announces *"AUTHENTICATION CONFIRMED. ACCESS GRANTED."* Unlocks smoothly.
+- You can also customize your lock PIN anytime in `~/.config/edex_lock_pin`.
 
 ---
 
@@ -90,12 +92,16 @@ Fullscreen alternate-screen live terminal monitor with animated ASCII radar, CPU
 
 | Command | Action |
 | :--- | :--- |
-| `edex` | Apply full Liquid-Gas theme across the entire system |
+| `edex` | Apply master Robotic Mecha theme across the entire system |
+| `edex lock` (or `edex-lock`) | Launch fullscreen robotic biometric screen locker |
+| `edex diag` (or `scan`) | Run robotic mecha hardware & security diagnostic |
+| `edex mecha` | Switch immediately to Titanium Mecha state & voice |
 | `edex fluid` | Launch interactive 2D fluid wave & vapor reactor |
-| `edex phase <state>` | Shift matter state (`cryo`, `plasma`, `mercury`, `solar`) |
+| `edex phase <state>` | Shift matter state (`mecha`, `cryo`, `plasma`, `mercury`, `solar`) |
 | `edex condense` | Compact memory cache with liquid condensation animation |
-| `edex --app` | Launch live telemetry terminal dashboard |
-| `edex --status` | Check system fluid telemetry and active matter state |
+| `edex voice <on\|off>` | Toggle mechanical robotic AI voice synthesizer |
+| `edex --app` | Launch live telemetry terminal monitor dashboard |
+| `edex --status` | Check system telemetry and active matter state |
 | `edex --restore` | Restore default desktop theme & settings |
 
 ---
@@ -104,13 +110,17 @@ Fullscreen alternate-screen live terminal monitor with animated ASCII radar, CPU
 
 ```text
 theme/
-├── edex-theme                           # Master Liquid-Gas controller (executable)
+├── edex-theme                           # Master system controller (executable)
 ├── edex                                 # Symlink to edex-theme
 ├── apply.sh                             # Convenience wrapper script
 │
 ├── tools/
+│   ├── robotic_lockscreen.py            # Fullscreen robotic mecha biometric screen locker
+│   ├── robot_voice.py                   # Mechanical robotic combat AI voice synthesizer
+│   ├── mecha_diag.py                    # Robotic hardware & security diagnostic scanner
 │   ├── fluid_reactor.py                 # Real-time 2D fluid wave & vapor particle reactor
-│   ├── sound_synth.py                   # Organic liquid & vapor sound synthesizer
+│   ├── sound_synth.py                   # Organic liquid & mechanical sound synthesizer
+│   ├── eDEX-TRON-Mecha.colors           # Titanium Mecha KDE Plasma color scheme
 │   ├── eDEX-TRON-Cryo.colors            # Sub-zero Cryo-Gas KDE color scheme
 │   ├── eDEX-TRON-Plasma.colors          # Neon-Plasma KDE color scheme
 │   ├── eDEX-TRON-Mercury.colors         # Liquid-Mercury KDE color scheme
@@ -118,12 +128,16 @@ theme/
 │   └── edex-theme.sh                    # Interactive shell environment configuration
 │
 ├── assets/
+│   ├── mech_lock.wav                    # Hydraulic clamp closure sound
+│   ├── mech_unlock.wav                  # Pneumatic depressurize & servo sound
+│   ├── access_denied.wav                # High-security alarm buzzer sound
+│   ├── scan_beep.wav                    # Cybernetic scanning sonar beep
 │   ├── liquid_drop.wav                  # Resonant fluid droplet sound
 │   ├── vapor_hiss.wav                   # Steam vapor release sound
 │   ├── plasma_ignite.wav                # High-energy plasma surge sound
 │   └── solar_flare.wav                  # Solar flare hiss sound
 │
-├── gtk-3.0/ & gtk-4.0/                  # Liquid-Gas fluid glassmorphism GTK themes
+├── gtk-3.0/ & gtk-4.0/                  # Fluid mecha glassmorphism GTK themes
 ├── metacity-1/                          # Window decorations with glowing vapor borders
 ├── icons/Jarvis-White/                  # Minimalist vector icon theme
 └── cinnamon/                            # Cinnamon shell theme

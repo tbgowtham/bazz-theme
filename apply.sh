@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# eDEX-UI // TRON SYSTEM-WIDE THEME & SHELL CONTROLLER
+# eDEX-UI // ROBOTIC MECHA & LIQUID-GAS SYSTEM CONTROLLER
 # ==============================================================================
-# Applies the full eDEX-UI Tron desktop theme:
-# - KDE Plasma 6 eDEX-TRON Color Scheme
+# Applies the full Robotic Mecha & Liquid-Gas futuristic theme:
+# - Fullscreen Biometric Robotic Screen Locker (`./apply.sh lock`)
+# - Robotic AI Voice Synthesizer & Mechanical Audio Suite
+# - KDE Plasma 6 Mecha Robotic Color Scheme (`eDEX-TRON-Mecha`)
+# - Mecha Hardware & Security Diagnostic Scanner (`./apply.sh diag`)
+# - 2D Liquid-Gas Fluid Dynamics Reactor (`./apply.sh fluid`)
+# - Matter Phase Shifting (Mecha, Cryo, Plasma, Mercury, Solar)
 # - Konsole Terminal Profile & Colorscheme
-# - Active Terminal OSC Palette Shift (Neon Cyan / Deep Navy)
-# - Interactive Shell Prompt ([eDEX-UI // TRON])
-# - GTK 3/4 & Metacity Neon Cyan Borders
-# - Jarvis-White Minimalist Vector Icon Theme
-# - Audio Chime Feedback
-# - Optional Interactive Live TUI Monitor (`./apply.sh --app`)
+# - Active Terminal OSC Palette Shift (Core Cyan / Titanium Black)
+# - Interactive Shell Prompt ([⚙ MECHA-ROBOTIC ⚙])
+# - Fluid Mecha GTK 3/4 & Metacity Themes
 # ==============================================================================
 
 set -euo pipefail
