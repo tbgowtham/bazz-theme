@@ -306,7 +306,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     base_file = args.base
     if not base_file or not os.path.exists(base_file):
-        default_candidate = os.path.join(script_dir, "public/assets/wallpapers/jarvis-master.jpg")
+        default_candidate = os.path.join(script_dir, "wallpapers/jarvis-master.jpg")
         user_photo = os.path.expanduser("~/Pictures/tony-stark-iron-man-2008 (1).jpeg")
         if os.path.exists(default_candidate):
             base_file = default_candidate

@@ -40,7 +40,6 @@ usage() {
     echo "  --stop-live       Stop the background live telemetry wallpaper daemon"
     echo "  --status          Check status of the live wallpaper daemon"
     echo "  --icons           Install only the Jarvis-White icon theme"
-    echo "  --web, -w         Launch interactive Stark OS Web Desktop Shell (localhost:3030)"
     echo "  --restore, -r     Restore default desktop and icon settings"
     echo "  --help, -h        Show this help message"
     echo ""
@@ -141,18 +140,6 @@ install_icons_only() {
     echo -e "${GREEN}✓ Jarvis-White icon theme installed!${NC}"
 }
 
-start_web_shell() {
-    echo -e "${CYAN}Starting Stark OS Interactive Desktop Shell...${NC}"
-    if command -v node >/dev/null 2>&1; then
-        cd "${SCRIPT_DIR}"
-        echo -e "${GREEN}Serving shell at: http://localhost:3030${NC}"
-        node server.js
-    else
-        echo -e "${RED}Error: Node.js is required to start the web shell server.${NC}"
-        exit 1
-    fi
-}
-
 restore_defaults() {
     echo -e "${GOLD}Restoring default theme and icon settings...${NC}"
     stop_live_daemon || true
@@ -184,9 +171,6 @@ case "${ACTION}" in
         ;;
     --icons|icons)
         install_icons_only
-        ;;
-    --web|-w|web)
-        start_web_shell
         ;;
     --restore|-r|restore)
         restore_defaults

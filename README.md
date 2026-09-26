@@ -62,11 +62,12 @@ theme/
 │   ├── gtk.css                          # Dark obsidian glass headerbars & cyan accents
 │   └── gtk-dark.css                     # Dark mode overrides
 │
-├── tools/                               # Asset generation utilities
-│   ├── generate_icon_theme.py           # Icon theme builder
-│   └── create_window_decorations.py     # Metacity & GTK theme builder
+├── wallpapers/                          # Base 4K wallpapers
+│   └── jarvis-master.jpg                # 4K master cyberpunk cockpit & arc-reactor
 │
-└── public/ & server.js                  # Interactive Stark OS Desktop Shell Application
+└── tools/                               # Asset generation utilities
+    ├── generate_icon_theme.py           # Icon theme builder
+    └── create_window_decorations.py     # Metacity & GTK theme builder
 ```
 
 ---
@@ -102,13 +103,8 @@ To keep the wallpaper continuously updated with your live CPU and RAM consumptio
 ./apply.sh --wallpaper
 ```
 
-### 4. Launch Interactive Web Desktop Shell
-```bash
-./apply.sh --web
-# Open http://localhost:3030 in your browser
-```
-
-### 5. Restore Default Settings
+### 4. Restore Default Settings
 ```bash
 ./apply.sh --restore
 ```
+
