@@ -1,0 +1,33 @@
+[Icon Theme]
+Name=Ubuntu-Cinnamon-Orange-Icons
+Comment=Clean Ubuntu-inspired modern icon theme in Ubuntu Orange and Dark Charcoal
+Inherits=Yaru,Mint-Y,Adwaita,gnome,hicolor
+Directories=scalable/places,scalable/status,scalable/actions,scalable/apps
+
+[scalable/places]
+Size=48
+Type=Scalable
+MinSize=16
+MaxSize=512
+Context=Places
+
+[scalable/status]
+Size=24
+Type=Scalable
+MinSize=16
+MaxSize=128
+Context=Status
+
+[scalable/actions]
+Size=24
+Type=Scalable
+MinSize=16
+MaxSize=128
+Context=Actions
+
+[scalable/apps]
+Size=48
+Type=Scalable
+MinSize=16
+MaxSize=256
+Context=Applications

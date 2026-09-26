@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFCFD" />
+      <stop offset="60%" stop-color="#F6F7FA" />
+      <stop offset="100%" stop-color="#EDEFF4" />
+    </linearGradient>
+
+    <radialGradient id="subtle-glow" cx="80%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#FDEEE6" stop-opacity="0.45" />
+      <stop offset="50%" stop-color="#FBF2EC" stop-opacity="0.20" />
+      <stop offset="100%" stop-color="#F5F6F9" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Ubuntu Orange Accent Gradients -->
+    <linearGradient id="orange-primary" x1="20%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6332" />
+      <stop offset="70%" stop-color="#E95420" />
+      <stop offset="100%" stop-color="#C74010" />
+    </linearGradient>
+
+    <linearGradient id="orange-soft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFA07A" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#E95420" stop-opacity="0.65" />
+    </linearGradient>
+
+    <linearGradient id="orange-translucent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E95420" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#E95420" stop-opacity="0.03" />
+    </linearGradient>
+
+    <linearGradient id="charcoal-plane" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3C3B37" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#2C2C2C" stop-opacity="0.08" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadows (minimal, professional) -->
+    <filter id="soft-shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="3" dy="6" stdDeviation="10" flood-color="#C74010" flood-opacity="0.15"/>
+    </filter>
+    <filter id="subtle-card-shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.04"/>
+    </filter>
+  </defs>
+
+  <!-- Base Clean Background (White / Off-White) -->
+  <rect width="3840" height="2160" fill="url(#bg-grad)" />
+  <rect width="3840" height="2160" fill="url(#subtle-glow)" />
+
+  <!-- Subtle Minimalist Coordinate Grid Lines (Left Area remains pristine for icons) -->
+  <g stroke="#E2E4E8" stroke-width="1" opacity="0.6">
+    <line x1="307.2" y1="0" x2="307.2" y2="2160" stroke-dasharray="3,12" />
+    <line x1="768.0" y1="0" x2="768.0" y2="2160" stroke-dasharray="2,20" />
+    <line x1="0" y1="1900.8" x2="3840" y2="1900.8" stroke-dasharray="2,16" />
+    <circle cx="307.2" cy="1900.8" r="3" fill="#D0D3D9" />
+    <circle cx="768.0" cy="1900.8" r="2" fill="#D0D3D9" />
+  </g>
+
+  <!-- Right Geometric Compositions: Clean, Origami-like Facets and Ubuntu Orange Accents -->
+  <!-- Layer 1: Translucent background geometry -->
+  <path d="M 2112.0 0 L 3840 0 L 3840 1620.0 L 2688.0 1188.0 Z" 
+        fill="url(#orange-translucent)" />
+
+  <polygon points="2380.8,324.0 3532.8,172.8 3264.0,1404.0 2227.2,1080.0"
+           fill="url(#charcoal-plane)" />
+
+  <!-- Layer 2: Geometric polygon facets with delicate light borders -->
+  <polygon points="2764.7999999999997,432.0 3763.2,540.0 3379.2,1555.2 2534.4,1252.8"
+           fill="#FFFFFF" fill-opacity="0.75" stroke="#E5E7EB" stroke-width="1.5" filter="url(#subtle-card-shadow)" />
+
+  <polygon points="2534.4,1252.8 3379.2,1555.2 3072.0,2052.0 2304.0,1684.8"
+           fill="#F9FAFC" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1.5" />
+
+  <!-- Layer 3: Ubuntu Orange Hero Ribbon & Geometric Core (Clean #E95420) -->
+  <!-- Dynamic triangular ribbon 1 -->
+  <polygon points="2688.0,691.2 3302.4,475.2 3072.0,1339.2"
+           fill="url(#orange-primary)" filter="url(#soft-shadow)" />
+
+  <!-- Faceted shadow plane of hero ribbon -->
+  <polygon points="2688.0,691.2 3072.0,1339.2 2496.0,1209.6000000000001"
+           fill="#C74010" fill-opacity="0.95" />
+
+  <!-- Secondary warm ribbon accent -->
+  <polygon points="3072.0,1339.2 3379.2,1555.2 2841.6,1684.8 2764.7999999999997,1425.6000000000001"
+           fill="url(#orange-soft)" />
+
+  <!-- Layer 4: Minimal Ubuntu Motif (Circle of Friends Emblem Modernized) -->
+  <g transform="translate(2880.0, 1036.8)">
+    <!-- Outer delicate ring -->
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#FFFFFF" stroke-width="12" filter="url(#subtle-card-shadow)"/>
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#E95420" stroke-width="10" stroke-dasharray="160 30 160 30 160 30" stroke-linecap="round"/>
+
+    <!-- Three focal modern geometric nodes -->
+    <circle cx="-110" cy="0" r="15" fill="#E95420" stroke="#FFFFFF" stroke-width="4" />
+    <circle cx="55" cy="-95" r="15" fill="#E95420" stroke="#FFFFFF" stroke-width="4" />
+    <circle cx="55" cy="95" r="15" fill="#E95420" stroke="#FFFFFF" stroke-width="4" />
+
+    <!-- Core circle -->
+    <circle cx="0" cy="0" r="42" fill="#FFFFFF" filter="url(#subtle-card-shadow)"/>
+    <circle cx="0" cy="0" r="28" fill="#E95420" />
+  </g>
+
+  <!-- Crisp Modern Geometric Accent Lines -->
+  <line x1="2496.0" y1="1209.6000000000001" x2="3763.2" y2="540.0" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+  <line x1="2688.0" y1="691.2" x2="2304.0" y2="1684.8" stroke="#E95420" stroke-width="1.5" stroke-dasharray="4,8" opacity="0.4" />
+
+  <!-- Subtle Ubuntu / Cinnamon Typography Watermark at bottom right (Extremely subtle, 0.25 opacity) -->
+  <g transform="translate(3379.2, 2030.3999999999999)" font-family="'Ubuntu', 'Ubuntu Sans', 'Noto Sans', 'Segoe UI', sans-serif">
+    <text x="0" y="0" font-size="20" font-weight="700" fill="#2C2C2C" opacity="0.30" letter-spacing="3">UBUNTU</text>
+    <text x="110" y="0" font-size="20" font-weight="300" fill="#E95420" opacity="0.45" letter-spacing="3">CINNAMON</text>
+    <text x="0" y="24" font-size="11" font-weight="400" fill="#666666" opacity="0.25" letter-spacing="1.5">LIGHT EDITION</text>
+  </g>
+
+</svg>

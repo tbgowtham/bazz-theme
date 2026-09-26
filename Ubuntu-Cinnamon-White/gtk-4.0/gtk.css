@@ -1,0 +1,160 @@
+/* ===================================================================
+   Ubuntu Cinnamon Light Theme - GTK 4.0 / Libadwaita Stylesheet
+   Color Palette:
+   - Primary Background: #FFFFFF / #F7F7FA
+   - Accent Color: #E95420 (Ubuntu Orange)
+   - Primary Text: #2C2C2C (Dark Charcoal)
+   - Secondary Text: #666666 (Medium Gray)
+   - Borders: #DCDFE6 / #E2E4E8
+   =================================================================== */
+
+@define-color accent_color #E95420;
+@define-color accent_bg_color #E95420;
+@define-color accent_fg_color #FFFFFF;
+
+@define-color window_bg_color #F7F7FA;
+@define-color window_fg_color #2C2C2C;
+
+@define-color view_bg_color #FFFFFF;
+@define-color view_fg_color #2C2C2C;
+
+@define-color headerbar_bg_color #F6F7FA;
+@define-color headerbar_fg_color #2C2C2C;
+@define-color headerbar_border_color #DCDFE6;
+@define-color headerbar_backdrop_color #FAFAFB;
+
+@define-color card_bg_color #FFFFFF;
+@define-color card_fg_color #2C2C2C;
+@define-color card_border_color #DCDFE6;
+
+@define-color popover_bg_color #FFFFFF;
+@define-color popover_fg_color #2C2C2C;
+
+@define-color borders #DCDFE6;
+@define-color unfocused_borders #E5E7EB;
+
+/* Window & View Defaults */
+window {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+}
+
+headerbar {
+    background-color: @headerbar_bg_color;
+    color: @headerbar_fg_color;
+    border-bottom: 1px solid @headerbar_border_color;
+    min-height: 42px;
+}
+
+headerbar:backdrop {
+    background-color: @headerbar_backdrop_color;
+    color: #777777;
+}
+
+/* Window buttons */
+headerbar button.titlebutton.close {
+    background-image: url("assets/titlebutton-close.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+headerbar:backdrop button.titlebutton.close {
+    background-image: url("assets/titlebutton-close-backdrop.svg");
+}
+
+/* Buttons */
+button {
+    border-radius: 4px;
+    border: 1px solid #D0D4DC;
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    padding: 6px 12px;
+    font-weight: 500;
+    transition: all 120ms ease;
+}
+
+button:hover {
+    background-color: #FDFDFD;
+    border-color: #B8BDC8;
+    color: #111111;
+}
+
+button:active,
+button:checked {
+    background-color: #F0F1F4;
+    border-color: #A0A5B2;
+}
+
+button.suggested-action {
+    background-color: #E95420;
+    border-color: #C74010;
+    color: #FFFFFF;
+}
+
+button.suggested-action:hover {
+    background-color: #FF6332;
+}
+
+button.suggested-action:active {
+    background-color: #C74010;
+}
+
+/* Entries */
+entry {
+    background-color: #FFFFFF;
+    border: 1px solid #D0D4DC;
+    border-radius: 4px;
+    color: #2C2C2C;
+    padding: 6px 10px;
+}
+
+entry:focus-within {
+    border-color: #E95420;
+    outline: 2px solid rgba(233, 84, 32, 0.25);
+}
+
+/* Switches */
+switch {
+    background-color: #E0E2E6;
+    border-radius: 12px;
+}
+
+switch:checked {
+    background-color: #E95420;
+}
+
+/* Sliders */
+scale trough {
+    background-color: #E2E4E8;
+    border-radius: 3px;
+}
+
+scale highlight {
+    background-color: #E95420;
+    border-radius: 3px;
+}
+
+scale slider {
+    background-color: #FFFFFF;
+    border: 1.5px solid #E95420;
+    border-radius: 50%;
+}
+
+/* Checkboxes & Radios */
+checkbutton check:checked {
+    background-color: #E95420;
+    border-color: #C74010;
+    color: #FFFFFF;
+}
+
+/* Lists and selections */
+listview row:selected,
+list row:selected {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+listview row:hover,
+list row:hover {
+    background-color: #FDF2EE;
+}

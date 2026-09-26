@@ -1,0 +1,79 @@
+# ===================================================================
+# Ubuntu Cinnamon Light Theme - GTK 2.0 Fallback Configuration
+# ===================================================================
+
+gtk-color-scheme = "base_color:#FFFFFF\nbg_color:#F6F7FA\ntooltip_bg_color:#2C2C2C\nselected_bg_color:#E95420\ntext_color:#2C2C2C\nfg_color:#2C2C2C\ntooltip_fg_color:#FFFFFF\nselected_fg_color:#FFFFFF"
+
+style "default" {
+    xthickness = 1
+    ythickness = 1
+
+    GtkButton::child-displacement-x = 1
+    GtkButton::child-displacement-y = 1
+    GtkButton::default-border = { 0, 0, 0, 0 }
+
+    GtkCheckButton::indicator-size = 14
+    GtkRadioButton::indicator-size = 14
+
+    GtkRange::slider-width = 13
+    GtkRange::trough-border = 0
+
+    GtkScrollbar::has-backward-stepper = 0
+    GtkScrollbar::has-forward-stepper = 0
+    GtkScrollbar::slider-width = 8
+    GtkScrollbar::trough-border = 0
+
+    GtkScrolledWindow::scrollbar-spacing = 0
+
+    bg[NORMAL]        = @bg_color
+    bg[PRELIGHT]      = shade(1.02, @bg_color)
+    bg[ACTIVE]        = shade(0.92, @bg_color)
+    bg[SELECTED]      = @selected_bg_color
+    bg[INSENSITIVE]   = @bg_color
+
+    fg[NORMAL]        = @fg_color
+    fg[PRELIGHT]      = @fg_color
+    fg[ACTIVE]        = @fg_color
+    fg[SELECTED]      = @selected_fg_color
+    fg[INSENSITIVE]   = shade(0.65, @bg_color)
+
+    base[NORMAL]      = @base_color
+    base[PRELIGHT]    = shade(0.98, @base_color)
+    base[ACTIVE]      = @selected_bg_color
+    base[SELECTED]    = @selected_bg_color
+    base[INSENSITIVE] = @bg_color
+
+    text[NORMAL]      = @text_color
+    text[PRELIGHT]    = @text_color
+    text[ACTIVE]      = @selected_fg_color
+    text[SELECTED]    = @selected_fg_color
+    text[INSENSITIVE] = shade(0.65, @bg_color)
+}
+
+class "GtkWidget" style "default"
+
+style "button" {
+    xthickness = 3
+    ythickness = 3
+    bg[NORMAL]   = "#FFFFFF"
+    bg[PRELIGHT] = "#FAFAFB"
+    bg[ACTIVE]   = "#EDEFE4"
+}
+class "GtkButton" style "button"
+
+style "menu" {
+    xthickness = 2
+    ythickness = 2
+    bg[NORMAL]   = "#FFFFFF"
+    bg[PRELIGHT] = "#FDF2EE"
+    fg[PRELIGHT] = "#E95420"
+}
+class "GtkMenu" style "menu"
+class "GtkMenuItem" style "menu"
+
+style "entry" {
+    xthickness = 3
+    ythickness = 3
+    base[NORMAL] = "#FFFFFF"
+}
+class "GtkEntry" style "entry"

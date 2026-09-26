@@ -1,0 +1,850 @@
+/* ===================================================================
+   Ubuntu Cinnamon Light Theme - Cinnamon Desktop Shell Stylesheet
+   Color Palette:
+   - Primary Background: #FAFAFB / #FFFFFF (Crisp White / Off-White)
+   - Accent Color: #E95420 (Ubuntu Orange)
+   - Primary Text: #2C2C2C (Dark Charcoal)
+   - Secondary Text: #666666 (Medium Gray)
+   - Borders: #E2E4E8 (Subtle Light Gray)
+   - Hover Background: #FDF2EE (Very Light Warm Orange Tint)
+   - Active / Selected: #E95420 (Ubuntu Orange)
+   - Focus Outline: rgba(233, 84, 32, 0.3)
+   =================================================================== */
+
+/* --- Base Stage & Fonts --- */
+stage {
+    font-family: "Ubuntu", "Ubuntu Sans", "Cantarell", "Noto Sans", "Segoe UI", sans-serif;
+    font-size: 9.5pt;
+    color: #2C2C2C;
+}
+
+/* --- Panel --- */
+#panel {
+    background-color: #FAFAFB;
+    color: #2C2C2C;
+    font-size: 9.5pt;
+    font-weight: 500;
+    height: 38px;
+    box-shadow: none;
+}
+
+.panel-bottom {
+    border-top: 1px solid #E2E4E8;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+}
+
+.panel-top {
+    border-bottom: 1px solid #E2E4E8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.panel-left {
+    border-right: 1px solid #E2E4E8;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.panel-right {
+    border-left: 1px solid #E2E4E8;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+#panelLeft, #panelCenter, #panelRight {
+    spacing: 4px;
+}
+
+#panelLeft:dnd {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(233, 84, 32, 0.15);
+    background-gradient-end: rgba(233, 84, 32, 0.25);
+}
+
+#panelCenter:dnd {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(233, 84, 32, 0.15);
+    background-gradient-end: rgba(233, 84, 32, 0.25);
+}
+
+#panelRight:dnd {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(233, 84, 32, 0.15);
+    background-gradient-end: rgba(233, 84, 32, 0.25);
+}
+
+.panel-dummy {
+    background-color: rgba(233, 84, 32, 0.4);
+}
+
+/* --- Applets --- */
+.applet-box {
+    padding-left: 7px;
+    padding-right: 7px;
+    color: #2C2C2C;
+    text-shadow: none;
+    transition-duration: 120ms;
+    border-radius: 4px;
+    margin: 2px 1px;
+}
+
+.applet-box:hover {
+    color: #E95420;
+    background-color: #FDF2EE;
+}
+
+.applet-box:active,
+.applet-box:checked {
+    color: #E95420;
+    background-color: #FCE8E0;
+}
+
+.applet-box:highlight {
+    background-image: none;
+    border-image: none;
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+.applet-label {
+    font-weight: 500;
+    color: #2C2C2C;
+    text-shadow: none;
+}
+
+.applet-box:hover > .applet-label {
+    color: #E95420;
+}
+
+.applet-box:active > .applet-label,
+.applet-box:checked > .applet-label {
+    color: #E95420;
+}
+
+.applet-icon {
+    color: #2C2C2C;
+    icon-size: 16px;
+}
+
+.applet-box:hover > .applet-icon {
+    color: #E95420;
+}
+
+.applet-separator {
+    padding: 1px 4px;
+}
+
+.applet-separator-line {
+    width: 1px;
+    background-color: #E2E4E8;
+}
+
+.applet-separator-line-vertical {
+    border: 0px solid rgba(0,0,0,0);
+    border-bottom-width: 1px;
+    border-color: #E2E4E8;
+}
+
+/* Cornerbar / Show Desktop */
+.applet-cornerbar {
+    width: 10px;
+    background-color: transparent;
+    border-left: 1px solid #E2E4E8;
+}
+
+.applet-cornerbar:hover {
+    background-color: #E95420;
+}
+
+/* --- Window List & Grouped Window List --- */
+.window-list-box {
+    spacing: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.window-list-item-box {
+    color: #2C2C2C;
+    background-color: transparent;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 2px 1px;
+    border-bottom: 2px solid transparent;
+    transition-duration: 120ms;
+}
+
+.window-list-item-box:hover {
+    background-color: #FDF2EE;
+    color: #2C2C2C;
+    border-bottom: 2px solid #FFA07A;
+}
+
+.window-list-item-box:active,
+.window-list-item-box:checked,
+.window-list-item-box:focus {
+    background-color: #FDECE5;
+    color: #111111;
+    border-bottom: 2px solid #E95420;
+}
+
+.window-list-item-demands-attention {
+    background-color: #FFF2EC;
+    border-bottom: 2px solid #E95420;
+}
+
+/* Grouped window list items */
+.grouped-window-list-item-box {
+    color: #2C2C2C;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 2px 1px;
+    border-bottom: 2px solid transparent;
+    transition-duration: 120ms;
+}
+
+.grouped-window-list-item-box:hover {
+    background-color: #FDF2EE;
+    border-bottom: 2px solid #FFA07A;
+}
+
+.grouped-window-list-item-box:active,
+.grouped-window-list-item-box:checked {
+    background-color: #FDECE5;
+    border-bottom: 2px solid #E95420;
+}
+
+.grouped-window-list-badge {
+    border-radius: 8px;
+    background-color: #E95420;
+    color: #FFFFFF;
+    font-size: 8pt;
+    font-weight: bold;
+    padding: 1px 5px;
+}
+
+/* Window Thumbnail Preview */
+.window-list-preview {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDFE6;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    padding: 8px;
+    color: #2C2C2C;
+    font-size: 9pt;
+}
+
+/* --- Cinnamon Application Menu & Popups --- */
+.menu,
+.popup-menu,
+.popup-menu-content {
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    border: 1px solid #DCDFE6;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 6px;
+}
+
+.popup-sub-menu {
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.popup-sub-menu .popup-menu-item:ltr {
+    padding-right: 1.75em;
+}
+
+.popup-sub-menu .popup-menu-item:rtl {
+    padding-left: 1.75em;
+}
+
+.popup-menu-item {
+    padding: 6px 12px;
+    spacing: 8px;
+    border-radius: 4px;
+    color: #2C2C2C;
+    transition-duration: 100ms;
+}
+
+.popup-menu-item:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+.popup-menu-item:active {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+.popup-menu-item:insensitive {
+    color: #A0A0A0;
+    background-color: transparent;
+}
+
+.popup-separator-menu-item {
+    height: 1px;
+    background-color: #EAECEF;
+    margin: 4px 6px;
+}
+
+/* Menu Search Field */
+#menu-search-entry,
+#appmenu-search-entry {
+    background-color: #F5F6F8;
+    border: 1px solid #D0D4DC;
+    border-radius: 4px;
+    color: #2C2C2C;
+    selected-color: #FFFFFF;
+    selection-background-color: #E95420;
+    caret-color: #E95420;
+    caret-size: 1px;
+    padding: 7px 10px;
+    margin: 4px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+}
+
+#menu-search-entry:focus,
+#appmenu-search-entry:focus {
+    background-color: #FFFFFF;
+    border: 1px solid #E95420;
+    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.18);
+}
+
+#menu-search-entry:hover,
+#appmenu-search-entry:hover {
+    border-color: #C0C4CC;
+}
+
+/* Application Menu Categories & Applications */
+.menu-category-button,
+.appmenu-category-button {
+    padding: 7px 12px;
+    border-radius: 4px;
+    color: #333333;
+    font-weight: 500;
+}
+
+.menu-category-button:hover,
+.appmenu-category-button:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+.menu-category-button-selected,
+.appmenu-category-button-selected {
+    background-color: #E95420;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.menu-category-button-selected:hover,
+.appmenu-category-button-selected:hover {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+.menu-application-button,
+.appmenu-application-button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: #2C2C2C;
+}
+
+.menu-application-button:hover,
+.appmenu-application-button:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+.menu-application-button-selected,
+.appmenu-application-button-selected {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+.menu-application-button-label:selected,
+.appmenu-application-button-label:selected {
+    color: #FFFFFF;
+}
+
+.menu-favorites-button,
+.appmenu-system-button {
+    padding: 7px;
+    border-radius: 4px;
+    color: #2C2C2C;
+}
+
+.menu-favorites-button:hover,
+.appmenu-system-button:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+/* --- Calendar & Clock Popup --- */
+.calendar-main-box {
+    background-color: #FFFFFF;
+    padding: 10px;
+}
+
+.calendar-month-header {
+    font-weight: bold;
+    color: #2C2C2C;
+    padding-bottom: 8px;
+    font-size: 10pt;
+}
+
+.calendar-change-month-back,
+.calendar-change-month-forward {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    color: #555555;
+    transition-duration: 100ms;
+}
+
+.calendar-change-month-back:hover,
+.calendar-change-month-forward:hover {
+    color: #E95420;
+    background-color: #FDF2EE;
+}
+
+.calendar-day-heading {
+    color: #777777;
+    font-size: 8.5pt;
+    font-weight: bold;
+    padding: 4px;
+    text-align: center;
+}
+
+.calendar-day {
+    color: #2C2C2C;
+    border-radius: 4px;
+    padding: 5px;
+    text-align: center;
+}
+
+.calendar-day:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+.calendar-non-work-day {
+    color: #888888;
+}
+
+.calendar-other-month-day {
+    color: #BDBDBD;
+}
+
+.calendar-today {
+    background-color: #E95420;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.calendar-today:hover {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+.calendar-day-event-dot {
+    margin: 2px;
+    border-radius: 2px;
+    width: 4px;
+    height: 4px;
+    background-color: #E95420;
+}
+
+.calendar-event-button {
+    border-radius: 4px;
+    background-color: #F9FAFB;
+    border-left: 3px solid #E95420;
+    padding: 6px 10px;
+    margin-top: 4px;
+}
+
+/* --- Notifications --- */
+#notification {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDFE6;
+    border-left: 4px solid #E95420;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09);
+    padding: 14px 18px;
+    spacing-rows: 8px;
+    spacing-columns: 12px;
+    margin-from-right-edge-of-screen: 16px;
+    width: 32em;
+    color: #2C2C2C;
+}
+
+#notification-title {
+    font-weight: 600;
+    font-size: 10pt;
+    color: #2C2C2C;
+}
+
+#notification-body {
+    color: #555555;
+    font-size: 9pt;
+}
+
+.notification-button {
+    background-color: #F5F6F8;
+    border: 1px solid #D0D4DC;
+    border-radius: 4px;
+    color: #2C2C2C;
+    padding: 6px 16px;
+    font-weight: 500;
+    transition-duration: 120ms;
+}
+
+.notification-button:hover {
+    background-color: #FDF2EE;
+    border-color: #E95420;
+    color: #E95420;
+}
+
+.notification-button:active {
+    background-color: #E95420;
+    border-color: #E95420;
+    color: #FFFFFF;
+}
+
+.notification-icon-button {
+    border-radius: 4px;
+    padding: 5px;
+    color: #555555;
+}
+
+.notification-icon-button:hover {
+    color: #E95420;
+    background-color: #FDF2EE;
+}
+
+/* --- Sliders (Volume, Brightness, Sound Applet) --- */
+.popup-slider-menu-item,
+.slider {
+    -slider-height: 4px;
+    -slider-background-color: #E2E4E8;
+    -slider-active-background-color: #E95420;
+    -slider-border-width: 0px;
+    -slider-handle-radius: 7px;
+    height: 18px;
+    min-width: 14em;
+    border: 0 solid transparent;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    color: #E95420;
+}
+
+/* --- Sound Applet Controls --- */
+.sound-player {
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.sound-player StButton {
+    color: #2C2C2C;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.sound-player StButton:hover {
+    color: #E95420;
+    background-color: #FDF2EE;
+}
+
+.sound-player StButton:active {
+    color: #FFFFFF;
+    background-color: #E95420;
+}
+
+/* --- Workspace Switcher & Expo Overview --- */
+.workspace-switcher {
+    padding: 2px 4px;
+}
+
+.workspace-button {
+    color: #2C2C2C;
+    border-radius: 3px;
+    padding: 2px 8px;
+    margin: 1px;
+    font-weight: 500;
+}
+
+.workspace-button:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+.workspace-button:active,
+.workspace-button:selected {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+#overview,
+.expo-background {
+    background-color: rgba(246, 247, 249, 0.96);
+}
+
+.expo-workspace-thumbnail {
+    border: 2px solid #D0D4DC;
+    border-radius: 6px;
+}
+
+.expo-workspace-thumbnail:selected,
+.expo-workspace-thumbnail:active {
+    border: 2px solid #E95420;
+}
+
+/* --- Cinnamon Modal Dialogs & Run Dialog --- */
+.modal-dialog {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDFE6;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    color: #2C2C2C;
+    padding: 22px;
+}
+
+#run-dialog {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDFE6;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.run-dialog-entry {
+    background-color: #F5F6F8;
+    border: 1px solid #D0D4DC;
+    border-radius: 4px;
+    color: #2C2C2C;
+    padding: 8px 12px;
+    font-size: 10pt;
+    selected-color: #FFFFFF;
+    selection-background-color: #E95420;
+    caret-color: #E95420;
+}
+
+.run-dialog-entry:focus {
+    background-color: #FFFFFF;
+    border-color: #E95420;
+    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.18);
+}
+
+.modal-dialog-button {
+    background-color: #F5F6F8;
+    border: 1px solid #D0D4DC;
+    border-radius: 4px;
+    color: #2C2C2C;
+    padding: 7px 18px;
+    font-weight: 500;
+    transition-duration: 100ms;
+}
+
+.modal-dialog-button:hover {
+    background-color: #FDF2EE;
+    border-color: #E95420;
+    color: #E95420;
+}
+
+.modal-dialog-button:default {
+    background-color: #E95420;
+    border-color: #E95420;
+    color: #FFFFFF;
+}
+
+.modal-dialog-button:default:hover {
+    background-color: #FF6633;
+    border-color: #FF6633;
+}
+
+/* Polkit / Password entry */
+.prompt-dialog-password-entry {
+    background-color: #F5F6F8;
+    border: 1px solid #D0D4DC;
+    border-radius: 4px;
+    color: #2C2C2C;
+    padding: 7px 10px;
+    selected-color: #FFFFFF;
+    selection-background-color: #E95420;
+}
+
+.prompt-dialog-password-entry:focus {
+    background-color: #FFFFFF;
+    border-color: #E95420;
+    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.18);
+}
+
+/* --- OSD HUD (Volume / Brightness Popup) --- */
+.osd-window {
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 1px solid #DCDFE6;
+    border-radius: 8px;
+    color: #2C2C2C;
+    padding: 18px 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.osd-window .level {
+    height: 6px;
+    border-radius: 3px;
+    background-color: #E2E4E8;
+    color: #E95420;
+}
+
+.osd-window .level-bar {
+    border-radius: 3px;
+    background-color: #E95420;
+}
+
+/* --- Tooltips --- */
+#Tooltip {
+    background-color: #2C2C2C;
+    color: #FFFFFF;
+    border: 1px solid #3E3E3E;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 8.5pt;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* --- Scrollbars in Cinnamon UI --- */
+StScrollBar {
+    padding: 2px;
+}
+
+StScrollView StScrollBar StButton#trough {
+    background-color: transparent;
+}
+
+StScrollView StScrollBar StButton#vhandle,
+StScrollView StScrollBar StButton#hhandle {
+    background-color: #D0D4DC;
+    border-radius: 3px;
+    margin: 1px;
+}
+
+StScrollView StScrollBar StButton#vhandle:hover,
+StScrollView StScrollBar StButton#hhandle:hover {
+    background-color: #E95420;
+}
+
+/* Checkbox & Radio Assets */
+.check-box StBin {
+    width: 16px;
+    height: 16px;
+    background-image: url("assets/checkbox-unchecked.svg");
+}
+
+.check-box:checked StBin {
+    background-image: url("assets/checkbox-checked.svg");
+}
+
+.radio-button StBin {
+    width: 16px;
+    height: 16px;
+    background-image: url("assets/radio-unchecked.svg");
+}
+
+.radio-button:checked StBin {
+    background-image: url("assets/radio-checked.svg");
+}
+
+.toggle-switch {
+    width: 38px;
+    height: 20px;
+    background-image: url("assets/switch-off.svg");
+}
+
+.toggle-switch:checked {
+    background-image: url("assets/switch-on.svg");
+}
+
+/* --- Cinnamon Screensaver & Lock Screen Shield --- */
+.screen-shield {
+    background-color: #F6F7FA;
+    color: #2C2C2C;
+}
+
+.screen-shield .screen-shield-background {
+    background-color: #F6F7FA;
+}
+
+.screen-shield .clock-widget .clock-time-label {
+    font-size: 64pt;
+    font-weight: 300;
+    color: #2C2C2C;
+}
+
+.screen-shield .clock-widget .clock-date-label {
+    font-size: 15pt;
+    font-weight: 500;
+    color: #555555;
+}
+
+.screen-shield .clock-widget .clock-message-label {
+    font-size: 12pt;
+    color: #777777;
+}
+
+.screen-shield .prompt-dialog {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDFE6;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+}
+
+.screen-shield .prompt-dialog .user-widget-label {
+    color: #2C2C2C;
+    font-size: 18pt;
+    font-weight: 600;
+}
+
+.screen-shield .prompt-dialog-password-entry {
+    background-color: #F5F6F8;
+    border: 1px solid #D0D4DC;
+    border-radius: 4px;
+    color: #2C2C2C;
+    caret-color: #E95420;
+    selection-background-color: #E95420;
+    selected-color: #FFFFFF;
+    padding: 8px 12px;
+}
+
+.screen-shield .prompt-dialog-password-entry:focus {
+    background-color: #FFFFFF;
+    border-color: #E95420;
+    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.2);
+}
+
+.screen-shield .icon-button {
+    background-color: #FFFFFF;
+    border: 1px solid #D0D4DC;
+    color: #2C2C2C;
+}
+
+.screen-shield .icon-button:hover {
+    background-color: #FDF2EE;
+    border-color: #E95420;
+    color: #E95420;
+}
+

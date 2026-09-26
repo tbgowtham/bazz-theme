@@ -1,0 +1,558 @@
+/* ===================================================================
+   Ubuntu Cinnamon Light Theme - GTK 3.0 Stylesheet
+   Color Palette:
+   - Primary Background: #FFFFFF / #F7F7FA
+   - Accent Color: #E95420 (Ubuntu Orange)
+   - Primary Text: #2C2C2C (Dark Charcoal)
+   - Secondary Text: #666666 (Medium Gray)
+   - Borders: #DCDFE6 / #E2E4E8
+   - Hover Background: #FDF2EE
+   - Selected / Active: #E95420 with #FFFFFF
+   =================================================================== */
+
+@define-color theme_base_color #FFFFFF;
+@define-color theme_bg_color #F7F7FA;
+@define-color theme_fg_color #2C2C2C;
+@define-color theme_text_color #2C2C2C;
+@define-color theme_selected_bg_color #E95420;
+@define-color theme_selected_fg_color #FFFFFF;
+@define-color placeholder_text_color #888888;
+@define-color borders #DCDFE6;
+@define-color unfocused_borders #E5E7EB;
+@define-color warning_color #F27835;
+@define-color error_color #E95420;
+@define-color success_color #38B44A;
+
+@define-color wm_title #2C2C2C;
+@define-color wm_unfocused_title #777777;
+@define-color wm_bg #F6F7FA;
+@define-color wm_bg_unfocused #FAFAFB;
+@define-color wm_border #DCDFE6;
+
+@define-color content_view_bg #FFFFFF;
+@define-color sidebar_bg #F5F6F8;
+@define-color headerbar_bg #F6F7FA;
+@define-color headerbar_fg #2C2C2C;
+
+@define-color accent_color #E95420;
+@define-color accent_bg_color #E95420;
+@define-color accent_fg_color #FFFFFF;
+
+/* --- Global Elements & Typography --- */
+* {
+    -GtkArrow-arrow-scaling: 0.6;
+    -GtkCheckButton-indicator-size: 16;
+    -GtkCheckMenuItem-indicator-size: 14;
+    -GtkMenu-horizontal-padding: 0;
+    -GtkMenu-vertical-padding: 4px;
+    -GtkScrolledWindow-overlay-scrolling: true;
+    -GtkTextView-error-underline-color: #E95420;
+    outline-color: rgba(233, 84, 32, 0.4);
+    outline-style: solid;
+    outline-offset: -2px;
+    outline-width: 2px;
+}
+
+window,
+dialog {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+.background {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+/* --- Header Bars & Window Titlebars --- */
+headerbar {
+    min-height: 40px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: @headerbar_bg;
+    color: @headerbar_fg;
+    border-bottom: 1px solid @borders;
+    box-shadow: none;
+}
+
+headerbar:backdrop {
+    background-color: @wm_bg_unfocused;
+    color: @wm_unfocused_title;
+    border-bottom: 1px solid @unfocused_borders;
+}
+
+headerbar .title {
+    font-weight: bold;
+    font-size: 10pt;
+    color: @wm_title;
+}
+
+headerbar:backdrop .title {
+    color: @wm_unfocused_title;
+}
+
+headerbar .subtitle {
+    font-size: 8.5pt;
+    color: #666666;
+}
+
+/* Window Titlebar Controls */
+headerbar button.titlebutton {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0;
+    margin: 2px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+headerbar button.titlebutton.close {
+    background-image: url("assets/titlebutton-close.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+headerbar:backdrop button.titlebutton.close {
+    background-image: url("assets/titlebutton-close-backdrop.svg");
+}
+
+headerbar button.titlebutton.minimize {
+    background-image: url("assets/titlebutton-min.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+headerbar button.titlebutton.maximize {
+    background-image: url("assets/titlebutton-max.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* --- Buttons --- */
+button {
+    min-height: 26px;
+    min-width: 28px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    border: 1px solid #D0D4DC;
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    transition: all 120ms ease-in-out;
+}
+
+button:hover {
+    background-color: #FDFDFD;
+    border-color: #B8BDC8;
+    color: #111111;
+}
+
+button:active,
+button:checked {
+    background-color: #F0F1F4;
+    border-color: #A0A5B2;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+button:disabled {
+    background-color: #F5F6F8;
+    border-color: #E2E4E8;
+    color: #A0A0A0;
+}
+
+/* Suggested Action (Ubuntu Orange Button) */
+button.suggested-action,
+button.default {
+    background-color: #E95420;
+    border: 1px solid #C74010;
+    color: #FFFFFF;
+}
+
+button.suggested-action:hover,
+button.default:hover {
+    background-color: #FF6332;
+    border-color: #E95420;
+    color: #FFFFFF;
+}
+
+button.suggested-action:active,
+button.default:active {
+    background-color: #C74010;
+    border-color: #AA3208;
+    color: #FFFFFF;
+}
+
+/* Destructive Action */
+button.destructive-action {
+    background-color: #D93829;
+    border: 1px solid #B8281B;
+    color: #FFFFFF;
+}
+
+button.destructive-action:hover {
+    background-color: #EB4A3B;
+}
+
+/* Flat Buttons */
+button.flat {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+button.flat:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+    border-color: transparent;
+}
+
+button.flat:active,
+button.flat:checked {
+    background-color: #FDECE5;
+    color: #E95420;
+}
+
+/* --- Text Fields & Inputs --- */
+entry {
+    min-height: 28px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #D0D4DC;
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    transition: all 120ms ease-in-out;
+}
+
+entry:focus {
+    border-color: #E95420;
+    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.22);
+}
+
+entry:disabled {
+    background-color: #F5F6F8;
+    border-color: #E2E4E8;
+    color: #A0A0A0;
+}
+
+entry selection {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+/* Search Entry */
+entry.search {
+    border-radius: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* --- Checkboxes & Radios --- */
+checkbutton check {
+    min-height: 16px;
+    min-width: 16px;
+    background-image: url("assets/checkbox-unchecked.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+}
+
+checkbutton check:hover {
+    background-image: url("assets/checkbox-unchecked-hover.svg");
+}
+
+checkbutton check:checked {
+    background-image: url("assets/checkbox-checked.svg");
+}
+
+checkbutton check:checked:hover {
+    background-image: url("assets/checkbox-checked-hover.svg");
+}
+
+radiobutton radio {
+    min-height: 16px;
+    min-width: 16px;
+    background-image: url("assets/radio-unchecked.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+}
+
+radiobutton radio:hover {
+    background-image: url("assets/radio-unchecked-hover.svg");
+}
+
+radiobutton radio:checked {
+    background-image: url("assets/radio-checked.svg");
+}
+
+radiobutton radio:checked:hover {
+    background-image: url("assets/radio-checked-hover.svg");
+}
+
+/* --- Switches --- */
+switch {
+    min-width: 38px;
+    min-height: 20px;
+    border-radius: 10px;
+    background-color: #E0E2E6;
+    border: 1px solid #D0D3D9;
+    transition: all 150ms ease-in-out;
+}
+
+switch:checked {
+    background-color: #E95420;
+    border-color: #C74010;
+}
+
+switch slider {
+    min-width: 16px;
+    min-height: 16px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    margin: 1px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+/* --- Sliders / Scales --- */
+scale trough {
+    min-height: 4px;
+    border-radius: 2px;
+    background-color: #E2E4E8;
+}
+
+scale highlight {
+    min-height: 4px;
+    border-radius: 2px;
+    background-color: #E95420;
+}
+
+scale slider {
+    min-width: 16px;
+    min-height: 16px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    border: 1.5px solid #E95420;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+scale slider:hover {
+    background-color: #FDF2EE;
+    border-color: #FF6332;
+}
+
+/* --- Scrollbars --- */
+scrollbar {
+    background-color: transparent;
+    transition: all 200ms ease;
+}
+
+scrollbar trough {
+    background-color: transparent;
+}
+
+scrollbar slider {
+    min-width: 6px;
+    min-height: 6px;
+    border-radius: 3px;
+    background-color: #C8CCD5;
+    margin: 2px;
+}
+
+scrollbar slider:hover {
+    background-color: #E95420;
+}
+
+/* --- Notebooks & Tabs --- */
+notebook {
+    background-color: @theme_base_color;
+}
+
+notebook > header {
+    background-color: #F5F6F8;
+    border-bottom: 1px solid @borders;
+}
+
+notebook > header > tabs > tab {
+    min-height: 28px;
+    padding: 6px 14px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #555555;
+    font-weight: 500;
+    background-color: transparent;
+    transition: all 120ms ease;
+}
+
+notebook > header > tabs > tab:hover {
+    color: #2C2C2C;
+    background-color: #FDF2EE;
+}
+
+notebook > header > tabs > tab:checked {
+    color: #E95420;
+    background-color: #FFFFFF;
+    border-bottom: 2px solid #E95420;
+    font-weight: 600;
+}
+
+/* --- Progress Bars --- */
+progressbar trough {
+    min-height: 6px;
+    border-radius: 3px;
+    background-color: #ECEEF2;
+}
+
+progressbar progress {
+    min-height: 6px;
+    border-radius: 3px;
+    background-color: #E95420;
+}
+
+/* --- Menus, Popovers & Context Menus --- */
+menubar {
+    background-color: #F6F7FA;
+    border-bottom: 1px solid #E2E4E8;
+    color: #2C2C2C;
+}
+
+menubar > menuitem {
+    min-height: 24px;
+    padding: 4px 8px;
+}
+
+menubar > menuitem:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+menu,
+.menu,
+popover {
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    border: 1px solid #DCDFE6;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    padding: 4px;
+}
+
+menuitem {
+    min-height: 24px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #2C2C2C;
+}
+
+menuitem:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+menuitem:active {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+menuitem separator {
+    min-height: 1px;
+    background-color: #EAECEF;
+    margin: 4px 2px;
+}
+
+/* --- Tooltips --- */
+tooltip {
+    background-color: #2C2C2C;
+    color: #FFFFFF;
+    border: 1px solid #3E3E3E;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 8.5pt;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+tooltip label {
+    color: #FFFFFF;
+}
+
+/* --- Views, Lists, Sidebars & Treeviews --- */
+view,
+treeview,
+list {
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+}
+
+view:selected,
+treeview:selected,
+row:selected {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+view:hover,
+row:hover {
+    background-color: #FDF2EE;
+}
+
+/* --- Nemo File Manager Styling --- */
+.nemo-window {
+    background-color: #FFFFFF;
+}
+
+.nemo-window .sidebar {
+    background-color: #F6F7F9;
+    border-right: 1px solid #E2E4E8;
+    color: #2C2C2C;
+}
+
+.nemo-window .sidebar row {
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+.nemo-window .sidebar row:hover {
+    background-color: #FDF2EE;
+    color: #E95420;
+}
+
+.nemo-window .sidebar row:selected {
+    background-color: #E95420;
+    color: #FFFFFF;
+}
+
+.nemo-window .nemo-window-pane {
+    background-color: #FFFFFF;
+}
+
+.nemo-window .toolbar {
+    background-color: #F6F7FA;
+    border-bottom: 1px solid #E2E4E8;
+    padding: 4px;
+}
+
+/* Nemo Desktop Canvas */
+.nemo-desktop.nemo-canvas-item {
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+.nemo-desktop.nemo-canvas-item:selected {
+    background-color: rgba(233, 84, 32, 0.35);
+    border: 1px solid #E95420;
+    border-radius: 4px;
+    color: #FFFFFF;
+}
+
+/* Pathbar Breadcrumbs */
+.nemo-window .path-bar button {
+    border-radius: 4px;
+    margin: 1px;
+}
+
+.nemo-window .path-bar button:checked {
+    background-color: #FDF2EE;
+    color: #E95420;
+    border-color: #FFA07A;
+    font-weight: bold;
+}
