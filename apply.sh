@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 # ===================================================================
-# Ubuntu Cinnamon macOS Elegance Edition Installer & Applicator
-# For Linux Mint Cinnamon & Debian/Ubuntu Cinnamon Desktops
+# Dracula-Slim Cyberpunk Cinnamon Edition Installer & Applicator
+# For Linux Mint Cinnamon & Debian/Ubuntu/Arch Cinnamon Desktops
 # ===================================================================
 
 set -e
 
 # Terminal Colors
-ORANGE='\033[38;2;233;84;32m'
+CYAN='\033[38;2;139;233;253m'
+PURPLE='\033[38;2;189;147;249m'
+PINK='\033[38;2;255;121;198m'
 BOLD='\033[1m'
 NC='\033[0m'
 GREEN='\033[0;32m'
@@ -16,18 +18,19 @@ GRAY='\033[0;90m'
 RED='\033[0;31m'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-THEME_NAME="Ubuntu-Cinnamon-White"
-ICON_THEME_NAME="Ubuntu-Cinnamon-Orange-Icons"
-BUTTON_LAYOUT="close,minimize,maximize:" # macOS Traffic Lights Default
+THEME_NAME="Dracula-Slim"
+ICON_THEME_NAME="Dessert-white"
+BUTTON_LAYOUT=":minimize,maximize,close" # Right-aligned traffic lights (Yellow, Green, Red)
 
 print_header() {
-    echo -e "${ORANGE}${BOLD}"
-    echo "  ██╗   ██╗██████╗ ██╗   ██╗███╗   ██╗████████╗██╗   ██╗"
-    echo "  ██║   ██║██╔══██╗██║   ██║████╗  ██║╚══██╔══╝██║   ██║"
-    echo "  ██║   ██║██████╔╝██║   ██║██╔██╗ ██║   ██║   ██║   ██║"
-    echo "  ██║   ██║██╔══██╗██║   ██║██║╚██╗██║   ██║   ██║   ██║"
-    echo "  ╚██████╔╝██████╔╝╚██████╔╝██║ ╚████║   ██║   ╚██████╔╝"
-    echo -e "   CINNAMON MACOS ELEGANCE EDITION  ${NC}${GRAY}(Ubuntu Orange #E95420)${NC}\n"
+    echo -e "${PURPLE}${BOLD}"
+    echo "  ██████╗ ██████╗  █████╗  ██████╗██╗   ██╗██╗      █████╗ "
+    echo "  ██╔══██╗██╔══██╗██╔══██╗██╔════╝██║   ██║██║     ██╔══██╗"
+    echo "  ██║  ██║██████╔╝███████║██║     ██║   ██║██║     ███████║"
+    echo "  ██║  ██║██╔══██╗██╔══██║██║     ██║   ██║██║     ██╔══██║"
+    echo "  ██████╔╝██║  ██║██║  ██║╚██████╗╚██████╔╝███████╗██║  ██║"
+    echo -e "  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝${NC}"
+    echo -e "   ${CYAN}CINNAMON DRACULA-SLIM CYBERPUNK EDITION${NC} ${PINK}(Dessert-white Icons)${NC}\n"
 }
 
 log_info() {
@@ -39,7 +42,7 @@ log_ok() {
 }
 
 log_warn() {
-    echo -e " ${ORANGE}[!]${NC} $1"
+    echo -e " ${PURPLE}[!]${NC} $1"
 }
 
 log_err() {
@@ -69,11 +72,11 @@ show_help() {
     echo -e "${BOLD}Usage:${NC} ./apply.sh [OPTION]"
     echo ""
     echo -e "${BOLD}Options:${NC}"
-    echo "  (no args)             Install & apply Cinnamon shell, GTK, macOS traffic lights, icons, and wallpaper"
+    echo "  (no args)             Install & apply Dracula-Slim Cinnamon shell, GTK, traffic lights, Dessert-white icons, and Cyberpunk Cockpit wallpaper"
+    echo "  --macos-layout        Apply theme with macOS left-aligned traffic lights (close,minimize,maximize:)"
     echo "  --traditional-layout  Apply theme with traditional right-aligned window buttons (:minimize,maximize,close)"
-    echo "  --macos-layout        Apply theme with macOS traffic light buttons on left (close,minimize,maximize:)"
     echo "  --all                 Install desktop theme + prompt for system GRUB & Slick-Greeter login theme"
-    echo "  --grub                Install and activate the matching GRUB theme (requires sudo)"
+    echo "  --grub                Install and activate matching GRUB theme (requires sudo)"
     echo "  --lightdm             Configure Slick Greeter (LightDM) login screen (requires sudo)"
     echo "  --restore             Restore default Linux Mint (Mint-Y) theme settings"
     echo "  --help, -h            Display this help dialog"
@@ -105,22 +108,30 @@ install_theme_files() {
 
     mkdir -p "$USER_THEMES" "$USER_LOCAL_THEMES" "$USER_ICONS" "$USER_LOCAL_ICONS" "$USER_BG"
 
-    # Copy Theme
-    rm -rf "$USER_THEMES/$THEME_NAME" "$USER_LOCAL_THEMES/$THEME_NAME"
-    cp -r "$SCRIPT_DIR/$THEME_NAME" "$USER_THEMES/"
-    cp -r "$SCRIPT_DIR/$THEME_NAME" "$USER_LOCAL_THEMES/"
-    log_ok "Desktop Theme ($THEME_NAME) installed to ~/.themes and ~/.local/share/themes"
+    # Copy Themes (Dracula-Slim & Ubuntu-Cinnamon-White)
+    for t in "Dracula-Slim" "Ubuntu-Cinnamon-White"; do
+        if [ -d "$SCRIPT_DIR/$t" ]; then
+            rm -rf "$USER_THEMES/$t" "$USER_LOCAL_THEMES/$t"
+            cp -r "$SCRIPT_DIR/$t" "$USER_THEMES/"
+            cp -r "$SCRIPT_DIR/$t" "$USER_LOCAL_THEMES/"
+            log_ok "Desktop Theme ($t) installed to ~/.themes and ~/.local/share/themes"
+        fi
+    done
 
-    # Copy Icons
-    rm -rf "$USER_ICONS/$ICON_THEME_NAME" "$USER_LOCAL_ICONS/$ICON_THEME_NAME"
-    cp -r "$SCRIPT_DIR/icons/$ICON_THEME_NAME" "$USER_ICONS/"
-    cp -r "$SCRIPT_DIR/icons/$ICON_THEME_NAME" "$USER_LOCAL_ICONS/"
-    log_ok "Icon Theme ($ICON_THEME_NAME) installed to ~/.icons and ~/.local/share/icons"
+    # Copy Icons (Dessert-white & Ubuntu-Cinnamon-Orange-Icons)
+    for ic in "Dessert-white" "Ubuntu-Cinnamon-Orange-Icons"; do
+        if [ -d "$SCRIPT_DIR/icons/$ic" ]; then
+            rm -rf "$USER_ICONS/$ic" "$USER_LOCAL_ICONS/$ic"
+            cp -r "$SCRIPT_DIR/icons/$ic" "$USER_ICONS/"
+            cp -r "$SCRIPT_DIR/icons/$ic" "$USER_LOCAL_ICONS/"
+            log_ok "Icon Theme ($ic) installed to ~/.icons and ~/.local/share/icons"
+        fi
+    done
 
     # Copy Wallpapers
     cp "$SCRIPT_DIR/wallpapers/"*.png "$USER_BG/" 2>/dev/null || true
     cp "$SCRIPT_DIR/wallpapers/"*.svg "$USER_BG/" 2>/dev/null || true
-    log_ok "macOS-Ubuntu wallpapers installed to $USER_BG."
+    log_ok "Cyberpunk Cockpit & Dracula wallpapers installed to $USER_BG."
 }
 
 apply_cinnamon_settings() {
@@ -137,18 +148,18 @@ apply_cinnamon_settings() {
     set_setting org.cinnamon.desktop.wm.preferences theme "$THEME_NAME" "Cinnamon Window Decorations"
     set_setting org.gnome.desktop.wm.preferences theme "$THEME_NAME" "GNOME Window Decorations"
 
-    # 4. macOS Traffic Lights Button Layout
+    # 4. Traffic Lights Button Layout (Right-aligned Yellow, Green, Red)
     set_setting org.cinnamon.desktop.wm.preferences button-layout "$BUTTON_LAYOUT" "Window Controls Layout"
     set_setting org.gnome.desktop.wm.preferences button-layout "$BUTTON_LAYOUT" "GNOME Controls Layout"
 
-    # 5. Icon Theme
+    # 5. Icon Theme (Dessert-white)
     set_setting org.cinnamon.desktop.interface icon-theme "$ICON_THEME_NAME" "Cinnamon Icons"
     set_setting org.gnome.desktop.interface icon-theme "$ICON_THEME_NAME" "GNOME Icons"
 
-    # 6. Desktop Wallpaper (Default: macOS-style Ubuntu Wave)
-    WALLPAPER_PATH="$HOME/.local/share/backgrounds/ubuntu-cinnamon-macos-wave.png"
+    # 6. Desktop Wallpaper (Default: Cyberpunk Cockpit)
+    WALLPAPER_PATH="$HOME/.local/share/backgrounds/dracula-cyberpunk-cockpit.png"
     if [ ! -f "$WALLPAPER_PATH" ]; then
-        WALLPAPER_PATH="$SCRIPT_DIR/wallpapers/ubuntu-cinnamon-macos-wave.png"
+        WALLPAPER_PATH="$SCRIPT_DIR/wallpapers/dracula-cyberpunk-cockpit.png"
     fi
     if [ -f "$WALLPAPER_PATH" ]; then
         set_setting org.cinnamon.desktop.background picture-uri "file://$WALLPAPER_PATH" "Cinnamon Wallpaper"
@@ -157,7 +168,7 @@ apply_cinnamon_settings() {
         set_setting org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER_PATH" "GNOME Dark Wallpaper"
     fi
 
-    # 7. Typography (Prefer Ubuntu or SF Pro / Cantarell if installed)
+    # 7. Typography
     if command -v fc-list >/dev/null 2>&1 && fc-list : family | grep -iq "Ubuntu"; then
         set_setting org.cinnamon.desktop.interface font-name 'Ubuntu 10' "Interface Font"
         set_setting org.cinnamon.desktop.wm.preferences titlebar-font 'Ubuntu Bold 10' "Titlebar Font"
@@ -180,7 +191,7 @@ reload_cinnamon() {
 }
 
 install_grub() {
-    log_info "Configuring GRUB Theme (1366x867)..."
+    log_info "Configuring GRUB Theme..."
     if [ "$EUID" -ne 0 ]; then
         log_warn "GRUB installation requires administrative privileges. Running with sudo..."
         sudo bash "$SCRIPT_DIR/apply.sh" --grub-internal
@@ -190,16 +201,16 @@ install_grub() {
 }
 
 install_grub_internal() {
-    GRUB_DEST="/boot/grub/themes/ubuntu-cinnamon"
+    GRUB_DEST="/boot/grub/themes/dracula-cinnamon"
     mkdir -p "$GRUB_DEST"
     cp -r "$SCRIPT_DIR/grub/ubuntu-cinnamon/"* "$GRUB_DEST/"
 
     if [ -f "/etc/default/grub" ]; then
         cp /etc/default/grub "/etc/default/grub.bak.$(date +%s)"
         if grep -q "^GRUB_THEME=" /etc/default/grub; then
-            sed -i 's|^GRUB_THEME=.*|GRUB_THEME="/boot/grub/themes/ubuntu-cinnamon/theme.txt"|' /etc/default/grub
+            sed -i 's|^GRUB_THEME=.*|GRUB_THEME="/boot/grub/themes/dracula-cinnamon/theme.txt"|' /etc/default/grub
         else
-            echo 'GRUB_THEME="/boot/grub/themes/ubuntu-cinnamon/theme.txt"' >> /etc/default/grub
+            echo 'GRUB_THEME="/boot/grub/themes/dracula-cinnamon/theme.txt"' >> /etc/default/grub
         fi
 
         if command -v update-grub >/dev/null 2>&1; then
@@ -227,7 +238,7 @@ install_lightdm_internal() {
     mkdir -p /usr/share/themes /usr/share/icons /usr/share/backgrounds
     cp -r "$SCRIPT_DIR/$THEME_NAME" /usr/share/themes/
     cp -r "$SCRIPT_DIR/icons/$ICON_THEME_NAME" /usr/share/icons/
-    cp "$SCRIPT_DIR/wallpapers/ubuntu-cinnamon-macos-wave.png" /usr/share/backgrounds/
+    cp "$SCRIPT_DIR/wallpapers/dracula-cyberpunk-cockpit.png" /usr/share/backgrounds/
 
     if [ -d "/etc/lightdm" ]; then
         cp "$SCRIPT_DIR/login-lockscreen/slick-greeter.conf" /etc/lightdm/slick-greeter.conf
@@ -296,9 +307,9 @@ case "$1" in
         apply_cinnamon_settings
         reload_cinnamon
         echo ""
-        log_ok "${BOLD}Ubuntu Cinnamon macOS Elegance Theme successfully applied!${NC}"
-        echo -e "${GRAY}Window buttons set to macOS traffic lights (${BUTTON_LAYOUT})${NC}"
-        echo -e "${GRAY}To use traditional right-aligned buttons, run: ${BOLD}./apply.sh --traditional-layout${NC}"
+        log_ok "${BOLD}Dracula-Slim Cyberpunk Theme successfully applied!${NC}"
+        echo -e "${GRAY}Window buttons set to traffic lights (${BUTTON_LAYOUT})${NC}"
+        echo -e "${GRAY}To use left-aligned macOS style buttons, run: ${BOLD}./apply.sh --macos-layout${NC}"
         echo -e "${GRAY}To apply the matching GRUB theme, run: ${BOLD}./apply.sh --grub${NC}"
         echo -e "${GRAY}To restore Mint defaults, run: ${BOLD}./apply.sh --restore${NC}\n"
         ;;

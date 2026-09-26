@@ -1,81 +1,112 @@
-# Ubuntu-Cinnamon-White: macOS Elegance Edition 🍎🍊
+# Dracula-Slim: Cyberpunk Cockpit Cinnamon Edition 🌌🎮
 
-> A complete, professional Ubuntu-inspired desktop theme crafted natively for the **Linux Cinnamon** desktop environment (Linux Mint, Debian, and Ubuntu Cinnamon) infused with **macOS-level visual refinement**. 
-
----
-
-## ✨ macOS Elegance Features
-
-1. **Traffic Light Window Controls**:
-   - Signature **macOS Traffic Lights** (Coral Red Close `#FF5F56`, Amber Yellow Minimize `#FEBC2E`, Emerald Green Maximize `#28C840`) with clean vector glyphs on hover.
-   - Default left-aligned window button layout (`close,minimize,maximize:`), with a switch for traditional right-aligned buttons.
-   - Fully supported in both GTK 3/4 Headerbars and Metacity/Muffin Server-Side Decorations.
-
-2. **macOS Top Menu Bar & Dock Aesthetic**:
-   - Sleek, semi-translucent 36px Cinnamon panel with subtle bottom separator.
-   - Window list items styled with macOS Dock-inspired active application indicators (pill/dot highlight) and smooth rounded hover states (`border-radius: 6px`).
-
-3. **Spotlight / Launchpad Application Menu**:
-   - Rounded floating card (`border-radius: 12px`).
-   - macOS Spotlight-style search pill (`border-radius: 20px`) with subtle background.
-   - Sidebar categories with smooth rounded selection pills (`border-radius: 8px`).
-
-4. **Nemo (macOS Finder Elegance)**:
-   - macOS Finder sidebar layout with categorized places and rounded hover/selection pills.
-   - Clean breadcrumb path bar resembling Finder's bottom path pill.
-
-5. **Notification Cards**:
-   - macOS Notification Center style cards with 12px rounded corners and smooth pill action buttons.
-
-6. **Floating Square OSD HUD**:
-   - Volume and brightness popups styled like modern macOS Big Sur / Sonoma floating square cards (`border-radius: 16px`, smooth rounded level bar).
-
-7. **macOS Wave Wallpaper**:
-   - Sweeping, organic bezier ribbon waves with dimensional depth, combining velvety slate, deep aubergine, and glowing Ubuntu Orange ribbons with specular glass edges.
-   - 0% glare, 100% desktop icon legibility.
+> A complete, professional dark cyberpunk desktop theme suite built natively for **Linux Cinnamon** (Linux Mint, Debian, Ubuntu Cinnamon, and Arch Linux), faithfully recreated from the reference setup featuring the **Dracula-slim** GTK theme, **Dessert-white** minimalist icons, and the iconic futuristic cyberpunk mecha cockpit aesthetic.
 
 ---
 
-## 🎨 Color System (Warm Silk & Slate)
+## 📸 Reference Setup Replicated 1:1
 
-| Element | Color Hex / Tone | Role |
+This theme suite faithfully reproduces the aesthetic from the reference screenshot:
+- **Base Style**: `Dracula-slim [GTK2/3/4]` — sleek dark frosted acrylic glass (`#1E1F29` / `#282A36`).
+- **Icons**: `Dessert-white [GTK2/3]` — clean, minimalist frosted white line-art and glyphs.
+- **Window Decorations**: Translucent dark headers with right-aligned circular traffic light controls:
+  - 🟡 **Minimize**: Dracula Yellow (`#F1FA8C`)
+  - 🟢 **Maximize**: Dracula Green (`#50FA7B`)
+  - 🔴 **Close**: Dracula Red (`#FF5555`)
+- **Shell / Panel**: Minimalist translucent slim top bar (`rgba(30, 31, 41, 0.90)`) with glowing cyan/pink status indicators.
+- **Wallpaper Artwork**: The cyberpunk anime pilot with short pink hair and glowing headphones inside a high-tech mecha cockpit with neon cyan/magenta holographic circular HUD displays and a panoramic city skyline at night.
+
+---
+
+## 🎨 Color System (Dracula Cyberpunk Spec)
+
+| Element | Hex / RGBA | Role |
 | :--- | :--- | :--- |
-| **Window Background** | `#EFECE8` (Warm Silk Stone) | Window body, dialogs, preferences |
-| **Base Surface / Views** | `#FAF8F5` (Soft Warm Silk / Ivory) | Nemo file grid, text fields, cards |
-| **Panel Surface** | `rgba(235, 232, 227, 0.96)` | Sleek macOS menu bar / panel |
-| **Primary Accent** | `#E95420` (Ubuntu Orange) | Focused states, active tabs, buttons, highlights |
-| **Window Controls** | Red `#FF5F56`, Yellow `#FEBC2E`, Green `#28C840` | macOS Traffic Light buttons |
-| **Primary Text** | `#242220` (Deep Dark Charcoal) | High-contrast, sharp, comfortable readability |
-| **Secondary Text** | `#635E58` (Muted Warm Slate) | Subtitles, captions, and muted labels |
-| **Borders & Dividers**| `#D2CCC4` / `rgba(0, 0, 0, 0.12)` | Subtle 1px warm dividers |
+| **Window Background** | `#1E1F29` / `rgba(30, 31, 41, 0.92)` | Window base, translucent glass, terminal background |
+| **Cards & Surfaces** | `#282A36` | Sidebar, menu boxes, content views, headerbars |
+| **Hover & Focus Surfaces** | `#343746` / `#44475A` | Hover states, active buttons, selection rows |
+| **Primary Accent (Cyan)** | `#8BE9FD` | Focus rings, text highlights, active links, HUD radar |
+| **Secondary Accent (Pink)** | `#FF79C6` | Notification badges, hair highlights, special indicators |
+| **Selection Accent (Purple)** | `#BD93F9` | Active buttons, category selections, slider bars |
+| **Traffic Lights (Close)** | `#FF5555` | Window close circular button |
+| **Traffic Lights (Min)** | `#F1FA8C` | Window minimize circular button |
+| **Traffic Lights (Max)** | `#50FA7B` | Window maximize circular button |
+| **Primary Text** | `#F8F8F2` | Crisp high-contrast white text |
+| **Comment / Muted Text** | `#6272A4` | Subtitles, pathbars, inactive status text |
+| **Borders & Dividers** | `#44475A` / `rgba(255, 255, 255, 0.08)` | 1px subtle clean dividers |
 
 ---
 
-## 🚀 One-Click Theme Application
+## 📁 Repository Structure
+
+```text
+theme/
+├── Dracula-Slim/                     # Primary theme folder (Reference GTK/Cinnamon theme)
+│   ├── cinnamon/                    # Cinnamon Desktop Shell (Panel, Menus, Applets)
+│   ├── gtk-2.0/                     # GTK 2.0 configuration (gtkrc)
+│   ├── gtk-3.0/                     # GTK 3.0 CSS & traffic light vector assets
+│   ├── gtk-4.0/                     # GTK 4.0 CSS & traffic light vector assets
+│   ├── metacity-1/                  # Window manager decorations (metacity-theme-3.xml)
+│   └── index.theme                  # Theme descriptor
+├── Ubuntu-Cinnamon-White/           # Updated matching theme alias for compatibility
+├── icons/
+│   ├── Dessert-white/               # Minimalist white icon theme matching reference
+│   └── Ubuntu-Cinnamon-Orange-Icons # Legacy icon pack
+├── wallpapers/
+│   ├── dracula-cyberpunk-cockpit.png        # Master 1080p Cockpit Wallpaper
+│   ├── dracula-cyberpunk-cockpit-4k.png     # Master 4K Ultra-HD Cockpit Wallpaper
+│   ├── dracula-cyberpunk-cockpit-1366x768.png # Laptop resolution
+│   ├── dracula-cockpit-replica.png          # Exact 1:1 Instagram post replica
+│   ├── dracula-avatar-hd.png                # Avatar crop for kitty/fastfetch
+│   └── dracula-avatar-replica.png           # 1:1 avatar crop from reference
+├── grub/
+│   └── ubuntu-cinnamon/             # Matching GRUB bootloader theme
+├── login-lockscreen/
+│   └── slick-greeter.conf           # LightDM Slick-Greeter login configuration
+├── tools/                           # Asset generation utilities
+├── reference_desktop.jpg            # Original Instagram reference screenshot
+└── apply.sh                         # Self-contained installer script for target machines
+```
+
+---
+
+## 🛠️ Usage & Installation
+
+*(Note: Theme files are self-contained in this directory and are not automatically applied to the host development environment.)*
+
+When you wish to apply the theme to a target Linux machine running Cinnamon:
 
 ```bash
-cd /home/MR_Gray/muteX/theme
+cd /path/to/theme
 ./apply.sh
 ```
 
-### Options:
-- **Default (macOS Left-Aligned Traffic Lights)**:
+### Script Flags:
+- **Default (Right-aligned traffic lights `:minimize,maximize,close`)**:
   ```bash
   ./apply.sh
   ```
-- **Traditional Right-Aligned Window Buttons**:
+- **macOS Left-aligned traffic lights (`close,minimize,maximize:`)**:
   ```bash
-  ./apply.sh --traditional-layout
+  ./apply.sh --macos-layout
   ```
-- **Full System Setup (Desktop + GRUB + Login Screen)**:
+- **Full System Installation (Desktop + GRUB + Login screen)**:
   ```bash
   ./apply.sh --all
-  ```
-- **Apply GRUB Theme Only (1366×867)**:
-  ```bash
-  ./apply.sh --grub
   ```
 - **Restore Default Linux Mint Settings (`Mint-Y`)**:
   ```bash
   ./apply.sh --restore
   ```
+
+---
+
+## 💻 Terminal / Fastfetch Setup (Kitty & Neofetch)
+
+To replicate the exact terminal presentation seen in the reference screenshot:
+1. Use `kitty` or your preferred terminal with Dracula color palette.
+2. Set terminal background opacity to `0.85` (`background_opacity 0.85`).
+3. For fastfetch/neofetch, use the provided avatar:
+   ```bash
+   fastfetch --logo ~/path/to/theme/wallpapers/dracula-avatar-hd.png --logo-type kitty
+   ```

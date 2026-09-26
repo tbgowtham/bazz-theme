@@ -1,59 +1,102 @@
 /* ===================================================================
-   Ubuntu Cinnamon macOS Elegance Edition - GTK 4.0 Stylesheet
-   Designed with macOS traffic lights, rounded buttons, and Finder aesthetic.
+   Dracula-Slim Cyberpunk Edition - GTK 3.0 Stylesheet
+   Designed with traffic lights (Yellow, Green, Red), translucent glass,
+   Nemo dark sidebar, and neon Dracula cyberpunk accents (#8BE9FD, #BD93F9)
    =================================================================== */
 
-@define-color accent_color #E95420;
-@define-color accent_bg_color #E95420;
-@define-color accent_fg_color #FFFFFF;
+@define-color theme_base_color #282A36;
+@define-color theme_bg_color #1E1F29;
+@define-color theme_fg_color #F8F8F2;
+@define-color theme_text_color #F8F8F2;
+@define-color theme_selected_bg_color #BD93F9;
+@define-color theme_selected_fg_color #282A36;
+@define-color placeholder_text_color #6272A4;
+@define-color borders #44475A;
+@define-color unfocused_borders #282A36;
+@define-color warning_color #F1FA8C;
+@define-color error_color #FF5555;
+@define-color success_color #50FA7B;
 
-@define-color window_bg_color #EFECE8;
-@define-color window_fg_color #242220;
+@define-color wm_title #F8F8F2;
+@define-color wm_unfocused_title #6272A4;
+@define-color wm_bg #1E1F29;
+@define-color wm_bg_unfocused #21222C;
+@define-color wm_border #44475A;
 
-@define-color view_bg_color #FAF8F5;
-@define-color view_fg_color #242220;
+@define-color content_view_bg #282A36;
+@define-color sidebar_bg #21222C;
+@define-color headerbar_bg #1E1F29;
+@define-color headerbar_fg #F8F8F2;
 
-@define-color headerbar_bg_color #E8E4DF;
-@define-color headerbar_fg_color #242220;
-@define-color headerbar_border_color #D2CCC4;
-@define-color headerbar_backdrop_color #EEEBE6;
+@define-color accent_color #8BE9FD;
+@define-color accent_bg_color #8BE9FD;
+@define-color accent_fg_color #282A36;
 
-@define-color card_bg_color #FAF8F5;
-@define-color card_fg_color #242220;
-@define-color card_border_color #D2CCC4;
-
-@define-color popover_bg_color #FAF8F6;
-@define-color popover_fg_color #242220;
-
-@define-color borders #D2CCC4;
-@define-color unfocused_borders #DDD8D0;
-
-/* Window & View Defaults */
-window {
-    background-color: @window_bg_color;
-    color: @window_fg_color;
+/* --- Global Elements & Typography --- */
+* {
+    -GtkArrow-arrow-scaling: 0.6;
+    -GtkCheckButton-indicator-size: 16;
+    -GtkCheckMenuItem-indicator-size: 14;
+    -GtkScrolledWindow-overlay-scrolling: true;
+    -GtkTextView-error-underline-color: #FF5555;
+    outline-color: rgba(139, 233, 253, 0.4);
+    outline-style: solid;
+    outline-offset: -2px;
+    outline-width: 2px;
 }
 
+window,
+dialog {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+.background {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+/* --- Header Bars & Window Titlebars --- */
 headerbar {
-    background-color: @headerbar_bg_color;
-    color: @headerbar_fg_color;
-    border-bottom: 1px solid @headerbar_border_color;
     min-height: 38px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba(30, 31, 41, 0.95);
+    color: @headerbar_fg;
+    border-bottom: 1px solid @borders;
+    box-shadow: none;
 }
 
 headerbar:backdrop {
-    background-color: @headerbar_backdrop_color;
-    color: #7A756F;
+    background-color: @wm_bg_unfocused;
+    color: @wm_unfocused_title;
+    border-bottom: 1px solid @unfocused_borders;
 }
 
-/* macOS Traffic Light Buttons */
+headerbar .title {
+    font-weight: 600;
+    font-size: 9.5pt;
+    color: @wm_title;
+}
+
+headerbar:backdrop .title {
+    color: @wm_unfocused_title;
+}
+
+headerbar .subtitle {
+    font-size: 8pt;
+    color: #6272A4;
+}
+
+/* Window Titlebar Controls (Dracula Traffic Lights) */
 headerbar button.titlebutton {
     min-width: 14px;
     min-height: 14px;
-    margin: 0 4px;
     padding: 0;
+    margin: 0 4px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
 }
 
 headerbar button.titlebutton.close {
@@ -98,101 +141,326 @@ headerbar:backdrop button.titlebutton.maximize {
     background-image: url("assets/titlebutton-max-backdrop.svg");
 }
 
-/* Buttons (macOS Rounded Push Buttons) */
+/* --- Buttons --- */
 button {
+    min-height: 24px;
+    min-width: 24px;
+    padding: 4px 12px;
     border-radius: 6px;
-    border: 1px solid #CCC6BE;
-    background-color: #F5F3EF;
-    color: #242220;
-    padding: 5px 14px;
     font-weight: 500;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-    transition: all 120ms ease;
+    border: 1px solid #44475A;
+    background-color: #343746;
+    color: #F8F8F2;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.20);
+    transition: all 120ms ease-in-out;
 }
 
 button:hover {
-    background-color: #FAF8F5;
-    border-color: #B5AFA6;
-    color: #111111;
+    background-color: #44475A;
+    border-color: #8BE9FD;
+    color: #8BE9FD;
 }
 
 button:active,
 button:checked {
-    background-color: #E4DFD8;
-    border-color: #9E988F;
+    background-color: #BD93F9;
+    border-color: #BD93F9;
+    color: #1E1F29;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-button.suggested-action {
-    background-color: #E95420;
-    border-color: #C74010;
+button:disabled {
+    background-color: #282A36;
+    border-color: #343746;
+    color: #6272A4;
+    box-shadow: none;
+}
+
+/* Suggested Action (Cyberpunk Purple / Cyan) */
+button.suggested-action,
+button.default {
+    background-color: #BD93F9;
+    border: 1px solid #A478E8;
+    color: #1E1F29;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(189, 147, 249, 0.35);
+}
+
+button.suggested-action:hover,
+button.default:hover {
+    background-color: #CBA6FA;
+    border-color: #BD93F9;
+    color: #1E1F29;
+}
+
+button.suggested-action:active,
+button.default:active {
+    background-color: #A478E8;
+    border-color: #9260DF;
+    color: #1E1F29;
+}
+
+/* Destructive Action */
+button.destructive-action {
+    background-color: #FF5555;
+    border: 1px solid #E04040;
     color: #FFFFFF;
 }
 
-button.suggested-action:hover {
-    background-color: #FF6332;
+button.destructive-action:hover {
+    background-color: #FF6E6E;
 }
 
-button.suggested-action:active {
-    background-color: #C74010;
+/* Flat Buttons */
+button.flat {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
 }
 
-/* Entries */
+button.flat:hover {
+    background-color: rgba(68, 71, 90, 0.50);
+    color: #8BE9FD;
+    border-color: transparent;
+}
+
+button.flat:active,
+button.flat:checked {
+    background-color: rgba(189, 147, 249, 0.25);
+    color: #BD93F9;
+}
+
+/* --- Text Fields & Inputs --- */
 entry {
-    background-color: #FAF8F5;
-    border: 1px solid #CCC6BE;
+    min-height: 28px;
+    padding: 4px 10px;
     border-radius: 6px;
-    color: #242220;
-    padding: 6px 12px;
+    border: 1px solid #44475A;
+    background-color: #1E1F29;
+    color: #F8F8F2;
+    transition: all 120ms ease-in-out;
 }
 
-entry:focus-within {
-    border-color: #E95420;
-    background-color: #FFFFFF;
-    outline: 2px solid rgba(233, 84, 32, 0.25);
+entry:focus {
+    border-color: #8BE9FD;
+    background-color: #21222C;
+    box-shadow: 0 0 0 2px rgba(139, 233, 253, 0.25);
 }
 
-/* Switches */
+entry:disabled {
+    background-color: #282A36;
+    border-color: #343746;
+    color: #6272A4;
+}
+
+/* --- Nemo File Manager Styling --- */
+.nemo-window {
+    background-color: @theme_bg_color;
+}
+
+.nemo-window .sidebar {
+    background-color: @sidebar_bg;
+    border-right: 1px solid @borders;
+}
+
+.nemo-window .sidebar treeview {
+    background-color: @sidebar_bg;
+    color: #F8F8F2;
+}
+
+.nemo-window .sidebar treeview:hover {
+    color: #8BE9FD;
+}
+
+.nemo-window .sidebar treeview:selected {
+    background-color: rgba(189, 147, 249, 0.25);
+    color: #8BE9FD;
+    font-weight: 600;
+}
+
+.nemo-window .nemo-places-treeview {
+    padding: 4px;
+}
+
+.nemo-window notebook {
+    background-color: @content_view_bg;
+}
+
+.nemo-window .view {
+    background-color: @content_view_bg;
+    color: #F8F8F2;
+}
+
+.nemo-window .view:selected {
+    background-color: #44475A;
+    color: #8BE9FD;
+    border-radius: 6px;
+}
+
+/* Nemo Pathbar Pills */
+.nemo-pathbar button {
+    margin: 2px;
+    border-radius: 6px;
+    background-color: #343746;
+    border: 1px solid #44475A;
+    color: #F8F8F2;
+}
+
+.nemo-pathbar button:checked {
+    background-color: #BD93F9;
+    color: #1E1F29;
+    font-weight: bold;
+}
+
+/* --- Lists, Trees, & Rows --- */
+list,
+treeview {
+    background-color: @content_view_bg;
+    color: @theme_fg_color;
+}
+
+row {
+    padding: 4px 8px;
+    transition: background-color 100ms;
+}
+
+row:hover {
+    background-color: rgba(68, 71, 90, 0.40);
+    color: #8BE9FD;
+}
+
+row:selected {
+    background-color: #44475A;
+    color: #FFFFFF;
+}
+
+/* --- Tabs & Notebooks --- */
+notebook > header {
+    background-color: #1E1F29;
+    border-bottom: 1px solid @borders;
+}
+
+notebook > header > tabs > tab {
+    padding: 6px 16px;
+    border-radius: 6px 6px 0 0;
+    color: #6272A4;
+    border: 1px solid transparent;
+    transition: all 120ms;
+}
+
+notebook > header > tabs > tab:hover {
+    color: #8BE9FD;
+}
+
+notebook > header > tabs > tab:checked {
+    background-color: @content_view_bg;
+    color: #F8F8F2;
+    border-bottom: 2px solid #8BE9FD;
+    font-weight: 600;
+}
+
+/* --- Scrollbars --- */
+scrollbar {
+    background-color: transparent;
+    transition: all 200ms;
+}
+
+scrollbar trough {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    min-width: 6px;
+    min-height: 6px;
+    border-radius: 4px;
+    background-color: rgba(98, 114, 164, 0.50);
+    border: none;
+    margin: 2px;
+}
+
+scrollbar slider:hover {
+    background-color: #8BE9FD;
+}
+
+scrollbar slider:active {
+    background-color: #BD93F9;
+}
+
+/* --- Menus, Popovers, & Tooltips --- */
+menu,
+.menu,
+popover {
+    background-color: rgba(40, 42, 54, 0.98);
+    color: #F8F8F2;
+    border-radius: 8px;
+    border: 1px solid #44475A;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
+    padding: 4px;
+}
+
+menuitem {
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+menuitem:hover {
+    background-color: #44475A;
+    color: #8BE9FD;
+}
+
+tooltip {
+    background-color: rgba(30, 31, 41, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    color: #F8F8F2;
+    padding: 4px 8px;
+}
+
+/* --- Switches, Checkboxes, & Radios --- */
 switch {
-    background-color: #D8D3CC;
-    border-radius: 12px;
+    background-image: url("assets/switch-off.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
 }
 
 switch:checked {
-    background-color: #E95420;
+    background-image: url("assets/switch-on.svg");
 }
 
-/* Sliders */
-scale trough {
-    background-color: #DDD8D0;
-    border-radius: 3px;
+checkbutton check {
+    background-image: url("assets/checkbox-unchecked.svg");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-scale highlight {
-    background-color: #E95420;
-    border-radius: 3px;
+checkbutton check:hover {
+    background-image: url("assets/checkbox-unchecked-hover.svg");
 }
 
-scale slider {
-    background-color: #FAF8F5;
-    border: 1.5px solid #E95420;
-    border-radius: 50%;
-}
-
-/* Checkboxes & Radios */
 checkbutton check:checked {
-    background-color: #E95420;
-    border-color: #C74010;
-    color: #FFFFFF;
+    background-image: url("assets/checkbox-checked.svg");
 }
 
-/* Lists and selections */
-listview row:selected,
-list row:selected {
-    background-color: #E95420;
-    color: #FFFFFF;
+checkbutton check:checked:hover {
+    background-image: url("assets/checkbox-checked-hover.svg");
 }
 
-listview row:hover,
-list row:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+radiobutton radio {
+    background-image: url("assets/radio-unchecked.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+radiobutton radio:hover {
+    background-image: url("assets/radio-unchecked-hover.svg");
+}
+
+radiobutton radio:checked {
+    background-image: url("assets/radio-checked.svg");
+}
+
+radiobutton radio:checked:hover {
+    background-image: url("assets/radio-checked-hover.svg");
 }

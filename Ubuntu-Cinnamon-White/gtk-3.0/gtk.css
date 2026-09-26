@@ -1,36 +1,36 @@
 /* ===================================================================
-   Ubuntu Cinnamon macOS Elegance Edition - GTK 3.0 Stylesheet
-   Designed with macOS traffic lights, Finder sidebar aesthetic,
-   smooth rounded push buttons, and Ubuntu Orange (#E95420) accents.
+   Dracula-Slim Cyberpunk Edition - GTK 3.0 Stylesheet
+   Designed with traffic lights (Yellow, Green, Red), translucent glass,
+   Nemo dark sidebar, and neon Dracula cyberpunk accents (#8BE9FD, #BD93F9)
    =================================================================== */
 
-@define-color theme_base_color #FAF8F5;
-@define-color theme_bg_color #EFECE8;
-@define-color theme_fg_color #242220;
-@define-color theme_text_color #242220;
-@define-color theme_selected_bg_color #E95420;
-@define-color theme_selected_fg_color #FFFFFF;
-@define-color placeholder_text_color #8A847C;
-@define-color borders #D2CCC4;
-@define-color unfocused_borders #DDD8D0;
-@define-color warning_color #F27835;
-@define-color error_color #E95420;
-@define-color success_color #38B44A;
+@define-color theme_base_color #282A36;
+@define-color theme_bg_color #1E1F29;
+@define-color theme_fg_color #F8F8F2;
+@define-color theme_text_color #F8F8F2;
+@define-color theme_selected_bg_color #BD93F9;
+@define-color theme_selected_fg_color #282A36;
+@define-color placeholder_text_color #6272A4;
+@define-color borders #44475A;
+@define-color unfocused_borders #282A36;
+@define-color warning_color #F1FA8C;
+@define-color error_color #FF5555;
+@define-color success_color #50FA7B;
 
-@define-color wm_title #242220;
-@define-color wm_unfocused_title #7A756F;
-@define-color wm_bg #E8E4DF;
-@define-color wm_bg_unfocused #EEEBE6;
-@define-color wm_border #CBC6BD;
+@define-color wm_title #F8F8F2;
+@define-color wm_unfocused_title #6272A4;
+@define-color wm_bg #1E1F29;
+@define-color wm_bg_unfocused #21222C;
+@define-color wm_border #44475A;
 
-@define-color content_view_bg #F8F6F3;
-@define-color sidebar_bg #EAE6E1;
-@define-color headerbar_bg #E8E4DF;
-@define-color headerbar_fg #242220;
+@define-color content_view_bg #282A36;
+@define-color sidebar_bg #21222C;
+@define-color headerbar_bg #1E1F29;
+@define-color headerbar_fg #F8F8F2;
 
-@define-color accent_color #E95420;
-@define-color accent_bg_color #E95420;
-@define-color accent_fg_color #FFFFFF;
+@define-color accent_color #8BE9FD;
+@define-color accent_bg_color #8BE9FD;
+@define-color accent_fg_color #282A36;
 
 /* --- Global Elements & Typography --- */
 * {
@@ -38,8 +38,8 @@
     -GtkCheckButton-indicator-size: 16;
     -GtkCheckMenuItem-indicator-size: 14;
     -GtkScrolledWindow-overlay-scrolling: true;
-    -GtkTextView-error-underline-color: #E95420;
-    outline-color: rgba(233, 84, 32, 0.4);
+    -GtkTextView-error-underline-color: #FF5555;
+    outline-color: rgba(139, 233, 253, 0.4);
     outline-style: solid;
     outline-offset: -2px;
     outline-width: 2px;
@@ -56,12 +56,12 @@ dialog {
     color: @theme_fg_color;
 }
 
-/* --- Header Bars & Window Titlebars (macOS Style) --- */
+/* --- Header Bars & Window Titlebars --- */
 headerbar {
     min-height: 38px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: @headerbar_bg;
+    background-color: rgba(30, 31, 41, 0.95);
     color: @headerbar_fg;
     border-bottom: 1px solid @borders;
     box-shadow: none;
@@ -85,10 +85,10 @@ headerbar:backdrop .title {
 
 headerbar .subtitle {
     font-size: 8pt;
-    color: #635E58;
+    color: #6272A4;
 }
 
-/* Window Titlebar Controls (macOS Traffic Lights) */
+/* Window Titlebar Controls (Dracula Traffic Lights) */
 headerbar button.titlebutton {
     min-width: 14px;
     min-height: 14px;
@@ -141,72 +141,74 @@ headerbar:backdrop button.titlebutton.maximize {
     background-image: url("assets/titlebutton-max-backdrop.svg");
 }
 
-/* --- Buttons (macOS Rounded Push Buttons) --- */
+/* --- Buttons --- */
 button {
     min-height: 24px;
     min-width: 24px;
     padding: 4px 12px;
     border-radius: 6px;
     font-weight: 500;
-    border: 1px solid #CCC6BE;
-    background-color: #F5F3EF;
-    color: #242220;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    border: 1px solid #44475A;
+    background-color: #343746;
+    color: #F8F8F2;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.20);
     transition: all 120ms ease-in-out;
 }
 
 button:hover {
-    background-color: #FAF8F5;
-    border-color: #B5AFA6;
-    color: #111111;
+    background-color: #44475A;
+    border-color: #8BE9FD;
+    color: #8BE9FD;
 }
 
 button:active,
 button:checked {
-    background-color: #E4DFD8;
-    border-color: #9E988F;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+    background-color: #BD93F9;
+    border-color: #BD93F9;
+    color: #1E1F29;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 button:disabled {
-    background-color: #ECE9E4;
-    border-color: #DDD8D0;
-    color: #9C968E;
+    background-color: #282A36;
+    border-color: #343746;
+    color: #6272A4;
     box-shadow: none;
 }
 
-/* Suggested Action (Ubuntu Orange Button) */
+/* Suggested Action (Cyberpunk Purple / Cyan) */
 button.suggested-action,
 button.default {
-    background-color: #E95420;
-    border: 1px solid #C74010;
-    color: #FFFFFF;
-    box-shadow: 0 1px 2px rgba(233, 84, 32, 0.25);
+    background-color: #BD93F9;
+    border: 1px solid #A478E8;
+    color: #1E1F29;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(189, 147, 249, 0.35);
 }
 
 button.suggested-action:hover,
 button.default:hover {
-    background-color: #FF6332;
-    border-color: #E95420;
-    color: #FFFFFF;
+    background-color: #CBA6FA;
+    border-color: #BD93F9;
+    color: #1E1F29;
 }
 
 button.suggested-action:active,
 button.default:active {
-    background-color: #C74010;
-    border-color: #AA3208;
-    color: #FFFFFF;
+    background-color: #A478E8;
+    border-color: #9260DF;
+    color: #1E1F29;
 }
 
 /* Destructive Action */
 button.destructive-action {
-    background-color: #D93829;
-    border: 1px solid #B8281B;
+    background-color: #FF5555;
+    border: 1px solid #E04040;
     color: #FFFFFF;
 }
 
 button.destructive-action:hover {
-    background-color: #EB4A3B;
+    background-color: #FF6E6E;
 }
 
 /* Flat Buttons */
@@ -217,60 +219,220 @@ button.flat {
 }
 
 button.flat:hover {
-    background-color: rgba(0, 0, 0, 0.06);
-    color: #E95420;
+    background-color: rgba(68, 71, 90, 0.50);
+    color: #8BE9FD;
     border-color: transparent;
 }
 
 button.flat:active,
 button.flat:checked {
-    background-color: rgba(233, 84, 32, 0.15);
-    color: #E95420;
+    background-color: rgba(189, 147, 249, 0.25);
+    color: #BD93F9;
 }
 
-/* --- Text Fields & Inputs (macOS Rounded Inputs) --- */
+/* --- Text Fields & Inputs --- */
 entry {
     min-height: 28px;
     padding: 4px 10px;
     border-radius: 6px;
-    border: 1px solid #CCC6BE;
-    background-color: #FAF8F5;
-    color: #242220;
+    border: 1px solid #44475A;
+    background-color: #1E1F29;
+    color: #F8F8F2;
     transition: all 120ms ease-in-out;
 }
 
 entry:focus {
-    border-color: #E95420;
-    background-color: #FFFFFF;
-    box-shadow: 0 0 0 2px rgba(233, 84, 32, 0.22);
+    border-color: #8BE9FD;
+    background-color: #21222C;
+    box-shadow: 0 0 0 2px rgba(139, 233, 253, 0.25);
 }
 
 entry:disabled {
-    background-color: #ECE9E4;
-    border-color: #DDD8D0;
-    color: #9C968E;
+    background-color: #282A36;
+    border-color: #343746;
+    color: #6272A4;
 }
 
-entry selection {
-    background-color: #E95420;
+/* --- Nemo File Manager Styling --- */
+.nemo-window {
+    background-color: @theme_bg_color;
+}
+
+.nemo-window .sidebar {
+    background-color: @sidebar_bg;
+    border-right: 1px solid @borders;
+}
+
+.nemo-window .sidebar treeview {
+    background-color: @sidebar_bg;
+    color: #F8F8F2;
+}
+
+.nemo-window .sidebar treeview:hover {
+    color: #8BE9FD;
+}
+
+.nemo-window .sidebar treeview:selected {
+    background-color: rgba(189, 147, 249, 0.25);
+    color: #8BE9FD;
+    font-weight: 600;
+}
+
+.nemo-window .nemo-places-treeview {
+    padding: 4px;
+}
+
+.nemo-window notebook {
+    background-color: @content_view_bg;
+}
+
+.nemo-window .view {
+    background-color: @content_view_bg;
+    color: #F8F8F2;
+}
+
+.nemo-window .view:selected {
+    background-color: #44475A;
+    color: #8BE9FD;
+    border-radius: 6px;
+}
+
+/* Nemo Pathbar Pills */
+.nemo-pathbar button {
+    margin: 2px;
+    border-radius: 6px;
+    background-color: #343746;
+    border: 1px solid #44475A;
+    color: #F8F8F2;
+}
+
+.nemo-pathbar button:checked {
+    background-color: #BD93F9;
+    color: #1E1F29;
+    font-weight: bold;
+}
+
+/* --- Lists, Trees, & Rows --- */
+list,
+treeview {
+    background-color: @content_view_bg;
+    color: @theme_fg_color;
+}
+
+row {
+    padding: 4px 8px;
+    transition: background-color 100ms;
+}
+
+row:hover {
+    background-color: rgba(68, 71, 90, 0.40);
+    color: #8BE9FD;
+}
+
+row:selected {
+    background-color: #44475A;
     color: #FFFFFF;
 }
 
-/* macOS Search Pill Entry */
-entry.search {
-    border-radius: 18px;
-    padding-left: 12px;
-    padding-right: 12px;
+/* --- Tabs & Notebooks --- */
+notebook > header {
+    background-color: #1E1F29;
+    border-bottom: 1px solid @borders;
 }
 
-/* --- Checkboxes & Radios --- */
+notebook > header > tabs > tab {
+    padding: 6px 16px;
+    border-radius: 6px 6px 0 0;
+    color: #6272A4;
+    border: 1px solid transparent;
+    transition: all 120ms;
+}
+
+notebook > header > tabs > tab:hover {
+    color: #8BE9FD;
+}
+
+notebook > header > tabs > tab:checked {
+    background-color: @content_view_bg;
+    color: #F8F8F2;
+    border-bottom: 2px solid #8BE9FD;
+    font-weight: 600;
+}
+
+/* --- Scrollbars --- */
+scrollbar {
+    background-color: transparent;
+    transition: all 200ms;
+}
+
+scrollbar trough {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    min-width: 6px;
+    min-height: 6px;
+    border-radius: 4px;
+    background-color: rgba(98, 114, 164, 0.50);
+    border: none;
+    margin: 2px;
+}
+
+scrollbar slider:hover {
+    background-color: #8BE9FD;
+}
+
+scrollbar slider:active {
+    background-color: #BD93F9;
+}
+
+/* --- Menus, Popovers, & Tooltips --- */
+menu,
+.menu,
+popover {
+    background-color: rgba(40, 42, 54, 0.98);
+    color: #F8F8F2;
+    border-radius: 8px;
+    border: 1px solid #44475A;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
+    padding: 4px;
+}
+
+menuitem {
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+menuitem:hover {
+    background-color: #44475A;
+    color: #8BE9FD;
+}
+
+tooltip {
+    background-color: rgba(30, 31, 41, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    color: #F8F8F2;
+    padding: 4px 8px;
+}
+
+/* --- Switches, Checkboxes, & Radios --- */
+switch {
+    background-image: url("assets/switch-off.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+}
+
+switch:checked {
+    background-image: url("assets/switch-on.svg");
+}
+
 checkbutton check {
-    min-height: 16px;
-    min-width: 16px;
     background-image: url("assets/checkbox-unchecked.svg");
     background-repeat: no-repeat;
     background-position: center;
-    border: none;
 }
 
 checkbutton check:hover {
@@ -286,12 +448,9 @@ checkbutton check:checked:hover {
 }
 
 radiobutton radio {
-    min-height: 16px;
-    min-width: 16px;
     background-image: url("assets/radio-unchecked.svg");
     background-repeat: no-repeat;
     background-position: center;
-    border: none;
 }
 
 radiobutton radio:hover {
@@ -304,277 +463,4 @@ radiobutton radio:checked {
 
 radiobutton radio:checked:hover {
     background-image: url("assets/radio-checked-hover.svg");
-}
-
-/* --- Switches (macOS Style Pill) --- */
-switch {
-    min-width: 38px;
-    min-height: 20px;
-    border-radius: 10px;
-    background-color: #D8D3CC;
-    border: 1px solid #CCC6BE;
-    transition: all 150ms ease-in-out;
-}
-
-switch:checked {
-    background-color: #E95420;
-    border-color: #C74010;
-}
-
-switch slider {
-    min-width: 16px;
-    min-height: 16px;
-    border-radius: 8px;
-    background-color: #FAF8F5;
-    margin: 1px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-}
-
-/* --- Sliders / Scales --- */
-scale trough {
-    min-height: 4px;
-    border-radius: 2px;
-    background-color: #DDD8D0;
-}
-
-scale highlight {
-    min-height: 4px;
-    border-radius: 2px;
-    background-color: #E95420;
-}
-
-scale slider {
-    min-width: 16px;
-    min-height: 16px;
-    border-radius: 8px;
-    background-color: #FAF8F5;
-    border: 1.5px solid #E95420;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-}
-
-scale slider:hover {
-    background-color: #FDF2EE;
-    border-color: #FF6332;
-}
-
-/* --- Scrollbars --- */
-scrollbar {
-    background-color: transparent;
-    transition: all 200ms ease;
-}
-
-scrollbar trough {
-    background-color: transparent;
-}
-
-scrollbar slider {
-    min-width: 6px;
-    min-height: 6px;
-    border-radius: 3px;
-    background-color: #C5BFB7;
-    margin: 2px;
-}
-
-scrollbar slider:hover {
-    background-color: #E95420;
-}
-
-/* --- Notebooks & Tabs --- */
-notebook {
-    background-color: @content_view_bg;
-}
-
-notebook > header {
-    background-color: #E6E2DD;
-    border-bottom: 1px solid @borders;
-}
-
-notebook > header > tabs > tab {
-    min-height: 28px;
-    padding: 6px 14px;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: #555048;
-    font-weight: 500;
-    background-color: transparent;
-    transition: all 120ms ease;
-}
-
-notebook > header > tabs > tab:hover {
-    color: #242220;
-    background-color: #FDF2EE;
-}
-
-notebook > header > tabs > tab:checked {
-    color: #E95420;
-    background-color: #FAF8F5;
-    border-bottom: 2px solid #E95420;
-    font-weight: 600;
-}
-
-/* --- Progress Bars --- */
-progressbar trough {
-    min-height: 6px;
-    border-radius: 3px;
-    background-color: #DDD8D0;
-}
-
-progressbar progress {
-    min-height: 6px;
-    border-radius: 3px;
-    background-color: #E95420;
-}
-
-/* --- Menus, Popovers & Context Menus (macOS Context Menu Elegance) --- */
-menubar {
-    background-color: #E8E4DF;
-    border-bottom: 1px solid #D5CFC7;
-    color: #242220;
-}
-
-menubar > menuitem {
-    min-height: 24px;
-    padding: 4px 8px;
-}
-
-menubar > menuitem:hover {
-    background-color: #E95420;
-    color: #FFFFFF;
-}
-
-menu,
-.menu,
-popover {
-    background-color: #FAF8F6;
-    color: #242220;
-    border: 1px solid #D5CFC7;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
-    padding: 6px;
-}
-
-menuitem {
-    min-height: 24px;
-    padding: 5px 12px;
-    border-radius: 6px;
-    color: #242220;
-    margin: 1px 0;
-}
-
-menuitem:hover {
-    background-color: #E95420;
-    color: #FFFFFF;
-}
-
-menuitem:active {
-    background-color: #C74010;
-    color: #FFFFFF;
-}
-
-menuitem separator {
-    min-height: 1px;
-    background-color: #E4DFD8;
-    margin: 4px 6px;
-}
-
-/* --- Tooltips --- */
-tooltip {
-    background-color: #242220;
-    color: #FAF8F5;
-    border: 1px solid #383430;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 8.5pt;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-tooltip label {
-    color: #FAF8F5;
-}
-
-/* --- Views, Lists, Sidebars & Treeviews --- */
-view,
-treeview,
-list {
-    background-color: @content_view_bg;
-    color: #242220;
-}
-
-view:selected,
-treeview:selected,
-row:selected {
-    background-color: #E95420;
-    color: #FFFFFF;
-}
-
-view:hover,
-row:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* --- Nemo File Manager (macOS Finder Elegance) --- */
-.nemo-window {
-    background-color: @content_view_bg;
-}
-
-.nemo-window .sidebar {
-    background-color: #EAE6E1;
-    border-right: 1px solid #D5CFC7;
-    color: #242220;
-    padding: 6px 0;
-}
-
-.nemo-window .sidebar row {
-    padding: 5px 10px;
-    border-radius: 6px;
-    margin: 1px 6px;
-}
-
-.nemo-window .sidebar row:hover {
-    background-color: rgba(0, 0, 0, 0.06);
-    color: #111111;
-}
-
-.nemo-window .sidebar row:selected {
-    background-color: #E95420;
-    color: #FFFFFF;
-}
-
-.nemo-window .nemo-window-pane {
-    background-color: @content_view_bg;
-}
-
-.nemo-window .toolbar {
-    background-color: #E8E4DF;
-    border-bottom: 1px solid #D5CFC7;
-    padding: 4px 8px;
-}
-
-/* Nemo Desktop Canvas */
-.nemo-desktop.nemo-canvas-item {
-    color: #FFFFFF;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
-}
-
-.nemo-desktop.nemo-canvas-item:selected {
-    background-color: rgba(233, 84, 32, 0.35);
-    border: 1px solid #E95420;
-    border-radius: 6px;
-    color: #FFFFFF;
-}
-
-/* Pathbar Breadcrumbs (macOS Finder Style Path Pills) */
-.nemo-window .path-bar button {
-    background-color: #F5F3EF;
-    border: 1px solid #CCC6BE;
-    border-radius: 6px;
-    margin: 1px 2px;
-    padding: 3px 8px;
-}
-
-.nemo-window .path-bar button:checked {
-    background-color: #E95420;
-    color: #FFFFFF;
-    border-color: #C74010;
-    font-weight: bold;
 }

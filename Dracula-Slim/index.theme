@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Dracula-Slim
+Comment=Dracula-slim cyberpunk dark theme with translucent glass, cyan/pink accents, and traffic light window controls
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Dracula-Slim
+MetacityTheme=Dracula-Slim
+IconTheme=Dessert-white
+CursorTheme=DMZ-White
+ButtonLayout=:minimize,maximize,close
+CinnamonTheme=Dracula-Slim

@@ -1,11 +1,11 @@
 # ===================================================================
-# Ubuntu Cinnamon Professional Theme for GRUB (1366x867)
-# Non-glaring dark slate background with Ubuntu Orange #E95420 accent
+# Dracula-Slim Cyberpunk Cockpit Theme for GRUB
+# Deep dark #1E1F29 background with glowing Cyan #8BE9FD & Purple #BD93F9
 # ===================================================================
 
 title-text: ""
 desktop-image: "background.png"
-desktop-color: "#262124"
+desktop-color: "#1E1F29"
 terminal-font: "Unifont Regular 16"
 terminal-box: "select_c.png"
 
@@ -15,8 +15,8 @@ terminal-box: "select_c.png"
     top = 28%
     width = 56%
     height = 42%
-    item_color = "#E0DCD8"
-    selected_item_color = "#FFFFFF"
+    item_color = "#F8F8F2"
+    selected_item_color = "#8BE9FD"
     item_height = 40
     item_padding = 10
     item_spacing = 8
@@ -34,9 +34,9 @@ terminal-box: "select_c.png"
     width = 56%
     height = 6
     show_text = false
-    fg_color = "#E95420"
-    bg_color = "#382F33"
-    border_color = "#483F43"
+    fg_color = "#8BE9FD"
+    bg_color = "#282A36"
+    border_color = "#44475A"
 }
 
 # Navigation Guide
@@ -45,7 +45,7 @@ terminal-box: "select_c.png"
     left = 22%
     width = 56%
     align = "center"
-    color = "#A8A09A"
+    color = "#BD93F9"
     text = "Use the arrow keys to select an OS, then press Enter to boot."
 }
 
@@ -54,6 +54,6 @@ terminal-box: "select_c.png"
     left = 22%
     width = 56%
     align = "center"
-    color = "#7A736E"
+    color = "#6272A4"
     text = "Press 'e' to edit boot parameters or 'c' for a command-line."
 }

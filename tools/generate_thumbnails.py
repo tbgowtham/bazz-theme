@@ -1,69 +1,88 @@
-from PIL import Image, ImageDraw
+#!/usr/bin/env python3
+"""
+Generate theme preview thumbnails matching the reference screenshot:
+Cyberpunk anime cockpit background, dark translucent terminal window,
+right-aligned traffic lights (Yellow, Green, Red), and Dracula neon accents.
+"""
+
+import os
+from PIL import Image, ImageDraw, ImageFont
 
 def create_thumbnails():
     width, height = 280, 180
-    im = Image.new('RGB', (width, height), color='#1E1A1D')
+    
+    # 1. Base Wallpaper
+    bg_path = "/home/MR_Gray/muteX/theme/wallpapers/dracula-cyberpunk-cockpit.png"
+    if os.path.exists(bg_path):
+        bg = Image.open(bg_path).resize((width, height), Image.Resampling.LANCZOS)
+        # Apply slight dark overlay for UI contrast
+        overlay = Image.new('RGBA', (width, height), (15, 16, 24, 70))
+        im = Image.alpha_composite(bg.convert('RGBA'), overlay).convert('RGB')
+    else:
+        im = Image.new('RGB', (width, height), color='#1E1F29')
+        
     draw = ImageDraw.Draw(im)
 
-    # Dark slate wallpaper background with macOS sweeping curves
-    for y in range(height):
-        ratio = y / height
-        r = int(36 - ratio * 15)
-        g = int(28 - ratio * 13)
-        b = int(33 - ratio * 15)
-        draw.line([(0, y), (width, y)], fill=(r, g, b))
-
-    # macOS Sweeping Waves on right
-    draw.polygon([(140, height), (200, 90), (280, 30), (280, height)], fill='#481A2D')
-    draw.polygon([(160, height), (220, 110), (280, 50), (280, height)], fill='#E95420')
-    draw.polygon([(185, height), (240, 130), (280, 75), (280, height)], fill='#FFA07A')
-
-    # Window preview (macOS Window with Traffic Lights)
-    win_x, win_y, win_w, win_h = 28, 20, 175, 115
-    # Window shadow
-    draw.rounded_rectangle([win_x-2, win_y-2, win_x+win_w+2, win_y+win_h+2], radius=8, fill='#110E10')
-    # Window body
-    draw.rounded_rectangle([win_x, win_y, win_x+win_w, win_y+win_h], radius=7, fill='#F8F6F3')
-    # Window titlebar (warm stone)
-    draw.rectangle([win_x, win_y, win_x+win_w, win_y+22], fill='#E8E4DF')
-    draw.line([(win_x, win_y+22), (win_x+win_w, win_y+22)], fill='#D2CCC4')
-
-    # macOS Traffic Lights (Red, Yellow, Green)
-    draw.ellipse([win_x+8, win_y+7, win_x+16, win_y+15], fill='#FF5F56')
-    draw.ellipse([win_x+20, win_y+7, win_x+28, win_y+15], fill='#FEBC2E')
-    draw.ellipse([win_x+32, win_y+7, win_x+40, win_y+15], fill='#28C840')
-
-    # Window content (sidebar + Nemo Finder view)
-    draw.rectangle([win_x, win_y+23, win_x+48, win_y+win_h-1], fill='#EAE6E1')
-    draw.line([(win_x+48, win_y+23), (win_x+48, win_y+win_h-1)], fill='#D5CFC7')
-    # Selected sidebar item
-    draw.rounded_rectangle([win_x+4, win_y+32, win_x+44, win_y+44], radius=4, fill='#FDF2EE', outline='#FFA07A')
+    # 2. Slim Top Panel (Dracula Slim)
+    panel_h = 16
+    draw.rectangle([0, 0, width, panel_h], fill='#1E1F29')
+    draw.line([(0, panel_h), (width, panel_h)], fill='#44475A', width=1)
     
-    # Selection in content (macOS folder)
-    draw.rounded_rectangle([win_x+58, win_y+34, win_x+115, win_y+65], radius=4, fill='#FDF2EE', outline='#E95420')
-    draw.rounded_rectangle([win_x+68, win_y+40, win_x+82, win_y+52], radius=2, fill='#E95420') # orange folder
+    # Top bar menu / clock indicators
+    draw.text((10, 2), "Cinnamon", fill='#F8F8F2')
+    draw.text((width - 45, 2), "13:37", fill='#8BE9FD')
+    draw.ellipse([width - 12, 5, width - 6, 11], fill='#50FA7B')
 
-    # Cinnamon Top/Bottom Menu Bar (macOS translucent style)
-    panel_y = height - 26
-    draw.rectangle([0, panel_y, width, height], fill='#E3DFD9')
-    draw.line([(0, panel_y), (width, panel_y)], fill='#CCC6BE')
+    # 3. Translucent Terminal Window (Centered, exactly like reference)
+    win_x, win_y, win_w, win_h = 35, 28, 210, 135
+    
+    # Window Shadow
+    draw.rounded_rectangle([win_x-2, win_y-2, win_x+win_w+2, win_y+win_h+2], radius=6, fill='#0D0E15')
+    
+    # Window Body (Dark translucent glass effect)
+    draw.rounded_rectangle([win_x, win_y, win_x+win_w, win_y+win_h], radius=5, fill='#1E1F29', outline='#44475A')
+    
+    # Titlebar
+    tb_h = 18
+    draw.rectangle([win_x, win_y, win_x+win_w, win_y+tb_h], fill='#282A36')
+    draw.line([(win_x, win_y+tb_h), (win_x+win_w, win_y+tb_h)], fill='#44475A', width=1)
+    
+    # Title text
+    draw.text((win_x + 10, win_y + 3), "user@cyberpunk:~", fill='#F8F8F2')
+    
+    # Right-aligned Traffic Lights (Yellow, Green, Red)
+    b_y = win_y + 5
+    draw.ellipse([win_x + win_w - 34, b_y, win_x + win_w - 26, b_y + 8], fill='#F1FA8C') # Min (Yellow)
+    draw.ellipse([win_x + win_w - 22, b_y, win_x + win_w - 14, b_y + 8], fill='#50FA7B') # Max (Green)
+    draw.ellipse([win_x + win_w - 10, b_y, win_x + win_w - 2, b_y + 8], fill='#FF5555')  # Close (Red)
 
-    # Menu button (Ubuntu orange icon)
-    draw.ellipse([8, panel_y+5, 22, panel_y+19], fill='#E95420')
-    draw.ellipse([12, panel_y+9, 18, panel_y+15], fill='#FFFFFF')
+    # Neofetch specs in Terminal Body
+    draw.text((win_x + 12, win_y + 24), "OS -> Arch Linux x86_64", fill='#50FA7B')
+    draw.text((win_x + 12, win_y + 38), "Kernel -> 6.3.8-zen", fill='#8BE9FD')
+    draw.text((win_x + 12, win_y + 52), "Theme -> Dracula-slim", fill='#BD93F9')
+    draw.text((win_x + 12, win_y + 66), "Icons -> Dessert-white", fill='#FF79C6')
 
-    # Active window list item with Ubuntu orange underline
-    draw.rounded_rectangle([28, panel_y+3, 105, panel_y+23], radius=4, fill='#FAF8F5')
-    draw.line([(28, panel_y+24), (105, panel_y+24)], fill='#E95420', width=2)
+    # Color blocks bar at bottom of terminal
+    palette_colors = ['#282A36', '#FF5555', '#50FA7B', '#F1FA8C', '#BD93F9', '#FF79C6', '#8BE9FD', '#F8F8F2']
+    for idx, c in enumerate(palette_colors):
+        px = win_x + 12 + (idx * 10)
+        draw.rectangle([px, win_y + 90, px + 8, win_y + 98], fill=c)
 
-    # Tray applets on right
-    draw.ellipse([width-55, panel_y+9, width-47, panel_y+17], fill='#48423E')
-    draw.ellipse([width-40, panel_y+9, width-32, panel_y+17], fill='#48423E')
-    draw.rectangle([width-24, panel_y+7, width-14, panel_y+19], fill='#D5CFC7', outline='#48423E')
+    destinations = [
+        "Dracula-Slim/cinnamon/thumbnail.png",
+        "Dracula-Slim/gtk-3.0/thumbnail.png",
+        "Dracula-Slim/metacity-1/thumbnail.png",
+        "Ubuntu-Cinnamon-White/cinnamon/thumbnail.png",
+        "Ubuntu-Cinnamon-White/gtk-3.0/thumbnail.png",
+        "Ubuntu-Cinnamon-White/metacity-1/thumbnail.png"
+    ]
 
-    im.save("Ubuntu-Cinnamon-White/cinnamon/thumbnail.png")
-    im.save("Ubuntu-Cinnamon-White/gtk-3.0/thumbnail.png")
-    im.save("Ubuntu-Cinnamon-White/metacity-1/thumbnail.png")
-    print("Updated thumbnails with macOS elegance successfully")
+    for dest in destinations:
+        dest_path = os.path.join("/home/MR_Gray/muteX/theme", dest)
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+        im.save(dest_path)
 
-create_thumbnails()
+    print("Updated thumbnails with Dracula-Slim aesthetic successfully!")
+
+if __name__ == "__main__":
+    create_thumbnails()
