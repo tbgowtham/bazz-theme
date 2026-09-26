@@ -7,7 +7,7 @@ Real-time 2D ASCII/Unicode fluid wave equation & vapor particle simulation
 driven directly by Linux OS telemetry (CPU, RAM, Temp, Network).
 
 Interactive controls:
-- [SPACE] : Inject fluid droplet (creates wave ripple + sound)
+- [SPACE] : Inject fluid droplet (creates wave ripple)
 - [B]     : Release vapor bubble surge
 - [P]     : Cycle matter phase (Cryo -> Plasma -> Mercury -> Solar)
 - [C]     : Condense & compact memory
@@ -107,19 +107,6 @@ class FluidReactor:
         try:
             self.last_net_bytes = psutil.net_io_counters().bytes_recv
         except Exception:
-            pass
-
-    def play_sound(self, sound_file):
-        path = os.path.join(ASSETS_DIR, sound_file)
-        if os.path.exists(path):
-            for player in ["paplay", "pw-play", "aplay"]:
-                if shutil.which(player):
-                    try:
-                        subprocess.Popen([player, path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                        break
-                    except Exception:
-                        pass
-
     def drop_ripple(self, x=None, strength=7.0):
         if x is None:
             x = random.randint(5, self.sim_w - 6)
@@ -127,7 +114,6 @@ class FluidReactor:
         self.heights[x] += strength
         self.heights[x - 1] += strength * 0.5
         self.heights[x + 1] += strength * 0.5
-        self.play_sound("liquid_drop.wav")
 
     def burst_bubble(self):
         p_cfg = PHASES[self.phase_key]
@@ -136,7 +122,6 @@ class FluidReactor:
             by = self.term_h - 6
             self.particles.append(VaporParticle(bx, by, p_cfg['c_vapor']))
         self.drop_ripple(strength=4.0)
-        self.play_sound("vapor_hiss.wav")
 
     def cycle_phase(self):
         keys = list(PHASES.keys())
@@ -153,10 +138,8 @@ class FluidReactor:
         sys.stdout.write(f"\033]10;rgb:{r:02x}/{g:02x}/{b:02x}\a")
         sys.stdout.write(f"\033]11;rgb:{br:02x}/{bg:02x}/{bb:02x}\a")
         sys.stdout.flush()
-        self.play_sound("vapor_hiss.wav")
 
     def condense_memory(self):
-        # Memory compaction
         subprocess.run(["sync"], check=False)
         self.burst_bubble()
 

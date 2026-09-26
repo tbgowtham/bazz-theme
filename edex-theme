@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
 """
 ==============================================================================
-eDEX-UI // LIQUID-GAS & ROBOTIC MECHA SYSTEM CONTROLLER
+eDEX-UI // CYBERNETIC MECHA & LIQUID-GAS SYSTEM CONTROLLER
 ==============================================================================
-A multi-feature sci-fi system controller and theme engine inspired by eDEX-UI
-with physical Liquid-Gas & Robotic Mecha matter states, fullscreen biometric
-robotic screen locker, robotic AI voice synthesizer, fluid dynamics reactor,
-and system diagnostic analyzer.
+An advanced AI-engineered cybernetic environment for Linux.
+Delivers deep system telemetry, physical matter phase shifting, hardware
+diagnostics, biometric robotic screen locking, and adaptive load intelligence.
+100% silent, fast, and engineered for maximum data density.
 
-Commands & Features:
-- edex                     : Apply full futuristic Liquid-Gas & Mecha theme
-- edex lock                : Launch fullscreen robotic biometric screen locker
-- edex mecha               : Activate Titanium Mecha Robotic matter state & voice
-- edex diag (or scan)      : Run mecha system hardware & security diagnostic
-- edex fluid               : Launch interactive 2D fluid wave & vapor particle reactor
+Commands:
+- edex                     : Apply master Cybernetic Mecha theme across entire system
+- edex lock                : Launch fullscreen biometric robotic screen locker
+- edex auto                : Run AI adaptive matter engine (auto-shifts theme by CPU/temp)
+- edex diag (or scan)      : Run deep hardware bus & security diagnostic
 - edex phase <state>       : Shift matter state (mecha, cryo, plasma, mercury, solar)
+- edex fluid               : Launch interactive 2D fluid dynamics wave reactor
 - edex condense            : Compact memory cache with liquid condensation animation
-- edex voice <on|off>      : Toggle robotic AI voice synthesizer
-- edex --app (or --tui)    : Fullscreen live telemetry terminal monitor
+- edex --app (or --tui)    : Fullscreen live telemetry terminal cockpit
 - edex --status            : Display system telemetry and active matter state
 - edex --restore           : Restore default desktop settings
 ==============================================================================
@@ -38,20 +37,9 @@ import psutil
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 TOOLS_DIR = os.path.join(SCRIPT_DIR, "tools")
-ASSETS_DIR = os.path.join(SCRIPT_DIR, "assets")
 FLUID_REACTOR = os.path.join(TOOLS_DIR, "fluid_reactor.py")
 ROBOTIC_LOCK = os.path.join(TOOLS_DIR, "robotic_lockscreen.py")
 MECHA_DIAG = os.path.join(TOOLS_DIR, "mecha_diag.py")
-
-try:
-    from tools.robot_voice import speak, set_voice_enabled, is_voice_enabled
-except ImportError:
-    try:
-        from robot_voice import speak, set_voice_enabled, is_voice_enabled
-    except ImportError:
-        def speak(text, async_mode=True): pass
-        def set_voice_enabled(enabled=True): pass
-        def is_voice_enabled(): return True
 
 # Destination Paths
 HOME = os.path.expanduser("~")
@@ -67,66 +55,51 @@ PHASE_CONFIGS = {
     'mecha': {
         'name': 'ROBOTIC-MECHA [TITANIUM CYBERNETIC]',
         'scheme': 'eDEX-TRON-Mecha',
-        'sound': 'mech_lock.wav',
-        'voice': 'Mecha robotic protocol engaged. Armor and shields online.',
         'prompt_icon': '⚙ MECHA-ROBOTIC ⚙',
         'fg_hex': '#00f0ff',
         'bg_hex': '#070a10',
         'rgb_pri': '\033[38;2;0;240;255m',
         'rgb_sec': '\033[38;2;255;183;3m',
-        'rgb_vapor': '\033[38;2;240;246;252m',
         'desc': 'Titanium black chassis, mecha hazard gold, high-energy core cyan'
     },
     'cryo': {
         'name': 'CRYO-GAS [LIQUID NITROGEN]',
         'scheme': 'eDEX-TRON-Cryo',
-        'sound': 'liquid_drop.wav',
-        'voice': 'Cryogenic liquid nitrogen state active.',
         'prompt_icon': '≋ CRYO-GAS ≋',
         'fg_hex': '#00f5d4',
         'bg_hex': '#001220',
         'rgb_pri': '\033[38;2;0;245;212m',
         'rgb_sec': '\033[38;2;0;187;249m',
-        'rgb_vapor': '\033[38;2;224;251;252m',
         'desc': 'Sub-zero liquid cyan, ice blue accents, frost vapor'
     },
     'plasma': {
         'name': 'NEON-PLASMA [IONIZED VAPOR]',
         'scheme': 'eDEX-TRON-Plasma',
-        'sound': 'plasma_ignite.wav',
-        'voice': 'Ionized neon plasma vapor online.',
         'prompt_icon': '⚡ NEON-PLASMA ⚡',
         'fg_hex': '#f72585',
         'bg_hex': '#10002b',
         'rgb_pri': '\033[38;2;247;37;133m',
         'rgb_sec': '\033[38;2;157;78;221m',
-        'rgb_vapor': '\033[38;2;0;240;255m',
         'desc': 'Ionized electric magenta, violet glow, cyan ionization'
     },
     'mercury': {
         'name': 'LIQUID-MERCURY [QUICKSILVER]',
         'scheme': 'eDEX-TRON-Mercury',
-        'sound': 'liquid_drop.wav',
-        'voice': 'Liquid mercury chrome state active.',
         'prompt_icon': '∿ LIQUID-MERCURY ∿',
         'fg_hex': '#e0e1dd',
         'bg_hex': '#0a0e14',
         'rgb_pri': '\033[38;2;224;225;221m',
         'rgb_sec': '\033[38;2;0;229;255m',
-        'rgb_vapor': '\033[38;2;119;141;169m',
         'desc': 'Chrome silver, liquid titanium, neon gallium aqua'
     },
     'solar': {
         'name': 'SOLAR-FLARE [SUPERHEATED GAS]',
         'scheme': 'eDEX-TRON-Solar',
-        'sound': 'solar_flare.wav',
-        'voice': 'Superheated solar flare plasma online.',
         'prompt_icon': '☼ SOLAR-FLARE ☼',
         'fg_hex': '#ffb703',
         'bg_hex': '#1a0500',
         'rgb_pri': '\033[38;2;255;183;3m',
         'rgb_sec': '\033[38;2;255;72;0m',
-        'rgb_vapor': '\033[38;2;255;209;102m',
         'desc': 'Molten gold fluid, solar flare orange, superheated corona'
     }
 }
@@ -140,18 +113,6 @@ AMBER = '\033[38;2;255;183;3m'
 MUTED = '\033[38;2;130;160;190m'
 BOLD = '\033[1m'
 RESET = '\033[0m'
-
-def play_audio(filename):
-    """Play synthesized organic liquid-gas or mechanical sound."""
-    path = os.path.join(ASSETS_DIR, filename)
-    if os.path.exists(path):
-        for player in ["paplay", "pw-play", "aplay"]:
-            if shutil.which(player):
-                try:
-                    subprocess.Popen([player, path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                    break
-                except Exception:
-                    pass
 
 def apply_terminal_palette(fg_hex='#00f0ff', bg_hex='#070a10'):
     """Dynamically set the palette of the currently active terminal window."""
@@ -217,7 +178,7 @@ def install_shell_env(prompt_icon="⚙ MECHA-ROBOTIC ⚙", fg_hex="#00f0ff", bg_
     os.makedirs(BASHRC_D, exist_ok=True)
     dst = os.path.join(BASHRC_D, "edex-theme.sh")
     content = f"""#!/usr/bin/env bash
-# eDEX-UI // ROBOTIC MECHA SHELL ENVIRONMENT
+# eDEX-UI // CYBERNETIC SHELL ENVIRONMENT
 if [[ $- == *i* ]]; then
     printf '\\e]10;{fg_hex}\\a' 2>/dev/null || true
     printf '\\e]11;{bg_hex}\\a' 2>/dev/null || true
@@ -233,6 +194,7 @@ alias scan="edex-theme scan"
 alias fluid="edex-theme fluid"
 alias condense="edex-theme condense"
 alias phase="edex-theme phase"
+alias auto="edex-theme auto"
 """
     with open(dst, 'w') as f:
         f.write(content)
@@ -270,17 +232,19 @@ def install_desktop_themes():
             except Exception:
                 pass
 
-def set_matter_phase(phase_name):
+def set_matter_phase(phase_name, silent=False):
     """Shift matter state across KDE, lockscreen, terminal palette, and shell prompt."""
     phase_key = phase_name.lower().strip()
     if phase_key not in PHASE_CONFIGS:
-        print(f"{AMBER}Unknown phase '{phase_name}'. Available: mecha, cryo, plasma, mercury, solar{RESET}")
+        if not silent:
+            print(f"{AMBER}Unknown phase '{phase_name}'. Available: mecha, cryo, plasma, mercury, solar{RESET}")
         return
 
     cfg = PHASE_CONFIGS[phase_key]
     pri_col = cfg['rgb_pri']
-    print(f"\n{pri_col}≋≋≋ INITIATING MATTER PHASE TRANSITION -> {cfg['name']} ≋≋≋{RESET}")
-    print(f" {MUTED}• {cfg['desc']}{RESET}")
+    if not silent:
+        print(f"\n{pri_col}≋≋≋ INITIATING MATTER PHASE TRANSITION -> {cfg['name']} ≋≋≋{RESET}")
+        print(f" {MUTED}• {cfg['desc']}{RESET}")
 
     # 1. Terminal OSC Shift
     apply_terminal_palette(cfg['fg_hex'], cfg['bg_hex'])
@@ -295,12 +259,55 @@ def set_matter_phase(phase_name):
     # 4. Shell Prompt
     install_shell_env(prompt_icon=cfg['prompt_icon'], fg_hex=cfg['fg_hex'], bg_hex=cfg['bg_hex'])
     
-    # 5. Audio & Robotic Voice
-    play_audio(cfg['sound'])
-    if 'voice' in cfg:
-        speak(cfg['voice'])
-    
-    print(f"{GREEN_BOLD}✓ Matter phase shifted to {cfg['name']} successfully!{RESET}\n")
+    if not silent:
+        print(f"{GREEN_BOLD}✓ Matter phase shifted to {cfg['name']} successfully!{RESET}\n")
+
+def run_adaptive_ai(daemon=False):
+    """AI Adaptive Matter Engine: Dynamically shifts desktop phase based on compute pressure."""
+    print(f"\n{CYAN_BOLD}╔══════════════════════════════════════════════════════════════════╗{RESET}")
+    print(f"{CYAN_BOLD}║  [ eDEX-UI // AI ADAPTIVE COMPUTE PRESSURE MONITOR ]             ║{RESET}")
+    print(f"{CYAN_BOLD}╚══════════════════════════════════════════════════════════════════╝{RESET}")
+
+    def evaluate_state():
+        cpu_p = psutil.cpu_percent(interval=0.5)
+        # Check thermal temp if available
+        temp = 45.0
+        try:
+            temps = psutil.sensors_temperatures()
+            if 'coretemp' in temps and temps['coretemp']:
+                temp = temps['coretemp'][0].current
+        except Exception:
+            pass
+
+        if temp > 75.0 or cpu_p > 85.0:
+            target = "solar"
+        elif cpu_p > 60.0:
+            target = "plasma"
+        elif cpu_p > 25.0:
+            target = "mecha"
+        else:
+            target = "cryo"
+
+        return target, cpu_p, temp
+
+    target_phase, cpu, t = evaluate_state()
+    print(f" {CYAN_BOLD}► SENSOR ANALYSIS:{RESET} CPU Load: {GREEN}{cpu:.1f}%{RESET}  •  Core Temp: {AMBER}{t:.1f}°C{RESET}")
+    print(f" {CYAN_BOLD}► AI CLASSIFICATION:{RESET} Workload demands phase -> {BOLD}{PHASE_CONFIGS[target_phase]['name']}{RESET}")
+    set_matter_phase(target_phase, silent=False)
+
+    if daemon:
+        print(f"{MUTED}Starting continuous adaptive monitoring (Ctrl+C to stop)...{RESET}")
+        current_active = target_phase
+        try:
+            while True:
+                time.sleep(3.0)
+                new_phase, c, tm = evaluate_state()
+                if new_phase != current_active:
+                    current_active = new_phase
+                    print(f"[{time.strftime('%H:%M:%S')}] {CYAN}Load shift ({c:.1f}% / {tm:.1f}°C) -> Shifting to {PHASE_CONFIGS[new_phase]['name']}{RESET}")
+                    set_matter_phase(new_phase, silent=True)
+        except KeyboardInterrupt:
+            print(f"\n{MUTED}Adaptive daemon halted.{RESET}")
 
 def run_condenser():
     """Fluid Memory Condensation & Cache Purge utility."""
@@ -313,8 +320,6 @@ def run_condenser():
 
     print(f" {MUTED}• Initial State: {used_mb_before:.1f} MB active memory allocation{RESET}")
     print(f" {CYAN}• Condensing gaseous thread buffers...{RESET}")
-    play_audio("vapor_hiss.wav")
-    speak("Compacting memory buffers.")
     
     frames = [
         "   °   *   ·   *   (gaseous vapor cooling)",
@@ -323,11 +328,10 @@ def run_condenser():
         "        [ 💧 ]     (condensed into liquid pool)",
     ]
     for frame in frames:
-        time.sleep(0.2)
+        time.sleep(0.15)
         print(f"   {CYAN}{frame}{RESET}")
 
     subprocess.run(["sync"], check=False)
-    play_audio("liquid_drop.wav")
 
     mem_after = psutil.virtual_memory()
     used_mb_after = mem_after.used / (1024 ** 2)
@@ -346,7 +350,7 @@ def print_banner():
 ║   ██╔══╝  ██║  ██║██╔══╝   ██╔██╗ ╚════╝██║   ██║██║                        ║
 ║   ███████╗██████╔╝███████╗██╔╝ ██╗      ╚██████╔╝██║                        ║
 ║   ╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝       ╚═════╝ ╚═╝                        ║
-║   MECHA CYBERNETIC & LIQUID-GAS SYSTEM CONTROLLER // LEVEL OMEGA             ║
+║   CYBERNETIC MECHA & ADAPTIVE INTELLIGENCE CONTROLLER // OMEGA-LEVEL         ║
 ╚══════════════════════════════════════════════════════════════════════════════╝{RESET}"""
     print(banner)
 
@@ -374,19 +378,19 @@ def print_telemetry_summary():
     print(f" {CYAN_BOLD}[MECHA] {RESET} State: {CYAN_BOLD}TITANIUM MECHA ⚙{RESET}  •  Core Temp: {GREEN_BOLD}{fluid_temp:.1f}°C{RESET}  •  CPU: {GREEN}{cpu_percent:.1f}%{RESET}")
     print(f" {CYAN_BOLD}[RAM]   {RESET} Allocation: {GREEN_BOLD}{mem.percent}%{RESET} ({mem.used/(1024**3):.2f} GB / {mem.total/(1024**3):.2f} GB)")
     print(f" {CYAN_BOLD}[SECURITY]{RESET} Biometric Lock: {GREEN_BOLD}ARMED{RESET}  •  Retinal Scanner: {GREEN}STANDBY{RESET}")
-    print(f" {CYAN_BOLD}[STATUS]{RESET} {GREEN_BOLD}FUTURISTIC ROBOTIC MECHA THEME ACTIVE!{RESET}\n")
+    print(f" {CYAN_BOLD}[STATUS]{RESET} {GREEN_BOLD}CYBERNETIC MECHA ENVIRONMENT ACTIVE!{RESET}\n")
     print(f" {MUTED}• Terminal:  Konsole & active window set to Core Cyan / Titanium Black")
     print(f" • Desktop:   KDE Plasma 6 eDEX-TRON-Mecha activated")
     print(f" • Lockscreen:Biometric robotic screen locker ready (run 'edex lock')")
     print(f" • Shell:     Prompt set to [⚙ MECHA-ROBOTIC ⚙] in ~/.bashrc.d/")
     print(f" • Graphics:  GTK 3/4 & Metacity fluid mecha glassmorphism configured{RESET}")
-    print(f"\n {CYAN_BOLD}Futuristic Features (Not available in Cinnamon):{RESET}")
-    print(f"   {BOLD}edex lock{RESET}           Launch fullscreen robotic biometric screen locker")
-    print(f"   {BOLD}edex diag{RESET}           Run robotic mecha hardware & security diagnostic")
-    print(f"   {BOLD}edex mecha{RESET}          Switch immediately to Titanium Mecha state & voice")
-    print(f"   {BOLD}edex fluid{RESET}          Launch interactive 2D fluid dynamics reactor")
+    print(f"\n {CYAN_BOLD}Futuristic Features:{RESET}")
+    print(f"   {BOLD}edex lock{RESET}           Launch fullscreen biometric robotic screen locker")
+    print(f"   {BOLD}edex auto{RESET}           AI adaptive matter engine (auto-shifts theme by compute load)")
+    print(f"   {BOLD}edex diag{RESET}           Run deep hardware bus & security diagnostic")
+    print(f"   {BOLD}edex mecha{RESET}          Switch immediately to Titanium Mecha state")
+    print(f"   {BOLD}edex fluid{RESET}          Launch interactive 2D fluid wave reactor")
     print(f"   {BOLD}edex phase <state>{RESET}  Shift matter state (mecha, cryo, plasma, mercury, solar)")
-    print(f"   {BOLD}edex voice <on|off>{RESET} Toggle mechanical robotic AI voice synthesizer")
     print(f"   {BOLD}edex condense{RESET}       Compact memory cache with liquid condensation animation\n")
 
 def run_tui_monitor():
@@ -430,7 +434,7 @@ def run_tui_monitor():
             buf = []
             buf.append('\033[H')
             buf.append(f"{CYAN_BOLD}╔══════════════════════════════════════════════════════════════════════════════════════╗{RESET}\n")
-            buf.append(f"{CYAN_BOLD}║  eDEX-UI // ROBOTIC MECHA TERMINAL DASHBOARD                         [ {time_str} ] ║{RESET}\n")
+            buf.append(f"{CYAN_BOLD}║  eDEX-UI // ROBOTIC MECHA TERMINAL COCKPIT                           [ {time_str} ] ║{RESET}\n")
             buf.append(f"{CYAN_BOLD}║  NODE: {uname.node.upper():<12} ARCH: {uname.machine:<8} KERNEL: {uname.release[:18]:<18} UPTIME: {up_h}h {up_m}m  ║{RESET}\n")
             buf.append(f"{CYAN_BOLD}╠══════════════════════════════════════════╦═══════════════════════════════════════════╣{RESET}\n")
             buf.append(f"{CYAN_BOLD}║  [ CPU QUANTUM BUS & CORES ]             ║  [ GEO-RADAR & TELEMETRY SCANNER ]        ║{RESET}\n")
@@ -492,7 +496,7 @@ def run_tui_monitor():
             buf.append(f"  {p3_str:<39}  {CYAN_BOLD}║{RESET}\n")
 
             buf.append(f"{CYAN_BOLD}╚══════════════════════════════════════════╩═══════════════════════════════════════════╝{RESET}\n")
-            buf.append(f" {CYAN_BOLD}[COMMANDS]{RESET} {BOLD}[Q]{RESET} Exit Monitor   {GREEN}DEFENSE GRID: LEVEL 9 ONLINE{RESET}\n")
+            buf.append(f" {CYAN_BOLD}[COMMANDS]{RESET} {BOLD}[Q]{RESET} Exit Cockpit   {GREEN}DEFENSE GRID: LEVEL 9 ONLINE{RESET}\n")
 
             sys.stdout.write("".join(buf))
             sys.stdout.flush()
@@ -530,17 +534,18 @@ def restore_defaults():
     print(f"{GREEN}✓ Restored default desktop settings.{RESET}")
 
 def main():
-    parser = argparse.ArgumentParser(description="eDEX-UI // Robotic Mecha & Liquid-Gas System Controller")
-    parser.add_argument("action", nargs="?", default=None, help="Action: lock, mecha, diag, scan, fluid, condense, phase, voice, status, restore")
-    parser.add_argument("param", nargs="?", default=None, help="Parameter for action (e.g. state or on/off)")
+    parser = argparse.ArgumentParser(description="eDEX-UI // Cybernetic Mecha System Controller")
+    parser.add_argument("action", nargs="?", default=None, help="Action: lock, mecha, auto, diag, scan, fluid, condense, phase, status, restore")
+    parser.add_argument("param", nargs="?", default=None, help="Parameter for action (e.g. phase state name or --daemon)")
     parser.add_argument("--lock", action="store_true", help="Launch fullscreen robotic screen locker")
+    parser.add_argument("--auto", "--adaptive", action="store_true", dest="auto", help="Run AI adaptive matter engine (auto-shifts theme by compute load)")
+    parser.add_argument("--daemon", action="store_true", help="Run adaptive engine in continuous daemon loop")
     parser.add_argument("--mecha", action="store_true", help="Activate Titanium Mecha Robotic state")
     parser.add_argument("--diag", "--scan", action="store_true", dest="diag", help="Run robotic mecha hardware diagnostic")
     parser.add_argument("--fluid", action="store_true", help="Launch interactive 2D fluid dynamics reactor")
     parser.add_argument("--condense", action="store_true", help="Run memory condensation & cache purge")
     parser.add_argument("--phase", type=str, default=None, help="Shift matter state: mecha, cryo, plasma, mercury, solar")
-    parser.add_argument("--voice", type=str, default=None, help="Toggle robotic voice: on, off")
-    parser.add_argument("--app", "--tui", "--monitor", action="store_true", dest="app", help="Launch interactive live terminal dashboard")
+    parser.add_argument("--app", "--tui", "--monitor", action="store_true", dest="app", help="Launch interactive live terminal cockpit")
     parser.add_argument("--status", action="store_true", help="Display telemetry and theme status")
     parser.add_argument("--restore", action="store_true", help="Restore default desktop theme")
     args = parser.parse_args()
@@ -548,32 +553,23 @@ def main():
     action = (args.action or "").lower()
 
     if action == "lock" or args.lock:
-        # Launch Fullscreen Robotic Mecha Screen Locker
         subprocess.run([sys.executable, ROBOTIC_LOCK])
         return
 
+    if action in ["auto", "adaptive"] or args.auto:
+        is_daemon = args.daemon or (args.param == "--daemon")
+        run_adaptive_ai(daemon=is_daemon)
+        return
+
     if action in ["diag", "scan"] or args.diag:
-        # Run Robotic Mecha System Diagnostic
         subprocess.run([sys.executable, MECHA_DIAG])
         return
 
     if action == "mecha" or args.mecha:
-        # Activate Titanium Mecha Robotic state
         set_matter_phase("mecha")
         return
 
-    if action == "voice" or args.voice:
-        val = (args.param or args.voice or "on").lower()
-        enabled = val in ["on", "1", "true", "yes"]
-        set_voice_enabled(enabled)
-        state_str = "ENABLED" if enabled else "MUTED"
-        print(f"{CYAN_BOLD}[ROBOTIC VOICE]: Voice synthesizer is now {state_str}.{RESET}")
-        if enabled:
-            speak("Robotic voice synthesizer enabled.")
-        return
-
     if action == "fluid" or args.fluid:
-        # Launch interactive fluid wave and vapor reactor
         phase_to_use = args.param or "cryo"
         subprocess.run([sys.executable, FLUID_REACTOR, phase_to_use])
         return
@@ -600,27 +596,23 @@ def main():
         run_tui_monitor()
         return
 
-    # Default action: Apply the COMPLETE Robotic Mecha & Liquid-Gas System Theme!
+    # Default action: Apply the COMPLETE Cybernetic Mecha System Theme!
     apply_terminal_palette(fg_hex='#00f0ff', bg_hex='#070a10')
-    play_audio("mech_lock.wav")
-    speak("Mecha cybernetic systems online.")
     print_banner()
     
-    print(f"{CYAN}[1/5] Configuring Robotic Mecha Shell & Terminal Environment...{RESET}")
+    print(f"{CYAN}[1/4] Configuring Cybernetic Mecha Shell & Terminal...{RESET}")
     install_konsole_profile("eDEX-TRON-Mecha")
     install_shell_env(prompt_icon="⚙ MECHA-ROBOTIC ⚙", fg_hex="#00f0ff", bg_hex="#070a10")
     
-    print(f"{CYAN}[2/5] Applying KDE Plasma 6 Mecha Robotic Color Scheme...{RESET}")
+    print(f"{CYAN}[2/4] Applying KDE Plasma 6 Mecha Robotic Color Scheme...{RESET}")
     install_kde_colors("eDEX-TRON-Mecha")
     
-    print(f"{CYAN}[3/5] Configuring Robotic Lock Screen & Defense Security Grid...{RESET}")
+    print(f"{CYAN}[3/4] Configuring Robotic Lock Screen & Defense Security Grid...{RESET}")
     configure_kde_lockscreen("eDEX-TRON-Mecha")
     
-    print(f"{CYAN}[4/5] Installing Fluid Mecha GTK 3/4 & Metacity Themes...{RESET}")
+    print(f"{CYAN}[4/4] Installing Fluid Mecha GTK 3/4 & Metacity Themes...{RESET}")
     install_desktop_themes()
     
-    print(f"{CYAN}[5/5] Activating Robotic Core Systems...{RESET}")
-    play_audio("mech_unlock.wav")
     print_telemetry_summary()
 
 if __name__ == "__main__":

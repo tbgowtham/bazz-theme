@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 ==============================================================================
-eDEX-UI // ROBOTIC MECHA BIOMETRIC SCREEN LOCKER
+eDEX-UI // ROBOTIC MECHA BIOMETRIC SCREEN LOCKER (SILENT & STEALTH)
 ==============================================================================
-Full-screen hardware-accelerated cybernetic HUD lockscreen with rotating mecha
-reticle, biometric laser scanner, live telemetry, robotic voice synthesis,
-and secure authentication.
+Hardware-accelerated cybernetic HUD lockscreen with counter-rotating mecha
+gears, biometric laser scanner, live system telemetry, and PAM authentication.
+Pure visual excellence — silent, instant, secure.
 ==============================================================================
 """
 
@@ -23,33 +23,14 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib
 import cairo
 
-SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-ASSETS_DIR = os.path.join(os.path.dirname(SCRIPT_DIR), "assets")
-
-try:
-    from tools.robot_voice import speak
-except ImportError:
-    try:
-        from robot_voice import speak
-    except ImportError:
-        def speak(text, async_mode=True): pass
-
 PIN_FILE = os.path.expanduser("~/.config/edex_lock_pin")
-
-def play_audio(filename):
-    path = os.path.join(ASSETS_DIR, filename)
-    if os.path.exists(path):
-        for player in ["paplay", "pw-play", "aplay"]:
-            if shutil.which(player):
-                subprocess.Popen([player, path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                break
 
 class RoboticLockScreen(Gtk.Window):
     def __init__(self, username=None):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
         self.username = username or getpass.getuser()
         
-        # Window properties
+        # Window configuration
         self.set_title("MECHA CYBERNETIC LOCK")
         self.set_decorated(False)
         self.set_keep_above(True)
@@ -82,10 +63,6 @@ class RoboticLockScreen(Gtk.Window):
         self.cpu_percent = psutil.cpu_percent(interval=None)
         self.mem = psutil.virtual_memory()
         self.last_telemetry_t = time.time()
-
-        # Initial sound and voice announcement
-        play_audio("mech_lock.wav")
-        speak("Security protocol active. Workstation locked. Authentication required.")
 
         # Animation timer: 30 FPS (33ms)
         GLib.timeout_add(33, self.on_tick)
@@ -122,24 +99,20 @@ class RoboticLockScreen(Gtk.Window):
 
     def on_key_press(self, widget, event):
         keyval = event.keyval
-        keyname = Gdk.keyval_name(keyval)
 
         if keyval == Gdk.KEY_Return or keyval == Gdk.KEY_KP_Enter:
             self.verify_password()
         elif keyval == Gdk.KEY_BackSpace:
             if len(self.password_buffer) > 0:
                 self.password_buffer = self.password_buffer[:-1]
-                play_audio("scan_beep.wav")
         elif keyval == Gdk.KEY_Escape:
             self.password_buffer = ""
             self.status_msg = "[ INPUT CLEARED — ENTER CREDENTIALS ]"
             self.status_is_error = False
         else:
-            # Printable characters
             ch = chr(Gdk.keyval_to_unicode(keyval))
             if ch and ch.isprintable():
                 self.password_buffer += ch
-                play_audio("scan_beep.wav")
 
         self.drawing_area.queue_draw()
         return True
@@ -148,7 +121,7 @@ class RoboticLockScreen(Gtk.Window):
         entered = self.password_buffer
         self.password_buffer = ""
 
-        # Check against emergency bypass PIN if configured or default 1234
+        # Emergency bypass PIN (default: 1234 or configured)
         bypass_pin = "1234"
         if os.path.exists(PIN_FILE):
             try:
@@ -178,14 +151,10 @@ class RoboticLockScreen(Gtk.Window):
             self.success_flash = 1.0
             self.status_msg = "[ AUTHENTICATION CONFIRMED — ACCESS GRANTED ]"
             self.status_is_error = False
-            play_audio("mech_unlock.wav")
-            speak("Authentication confirmed. Access granted.")
         else:
             self.alert_flash = 1.0
             self.status_msg = "[ ACCESS DENIED — INVALID OPERATOR TOKEN ]"
             self.status_is_error = True
-            play_audio("access_denied.wav")
-            speak("Access denied. Intrusion attempt logged.")
 
     def on_draw(self, widget, cr):
         w = widget.get_allocated_width()
@@ -193,8 +162,8 @@ class RoboticLockScreen(Gtk.Window):
         cx = w / 2.0
         cy = h / 2.0 - 40.0
 
-        # Background Fill
-        cr.set_source_rgb(0.03, 0.04, 0.07) # Titanium Black
+        # Background Fill (Titanium Black)
+        cr.set_source_rgb(0.03, 0.04, 0.07)
         cr.paint()
 
         # Flash overlays
@@ -267,7 +236,6 @@ class RoboticLockScreen(Gtk.Window):
         cr.set_source_rgb(0.0, 0.94, 1.0)
         cr.set_line_width(2.5)
 
-        # 4 Segmented arcs
         for a_start in [0, math.pi / 2, math.pi, 3 * math.pi / 2]:
             cr.arc(0, 0, r_inner, a_start + 0.15, a_start + (math.pi / 2) - 0.15)
         cr.stroke()
@@ -285,7 +253,6 @@ class RoboticLockScreen(Gtk.Window):
         # 4. Central Retinal Laser Scanline
         cr.save()
         cr.translate(cx, cy)
-        # Laser sweep line
         laser_color = (1.0, 0.2, 0.3) if self.status_is_error else (0.0, 0.94, 1.0)
         cr.set_source_rgba(laser_color[0], laser_color[1], laser_color[2], 0.85)
         cr.set_line_width(2.0)
@@ -301,7 +268,6 @@ class RoboticLockScreen(Gtk.Window):
         cr.arc(0, 0, 45, 0, 2 * math.pi)
         cr.stroke()
 
-        # Center lock icon text
         cr.set_font_size(18)
         lock_txt = "SECURED" if not self.status_is_error else "ALARM"
         cr.move_to(-38, 6)
@@ -309,7 +275,6 @@ class RoboticLockScreen(Gtk.Window):
         cr.restore()
 
         # 5. Flanking Telemetry HUD Cards
-        # Left Telemetry: CPU & Thermal
         cr.set_font_size(12)
         cr.set_source_rgb(0.0, 0.94, 1.0)
         lx = w * 0.08
@@ -325,7 +290,6 @@ class RoboticLockScreen(Gtk.Window):
         cr.move_to(lx, ly + 62)
         cr.show_text(f"TEMP:  43°C [NOMINAL]")
 
-        # Right Telemetry: Memory & Security
         rx = w * 0.76
         ry = cy - 60
         cr.set_source_rgb(0.0, 0.94, 1.0)
@@ -340,13 +304,12 @@ class RoboticLockScreen(Gtk.Window):
         cr.move_to(rx, ry + 62)
         cr.show_text(f"NODE: {self.username.upper()}")
 
-        # 6. Password Input Field (Centered below HUD)
+        # 6. Password Input Field
         input_w = 420.0
         input_h = 48.0
         ix = cx - input_w / 2.0
         iy = cy + r_outer + 35.0
 
-        # Container
         cr.set_source_rgba(0.02, 0.08, 0.16, 0.85)
         cr.rectangle(ix, iy, input_w, input_h)
         cr.fill()
@@ -356,7 +319,6 @@ class RoboticLockScreen(Gtk.Window):
         cr.rectangle(ix, iy, input_w, input_h)
         cr.stroke()
 
-        # Bullets for entered password
         bullets = "● " * len(self.password_buffer)
         if not bullets:
             bullets = "ENTER OPERATOR KEY..."
@@ -371,7 +333,6 @@ class RoboticLockScreen(Gtk.Window):
         status_col = (1.0, 0.2, 0.3) if self.status_is_error else (0.0, 1.0, 0.5)
         cr.set_source_rgb(status_col[0], status_col[1], status_col[2])
         cr.set_font_size(12)
-        # Center status message
         ext = cr.text_extents(self.status_msg)
         cr.move_to(cx - ext.width / 2.0, iy + input_h + 30)
         cr.show_text(self.status_msg)

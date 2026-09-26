@@ -4,7 +4,7 @@
 # ==============================================================================
 # Applies the full Robotic Mecha & Liquid-Gas futuristic theme:
 # - Fullscreen Biometric Robotic Screen Locker (`./apply.sh lock`)
-# - Robotic AI Voice Synthesizer & Mechanical Audio Suite
+# - AI Adaptive Matter Engine (`./apply.sh auto`)
 # - KDE Plasma 6 Mecha Robotic Color Scheme (`eDEX-TRON-Mecha`)
 # - Mecha Hardware & Security Diagnostic Scanner (`./apply.sh diag`)
 # - 2D Liquid-Gas Fluid Dynamics Reactor (`./apply.sh fluid`)

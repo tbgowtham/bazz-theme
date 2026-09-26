@@ -1,26 +1,29 @@
 # eDEX-UI // ROBOTIC MECHA & LIQUID-GAS SYSTEM CONTROLLER 🤖⚡
 
-> An ultra-futuristic **Robotic Mecha & Liquid-Gas** cybernetic desktop suite for Linux. Engineered with features standard desktop environments like Cinnamon do not possess: a **fullscreen biometric robotic screen locker, onboard robotic AI voice synthesizer, mecha hardware diagnostic scanner, physical matter phase shifting, 2D fluid dynamics reactor, and full KDE Plasma 6 & Konsole mecha styling**.
+> An ultra-futuristic **Robotic Mecha & Liquid-Gas** cybernetic desktop suite for Linux. Engineered with features standard desktop environments like Cinnamon do not possess: a **fullscreen biometric robotic screen locker, AI adaptive compute pressure monitor, mecha hardware & security diagnostic scanner, physical matter phase shifting, 2D fluid dynamics reactor, and full KDE Plasma 6 & Konsole mecha styling** — completely silent, hardware-accelerated, and built for maximum data density.
 
 ---
 
 ## ⚡ What Makes This Different (Beyond Cinnamon & Traditional Desktops)
 
-Cinnamon and standard desktop environments provide traditional flat panels, static menus, and basic themes. This system upgrades your OS into an **onboard combat mecha AI**:
+Cinnamon and standard desktop environments provide traditional flat panels, static menus, and basic themes. This system upgrades your OS into an **autonomous cybernetic mecha environment**:
 
-1. **Fullscreen Biometric Robotic Screen Locker (`edex lock`)**:
+1. **Fullscreen Biometric Robotic Screen Locker (`edex lock` / `edex-lock`)**:
    - Hardware-accelerated GTK 3 & Cairo cybernetic HUD.
    - Dual-ring counter-rotating mecha gears & targeting crosshairs.
    - Vertical laser retinal/biometric scanline sweeping across the HUD.
    - Real-time CPU, RAM, battery, and defense grid telemetry displayed on the locked screen.
-   - Mechanical hydraulic lock sound (`mech_lock.wav`) and pneumatic unlock release (`mech_unlock.wav`).
-   - Robotic voice announcements: *"SECURITY PROTOCOL ACTIVE. WORKSTATION LOCKED."* / *"AUTHENTICATION CONFIRMED. ACCESS GRANTED."*
-   - Secure verification via Linux user password or emergency bypass PIN (`1234`).
-2. **Onboard Robotic AI Voice Synthesizer**:
-   - Mechanical formant-modulated speech AI that speaks system status, matter phase shifts, lock events, and diagnostic verdicts.
-   - Can be toggled anytime via `edex voice on` / `edex voice off`.
-3. **Robotic Mecha System Diagnostic Scanner (`edex diag`)**:
-   - Live hardware bus and security audit in your terminal: Quantum CPU multi-core audit, neural memory bus test, NVMe storage integrity, and defense uplink check with cybernetic sonar beeps.
+   - 100% silent, stealth operation without intrusive sounds or synthetic voices.
+   - Secure verification via Linux user password (PAM `/usr/bin/unix_chkpwd`) or emergency bypass PIN (`1234`).
+2. **AI Adaptive Compute Pressure Engine (`edex auto`)**:
+   - Continuously samples CPU multi-core load and core temperatures to dynamically shift the desktop matter phase:
+     - **Cryo-Gas** (< 25% load, < 48°C): Sub-zero liquid nitrogen cyan, frost mist.
+     - **Robotic Mecha** (25% - 60% load): Titanium black chassis, mecha hazard gold, core cyan.
+     - **Neon Plasma** (60% - 85% load): Ionized electric magenta, violet glow.
+     - **Solar Flare** (> 85% load or > 75°C): Superheated solar flare orange and crimson core.
+   - Can run as a one-shot evaluation (`edex auto`) or continuous background daemon (`edex auto --daemon`).
+3. **Robotic Mecha System Diagnostic Scanner (`edex diag` / `edex scan`)**:
+   - Live hardware bus and security audit in your terminal: Quantum CPU multi-core audit, neural memory bus test, NVMe storage integrity, and defense uplink telemetry.
 4. **Physical Matter Phase Shifting (`edex phase <state>`)**:
    - Instant system-wide matter phase transitions across KDE Plasma, Konsole, GTK, and shell prompt:
      - **`mecha`** : Titanium Black (`#070a10`), Mecha Hazard Gold (`#ffb703`), Core Cyan (`#00f0ff`).
@@ -37,7 +40,7 @@ Cinnamon and standard desktop environments provide traditional flat panels, stat
 
 ## 🚀 The Terminal Command: `edex`
 
-Because it is installed in your `$PATH`, you can run `edex` from **any terminal window**:
+Because it is installed in your `$PATH` (`~/.local/bin/edex`), you can run `edex` from **any terminal window**:
 
 ```bash
 # Apply the master Robotic Mecha theme across entire system
@@ -47,27 +50,28 @@ edex
 ### Specialized Commands:
 
 ```bash
-# 1. Lock screen with robotic biometric HUD
+# 1. Lock screen with robotic biometric HUD (silent & secure)
 edex lock
 # (or simply: edex-lock)
 
 # 2. Run mecha system hardware & security diagnostic
 edex diag
 
-# 3. Switch immediately to Titanium Mecha state & voice
+# 3. Run AI adaptive matter engine (auto-shifts theme by real-time compute load)
+edex auto
+# (or continuously monitor: edex auto --daemon)
+
+# 4. Switch immediately to Titanium Mecha state
 edex mecha
 
-# 4. Launch interactive 2D fluid dynamics reactor
+# 5. Launch interactive 2D fluid dynamics reactor
 edex fluid
 
-# 5. Shift matter state (mecha, cryo, plasma, mercury, solar)
+# 6. Shift matter state (mecha, cryo, plasma, mercury, solar)
 edex phase plasma
 
-# 6. Compact memory cache with liquid condensation animation
+# 7. Compact memory cache with liquid condensation animation
 edex condense
-
-# 7. Toggle robotic AI voice synthesizer
-edex voice on   # or: edex voice off
 
 # 8. Launch live telemetry terminal dashboard
 edex --app
@@ -80,11 +84,11 @@ edex --app
 When you run `edex lock`:
 - Takes over the display in fullscreen mode.
 - Locks the workstation with rotating mecha gears and a sweeping laser reticle.
-- Robotic Voice speaks: *"SECURITY PROTOCOL ACTIVE. WORKSTATION LOCKED. AUTHENTICATION REQUIRED."*
+- Completely silent operation (no unwanted synthetic voice or audio effects).
 - Enter your Linux user password (or default bypass PIN `1234`) and press `Enter`:
-  - **Wrong Password**: Alarm buzzer sounds, screen flashes red, and AI announces *"ACCESS DENIED. INTRUSION ATTEMPT LOGGED."*
-  - **Correct Password**: Pneumatic depressurize sound, emerald green glow, and AI announces *"AUTHENTICATION CONFIRMED. ACCESS GRANTED."* Unlocks smoothly.
-- You can also customize your lock PIN anytime in `~/.config/edex_lock_pin`.
+  - **Wrong Password**: Security alert border flashes red, intrusion attempt logged.
+  - **Correct Password**: Emerald green confirmation glow, unlocks smoothly into your session.
+- You can customize your lock PIN anytime in `~/.config/edex_lock_pin`.
 
 ---
 
@@ -93,13 +97,13 @@ When you run `edex lock`:
 | Command | Action |
 | :--- | :--- |
 | `edex` | Apply master Robotic Mecha theme across the entire system |
-| `edex lock` (or `edex-lock`) | Launch fullscreen robotic biometric screen locker |
+| `edex lock` (or `edex-lock`) | Launch fullscreen robotic biometric screen locker (silent) |
+| `edex auto` (or `--daemon`) | Run AI adaptive compute pressure engine (shifts theme by CPU/temp) |
 | `edex diag` (or `scan`) | Run robotic mecha hardware & security diagnostic |
-| `edex mecha` | Switch immediately to Titanium Mecha state & voice |
+| `edex mecha` | Switch immediately to Titanium Mecha state |
 | `edex fluid` | Launch interactive 2D fluid wave & vapor reactor |
 | `edex phase <state>` | Shift matter state (`mecha`, `cryo`, `plasma`, `mercury`, `solar`) |
 | `edex condense` | Compact memory cache with liquid condensation animation |
-| `edex voice <on\|off>` | Toggle mechanical robotic AI voice synthesizer |
 | `edex --app` | Launch live telemetry terminal monitor dashboard |
 | `edex --status` | Check system telemetry and active matter state |
 | `edex --restore` | Restore default desktop theme & settings |
@@ -115,27 +119,16 @@ theme/
 ├── apply.sh                             # Convenience wrapper script
 │
 ├── tools/
-│   ├── robotic_lockscreen.py            # Fullscreen robotic mecha biometric screen locker
-│   ├── robot_voice.py                   # Mechanical robotic combat AI voice synthesizer
+│   ├── robotic_lockscreen.py            # Fullscreen robotic mecha biometric screen locker (silent)
 │   ├── mecha_diag.py                    # Robotic hardware & security diagnostic scanner
 │   ├── fluid_reactor.py                 # Real-time 2D fluid wave & vapor particle reactor
-│   ├── sound_synth.py                   # Organic liquid & mechanical sound synthesizer
 │   ├── eDEX-TRON-Mecha.colors           # Titanium Mecha KDE Plasma color scheme
 │   ├── eDEX-TRON-Cryo.colors            # Sub-zero Cryo-Gas KDE color scheme
 │   ├── eDEX-TRON-Plasma.colors          # Neon-Plasma KDE color scheme
 │   ├── eDEX-TRON-Mercury.colors         # Liquid-Mercury KDE color scheme
 │   ├── eDEX-TRON-Solar.colors           # Solar-Flare KDE color scheme
+│   ├── eDEX-TRON.profile                # High-contrast Konsole terminal profile
 │   └── edex-theme.sh                    # Interactive shell environment configuration
-│
-├── assets/
-│   ├── mech_lock.wav                    # Hydraulic clamp closure sound
-│   ├── mech_unlock.wav                  # Pneumatic depressurize & servo sound
-│   ├── access_denied.wav                # High-security alarm buzzer sound
-│   ├── scan_beep.wav                    # Cybernetic scanning sonar beep
-│   ├── liquid_drop.wav                  # Resonant fluid droplet sound
-│   ├── vapor_hiss.wav                   # Steam vapor release sound
-│   ├── plasma_ignite.wav                # High-energy plasma surge sound
-│   └── solar_flare.wav                  # Solar flare hiss sound
 │
 ├── gtk-3.0/ & gtk-4.0/                  # Fluid mecha glassmorphism GTK themes
 ├── metacity-1/                          # Window decorations with glowing vapor borders
