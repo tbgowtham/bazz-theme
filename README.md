@@ -1,6 +1,22 @@
 # STARK OS // J.A.R.V.I.S. & F.R.I.D.A.Y. Linux Desktop Shell 🌌🦾
 
-> A next-generation, high-tech Linux desktop shell engineered to replicate **Tony Stark's J.A.R.V.I.S. & F.R.I.D.A.Y.** tactical interface, fused seamlessly with **Windows 11 centered frosted acrylic glass aesthetics**. Features a fully interactive, runnable desktop environment with live Linux system telemetry, plus native **Linux Cinnamon** theme suite deployment files.
+> A complete, professional dark cyberpunk desktop suite engineered to replicate **Tony Stark's J.A.R.V.I.S. & F.R.I.D.A.Y.** tactical interface, fused with **Windows 11 centered frosted acrylic glass aesthetics**. Features a dynamic wallpaper engine that embeds **real-time Linux OS telemetry (CPU %, RAM %, Storage, Network, Hostname, Uptime)** directly onto the desktop wallpaper, plus complete **Shell theme, Icon theme, Window decorations, and Live background daemon**.
+
+---
+
+## 📸 Real Linux OS Telemetry Wallpaper HUD
+
+The wallpaper engine inspects your real system via `psutil` and renders a live high-tech tactical HUD directly onto your desktop wallpaper:
+
+![Stark Industries J.A.R.V.I.S. Live Telemetry Wallpaper](/home/MR_Gray/.gemini/antigravity-ide/brain/b42dcd67-d1bd-4be4-ae35-a854875eef4f/stark-live-wallpaper.png)
+
+### Live Embedded Metrics:
+- **Real CPU % & Per-Core Activity**: Overall load percentage with individual `C0`-`C7` core mini-meter gauges and clock frequency.
+- **Real RAM & Storage Allocation**: Exact GB used / total, percentage bar, and NVMe `/` root filesystem capacity.
+- **Real Network I/O**: Live upload & download counters (`RX` / `TX` in MB).
+- **Active Process Consumption**: Top resource-demanding processes running on your OS.
+- **Host & Kernel Signature**: Hostname, kernel release, architecture, battery %, and system uptime.
+- **Stark Defense Grid**: Dynamic timestamp and status indicators.
 
 ---
 
@@ -8,105 +24,14 @@
 
 | Feature / Capability | **STARK OS (Jarvis Edition)** | **Linux Cinnamon** | **KDE Plasma 6** | **GNOME 46** | **Windows 11** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Taskbar Layout** | **Windows 11 Centered Dock** (or Left-aligned) | Traditional Bottom Panel | Bottom Panel / Floating Dock | Top Bar + Dash to Dock | Centered Bottom Dock |
-| **Start Menu Design** | **Floating Acrylic Glass (Mica blur + Glow)** | Corner Pop-up Menu | Kickoff / Application Menu | Fullscreen App Grid | Centered Floating Grid |
-| **AI Assistant Core** | **Native J.A.R.V.I.S. & F.R.I.D.A.Y. Voice & Text** | None (Third-party) | None (Third-party) | None | Copilot |
-| **HUD & System Visuals** | **Rotating Canvas Arc-Reactor + Telemetry** | Flat / GTK widgets | Plasma Widgets (Plasmoids) | GNOME Extensions | Desktop Widgets flyout |
-| **Audio Synthesis** | **Native Web Audio Sci-Fi Clicks & Chords** | Standard system sounds | System sound theme | System sound theme | Windows default chimes |
-| **Quick Settings** | **Windows 11 Action Center (6 Toggles + Sliders)** | Applet flyouts | System Tray Quick Settings | Quick Settings Pills | Action Center Grid |
+| **Wallpaper Telemetry** | **Real-time OS CPU/RAM on Wallpaper** | Static image | Static / slideshow | Static image | Static image |
+| **Live HUD Daemon** | **`./apply.sh --live` (Continuous updates)** | None | None | None | None |
+| **Taskbar Layout** | **Windows 11 Centered Dock** (or Left) | Traditional Bottom Panel | Bottom Panel / Floating Dock | Top Bar + Dash to Dock | Centered Bottom Dock |
+| **Start Menu Design** | **Floating Acrylic Glass (Mica blur)** | Corner Pop-up Menu | Kickoff / Application Menu | Fullscreen App Grid | Centered Floating Grid |
+| **Icon Theme** | **Jarvis-White (Frosted Minimalist SVG)** | Mint-Y / Adwaita | Breeze | Adwaita | Segoe Fluent Icons |
+| **Window Decoration** | **Metacity-1 + GTK3/4 Dark Glass Controls** | Metacity Mint-Y | KWin Breeze | Libadwaita | Windows Acrylic |
+| **AI Assistant Core** | **Native J.A.R.V.I.S. & F.R.I.D.A.Y. Voice & Text** | None | None | None | Copilot |
 | **Virtual Workspaces** | **Stark Task View (4 Quantum Desktops)** | Cinnamon Expo | Plasma Desktop Grid | GNOME Overview | Windows Task View |
-| **Live Diagnostics** | **Real-time CPU/RAM/Arc Output Canvas graphs** | System Monitor app | KSysGuard / Plasma System | GNOME System Monitor | Task Manager |
-| **Native Cinnamon Theme**| **Included (`cinnamon/cinnamon.css`)** | Default | N/A | N/A | N/A |
-
----
-
-## 🚀 Key Features
-
-### 1. 🪟 Windows 11 Centered Taskbar & Dock
-- **Centered Application Cluster**: Start button with glowing Arc Reactor crest, Search, Task View, Widgets, and Jarvis Quick Voice button.
-- **Active Window Indicators**: Subtle illuminated pills under running apps, active window glow, and minimize/restore toggle on click.
-- **System Tray**:
-  - Wi-Fi and Bluetooth status indicators
-  - Audio volume with interactive level feedback
-  - Battery charge percentage with Arc Core charging readout
-  - Windows 11 compact two-line Clock & Date (`19:30` / `26/09/2026`)
-  - Action Center Notification Bell with unread badge count
-  - "Show Desktop" edge peek slice
-
-### 2. 🌌 Floating Frosted Glass Start Menu
-- Centered floating placement with `backdrop-filter: blur(32px) saturate(200%)`.
-- Instant search bar with real-time app and Stark command filtering.
-- Pinned app grid (Terminal, J.A.R.V.I.S., Diagnostics, File Explorer, Arc Player, Settings).
-- Recent protocols list tracking mission logs and schematics.
-- Tony Stark user profile card with Power flyout (Lock Shell, Sleep, Restart, Shutdown).
-
-### 3. 🦾 J.A.R.V.I.S. & F.R.I.D.A.Y. Conversational Assistant
-- **Voice Synthesis**: Built-in speech synthesis using the native Web Speech API.
-- **Vocal Dual-Personality**:
-  - **J.A.R.V.I.S.**: Refined British AI assistant mode with cyan holographic accents.
-  - **F.R.I.D.A.Y.**: Tactical Irish female AI mode with hot-rod red and crimson-gold accents.
-- Responds to system diagnostic queries, armor scan commands, shell comparison requests, and security lockdown.
-
-### 4. ⚛️ Dynamic Animated Arc Reactor Canvas
-- Renders directly on the desktop background with concentric rotating rings, mechanical runes, radial tick markers, pulsing core, and kinetic plasma particles.
-- Dynamically responds to theme switching and system load.
-
-### 5. 📊 Real Linux System Telemetry & Diagnostics
-- Reads live metrics from the host operating system via Node.js `/api/telemetry` (CPU cores, model, utilization %, memory total/used/free, uptime, platform).
-- Live rolling 30-second timeline charts drawn with HTML5 Canvas.
-
-### 6. 💻 Mark LXXXV Interactive Terminal
-- Stark command processor with built-in commands: `status`, `diagnostics`, `scan`, `cinnamon`, `plasma`, `friday`, `jarvis`, `override`, `help`.
-- Live safe bash execution hook via backend API for native Linux commands (`uname -a`, `uptime`, `free -h`, `date`, `whoami`).
-
-### 7. 🗂️ Holographic File Explorer
-- Windows 11 style address bar, navigation buttons, and categorized sidebar.
-- Virtual Stark quantum directory structure: Mark 85 root, Blueprints, Schematics, Telemetry Logs, and Cinnamon Theme assets.
-
-### 8. 🎛️ Quick Settings & Action Center
-- 6 quick toggles: Stark Wi-Fi, Quantum BT, Flight Mode, Defense Grid, Night Light, Overdrive.
-- Interactive volume and display brightness sliders.
-- Integrated full month calendar with active date highlight.
-
-### 9. 🎨 Native Linux Cinnamon Theme Suite
-- Located in `cinnamon/cinnamon.css`.
-- Applies the exact Windows 11 centered frosted glass panel, floating start menu, and glowing cyan accents natively to any Linux distribution running Cinnamon (Linux Mint, Debian, Arch, Fedora).
-
----
-
-## 🛠️ Quick Start & Installation
-
-### Option 1: Launch the Interactive Web Desktop Shell
-```bash
-# Start the Stark OS Desktop Shell server (runs on port 3030)
-./apply.sh --web
-# or
-node server.js
-```
-Open **`http://localhost:3030`** in any web browser.
-
-### Option 2: Install Native Linux Cinnamon Theme
-```bash
-# Deploys theme to ~/.themes/Jarvis-Windows11-Shell and activates it
-./apply.sh --install
-```
-
-### Option 3: Restore Default Cinnamon Settings
-```bash
-./apply.sh --restore
-```
-
----
-
-## ⌨️ Keyboard Shortcuts
-
-| Shortcut | Action |
-| :--- | :--- |
-| `Win / Meta` | Toggle Windows 11 Start Menu |
-| `Ctrl + Alt + T` | Open Mark LXXXV Terminal |
-| `Alt + Tab` | Toggle Virtual Desktops (Task View) |
-| `Win + L` | Lock Shell (Stark Security Screen) |
-| `Esc` | Close active menu or flyout |
 
 ---
 
@@ -114,42 +39,76 @@ Open **`http://localhost:3030`** in any web browser.
 
 ```text
 theme/
-├── package.json                         # Node.js manifest
-├── server.js                            # Telemetry & static server
-├── apply.sh                             # Self-contained installer script
+├── apply.sh                             # Master installer & live daemon controller
+├── generate_wallpaper.py                # Live OS telemetry wallpaper generator
+├── live_wallpaper_daemon.py             # Background daemon for continuous wallpaper updates
+├── index.theme                          # Master desktop theme descriptor
 ├── README.md                            # Complete documentation
-├── cinnamon/                            # Native Linux Cinnamon shell package
-│   ├── cinnamon.css                     # Cinnamon theme styling
+│
+├── cinnamon/                            # Native Linux Cinnamon Desktop Shell
+│   ├── cinnamon.css                     # Windows 11 centered frosted dock & start menu
 │   └── metadata.json                    # Cinnamon theme descriptor
-└── public/                              # Interactive Desktop Shell
-    ├── index.html                       # Master desktop viewport
-    ├── assets/
-    │   ├── wallpapers/                  # 4K Arc Reactor wallpaper
-    │   └── icons/                       # Stark avatar and SVG assets
-    ├── css/
-    │   ├── shell.css                    # Base tokens, glassmorphism, HUD
-    │   ├── taskbar.css                  # Windows 11 centered dock
-    │   ├── start-menu.css               # Floating frosted glass Start Menu
-    │   ├── windows.css                  # Draggable/resizable window manager
-    │   ├── quick-settings.css           # Action Center, Calendar, Lock Screen
-    │   └── apps.css                     # App window specific layouts
-    └── js/
-        ├── sound-fx.js                  # Web Audio API sound synthesizer
-        ├── arc-reactor.js               # HTML5 Canvas Arc Reactor animation
-        ├── window-manager.js            # Window dragging, snapping, resizing
-        ├── taskbar.js                   # Taskbar, clock, tray controller
-        ├── startmenu.js                 # Start menu search & power logic
-        ├── quick-settings.js            # Quick toggles, sliders, calendar
-        ├── app.js                       # Master app launcher & keybindings
-        └── apps/
-            ├── terminal.js              # Mark LXXXV Bash CLI
-            ├── jarvis-chat.js           # J.A.R.V.I.S. & F.R.I.D.A.Y. Voice AI
-            ├── system-monitor.js        # Live CPU/RAM/GPU canvas charts
-            ├── file-explorer.js         # Holographic File Explorer
-            ├── settings.js              # Personalization & Cinnamon settings
-            └── media-player.js          # Waveform audio visualizer
+│
+├── icons/                               # Complete Icon Theme
+│   └── Jarvis-White/                    # Minimalist frosted white & cyan SVG line-art
+│       ├── index.theme                  # Icon theme descriptor
+│       ├── scalable/                    # Scalable vector icons (places, apps, status, actions)
+│       └── 48x48/                       # High-DPI fixed bitmaps/SVGs
+│
+├── metacity-1/                          # Window Decorations
+│   └── metacity-theme-3.xml             # Sleek dark frosted acrylic window titlebars & buttons
+│
+├── gtk-3.0/ & gtk-4.0/                  # GTK Window & Application Styling
+│   ├── gtk.css                          # Dark obsidian glass headerbars & cyan accents
+│   └── gtk-dark.css                     # Dark mode overrides
+│
+├── tools/                               # Asset generation utilities
+│   ├── generate_icon_theme.py           # Icon theme builder
+│   └── create_window_decorations.py     # Metacity & GTK theme builder
+│
+└── public/ & server.js                  # Interactive Stark OS Desktop Shell Application
 ```
 
 ---
 
-*Engineered with nanotech precision by Tony Stark & MR_Gray.*
+## 🛠️ Usage & Installation
+
+### 1. Install Full Desktop Suite (One Command)
+```bash
+cd /home/MR_Gray/muteX/theme
+./apply.sh --all
+```
+This automatically:
+- Installs the **Cinnamon Shell Theme** to `~/.themes/Jarvis-Windows11-Shell/cinnamon`
+- Installs **Window Decorations (Metacity & GTK 3/4)** to `~/.themes/Jarvis-Windows11-Shell/`
+- Installs the **Jarvis-White Icon Theme** to `~/.icons/Jarvis-White`
+- Generates and applies the **Live OS Telemetry Wallpaper** with your current CPU/RAM metrics to your active desktop session (supports Cinnamon, KDE Plasma 6 Wayland, and GNOME).
+
+### 2. Enable Real-Time Live Wallpaper Updates
+To keep the wallpaper continuously updated with your live CPU and RAM consumption in the background:
+```bash
+# Start the live background daemon (updates every 3 seconds)
+./apply.sh --live
+
+# Check daemon status
+./apply.sh --status
+
+# Stop the daemon
+./apply.sh --stop-live
+```
+
+### 3. Generate Snapshot Wallpaper Once
+```bash
+./apply.sh --wallpaper
+```
+
+### 4. Launch Interactive Web Desktop Shell
+```bash
+./apply.sh --web
+# Open http://localhost:3030 in your browser
+```
+
+### 5. Restore Default Settings
+```bash
+./apply.sh --restore
+```

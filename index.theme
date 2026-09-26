@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Jarvis-Windows11-Shell
+Comment=Stark Industries J.A.R.V.I.S. Windows 11 Desktop Shell Suite
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Jarvis-Windows11-Shell
+MetacityTheme=Jarvis-Windows11-Shell
+IconTheme=Jarvis-White
+CinnamonTheme=Jarvis-Windows11-Shell
